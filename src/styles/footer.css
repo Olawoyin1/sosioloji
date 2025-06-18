@@ -367,9 +367,9 @@
 
   
   @media screen and (max-width: 1060px) {
-    .wrapper-tag-widget{
+    /* .wrapper-tag-widget{
       height: 400px;
-    }
+    } */
     .tags-container {
       height: 400px;
     } 

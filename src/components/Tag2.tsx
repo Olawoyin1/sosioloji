@@ -26,7 +26,7 @@ const Tag2 = () => {
         <span>Tag Cloud</span> <span className="dot"> <FaStar size={14} /></span>
       </h3>
       <div className="wrapper-tag-widget">
-        <div className="tags-container">
+        <div className="absolute top-[-20px] left-5 z-10 bg-[#FFF0D3] shadow-md p-4 rounded-[15px] space-x-4 space-y-10 flex-wrap justify-center  items-center h-[330px] max-w-[400px] w-full">
             {tags.map((tag) => (
               <FancyLinkButton
                 key={tag.label}
