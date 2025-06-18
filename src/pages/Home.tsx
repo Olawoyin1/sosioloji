@@ -1,19 +1,33 @@
-
-import Cards from '../components/Cards'
-import { PageWrapper } from '../components/PageWrapper'
+import Cards from "../components/Cards";
+import ImageSlider from "../components/ImageSlider";
+import Navbar from "../components/Navbar";
+import { PageWrapper } from "../components/PageWrapper";
 
 const Home = () => {
-  return (
+    return (
     <PageWrapper>
+      {/* Fixed background image */}
+      <div className="bg" />
+
+
+      {/* Content section */}
+      <section className="relative z-10">
+        <Navbar />
         <div className="container">
+          <div className="mb-20">
 
-      <div className="p-6">
-        {/* <h1 className="text-3xl font-bold mb-4">Welcome to the Blog</h1> */}
-        <Cards />
-      </div>
+          <ImageSlider />
+          </div>
+          <div className="">
+            <Cards />
+          </div>
         </div>
-    </PageWrapper>
-  )
-}
+      </section>
 
-export default Home
+      {/* Bottom padding */}
+      {/* <div className="min-h-[900px]" /> */}
+    </PageWrapper>
+  );
+};
+
+      export default Home;

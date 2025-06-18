@@ -1,16 +1,16 @@
 // src/layouts/SharedLayout.tsx
 
-import Navbar from '../components/Navbar'
+// import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { Outlet } from 'react-router-dom'
+import ScrollToTopButton from '../components/ScrollToTop'
 
 const SharedLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
+      {/* <Navbar /> */}
+      <ScrollToTopButton />
         <Outlet />
-      </main>
       <Footer />
     </div>
   )

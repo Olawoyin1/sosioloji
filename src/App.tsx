@@ -6,6 +6,9 @@ import './App.css'
 import SharedLayout from './layouts/SharedLayout'
 import Blog from './pages/Blog'
 import NotFound from './utils/NotFound'
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 
 function App() {
   const location = useLocation()
