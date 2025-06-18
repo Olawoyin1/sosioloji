@@ -21,7 +21,7 @@ const ImageSlider: React.FC = () => {
 
   return (
     <div className="w-full relative  mx-auto mb-8">
-        <div className='absolute w-full md:h-[400px] h-[300px] border border-gray-700 rounded-xl -left-4 top-3'/>
+        <div className='absolute w-full md:h-[400px] h-[300px] border border-gray-700 rounded-xl -left-1 top-1 md:-left-4 md:top-3'/>
       <Slider {...settings}>
         {images.map((src, index) => (
           <div key={index}>

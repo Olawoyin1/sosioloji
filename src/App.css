@@ -24,6 +24,7 @@ body{
 .bg-nav{
     background-image: url('../public/Images/sos.webp');
     height: 100vh;
+    background-color: #FFF6E6;
     object-fit: cover;
 
 }
