@@ -196,7 +196,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
     <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[590px] md:h-[470px]">
       {/* Image */}
       <div
-        className="relative w-full md:h-[300px]"
+        className="relative w-full h-[440px] md:h-[300px]"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
