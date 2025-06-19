@@ -81,7 +81,7 @@ const Navbar = () => {
 
             {/* AnimatePresence for list */}
             <motion.ul
-              className=" text-xl sm:text-3xl space-y-6 text-center"
+              className="w-full text-xl sm:text-3xl space-y-6 text-center"
               variants={containerVariant}
               initial="hidden"
               animate="visible"
@@ -104,7 +104,7 @@ const Navbar = () => {
                   </Link>
 
                   {item.name === "LAST GENERATION" && (
-                    <div className="h-px w-80 md:w-130 mx-auto bg-black/20 mt-9" />
+                    <div className="h-px w-[80%] md:w-130 mx-auto bg-black/20 mt-9" />
                   )}
                 </motion.li>
               ))}
