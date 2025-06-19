@@ -135,7 +135,7 @@ const FancyLinkButton: React.FC<FancyLinkButtonProps> = ({
       >
         {/* Decorative shrinking border */}
         <motion.span
-          className="absolute border border-black rounded-full z-30 pointer-events-none"
+          className="absolute border border-black rounded-full  pointer-events-none"
           initial={{
             width: "100%",
             height: "100%",
@@ -167,7 +167,7 @@ const FancyLinkButton: React.FC<FancyLinkButtonProps> = ({
           {hovered && (
             <motion.span
               key="cursor-circle"
-              className="absolute w-4 h-4 bg-white rounded-full pointer-events-none z-20"
+              className="absolute w-4 h-4 bg-white rounded-full pointer-events-none "
               animate={{
                 left: coords.x - 10,
                 top: coords.y - 10,
@@ -180,7 +180,7 @@ const FancyLinkButton: React.FC<FancyLinkButtonProps> = ({
         </AnimatePresence>
 
         {/* Button Text */}
-        <span className="relative z-40">{label}</span>
+        <span className="relative ">{label}</span>
       </div>
     </Link>
   );

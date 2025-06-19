@@ -30,6 +30,7 @@ body{
     height: 100vh;
     background-color: #FFF6E6;
     object-fit: cover;
+    z-index: 9000;
 
 }
 
