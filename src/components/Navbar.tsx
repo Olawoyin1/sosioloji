@@ -39,9 +39,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between min-h-[100px] md:min-h-[200px]  mx-auto relative">
           {/* Title */}
           <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-800">
-            <span className="block md:hidden">SOSIOLOJI</span>
+            <span className="block md:hidden">sosioloji</span>
             <span className="hidden md:block md:-translate-y-1/2 absolute left-1/2 -translate-x-1/2">
-              SOSIOLOJI
+              sosioloji
             </span>
           </h1>
 
