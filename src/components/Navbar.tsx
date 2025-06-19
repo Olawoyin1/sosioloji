@@ -39,22 +39,26 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full z-50 relative">
+    <nav className="w-full z-50 relative mb-4">
       <div className="container">
-        <div className="relative flex items-center min-h-[100px] md:min-h-[200px] justify-center max-w-6xl mx-auto">
-          {/* Center: Title */}
-          <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-800">
-            SOCIOLOGY
-          </h1>
+        <div className="flex items-center justify-between min-h-[100px] md:min-h-[200px]  mx-auto relative">
+  {/* Title */}
+  <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-800">
+    <span className="block md:hidden">SOCIOLOGY</span>
+    <span className="hidden md:block md:-translate-y-1/2 absolute left-1/2 -translate-x-1/2">
+      SOCIOLOGY
+    </span>
+  </h1>
 
-          {/* Right: Menu Icon */}
-          <div
-            className="absolute right-0 top-1/2 -translate-y-1/2 rotate-90 text-3xl text-gray-700 cursor-pointer"
-            onClick={() => setMenuOpen(true)}
-          >
-            <IoMenu />
-          </div>
-        </div>
+  {/* Menu icon */}
+  <div
+    className="text-3xl text-gray-700 cursor-pointer rotate-90 block md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2"
+    onClick={() => setMenuOpen(true)}
+  >
+    <IoMenu />
+  </div>
+</div>
+
       </div>
 
       {/* Slide-up menu */}

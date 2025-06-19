@@ -196,7 +196,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[470px]">
+    <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[540px] md:max-h-[470px]">
       {/* Image */}
       <div
   className="relative w-full h-[400px]"
