@@ -5,60 +5,54 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 
+const containerVariant: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.3, delayChildren: 0.7 },
+  },
+};
 
+const itemVariant: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", bounce: 0.4 },
+  },
+};
 
- const containerVariant: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.3, delayChildren: 0.7 },
-    },
-  };
-
-
-
-  const itemVariant: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", bounce: 0.4 },
-    },
-  };
-
-
- const navItems = [
-    { name: "OUR PURPOSE", href: "/purpose" },
-    { name: "LAST GENERATION", href: "/last-generation" },
-    { name: "FILOSOFI", href: "/filosofi" },
-    { name: "IDEA IS CAPITAL", href: "/ideaiscapital" },
-    { name: "CONNECT", href: "/connect" },
-  ];
+const navItems = [
+  { name: "OUR PURPOSE", href: "/purpose" },
+  { name: "LAST GENERATION", href: "/last-generation" },
+  { name: "FILOSOFI", href: "/filosofi" },
+  { name: "IDEA IS CAPITAL", href: "/ideaiscapital" },
+  { name: "CONNECT", href: "/connect" },
+];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full z-50 relative mb-4">
-      <div className="container">
+    <nav className="w-full  z-50 relative mb-4">
+      <div className="">
         <div className="flex items-center justify-between min-h-[100px] md:min-h-[200px]  mx-auto relative">
-  {/* Title */}
-  <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-800">
-    <span className="block md:hidden">SOSIOLOJI</span>
-    <span className="hidden md:block md:-translate-y-1/2 absolute left-1/2 -translate-x-1/2">
-      SOSIOLOJI
-    </span>
-  </h1>
+          {/* Title */}
+          <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-800">
+            <span className="block md:hidden">SOSIOLOJI</span>
+            <span className="hidden md:block md:-translate-y-1/2 absolute left-1/2 -translate-x-1/2">
+              SOSIOLOJI
+            </span>
+          </h1>
 
-  {/* Menu icon */}
-  <div
-    className="text-3xl text-gray-700 cursor-pointer rotate-90 block md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2"
-    onClick={() => setMenuOpen(true)}
-  >
-    <IoMenu />
-  </div>
-</div>
-
+          {/* Menu icon */}
+          <div
+            className="text-3xl text-gray-700 cursor-pointer rotate-90 block md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2"
+            onClick={() => setMenuOpen(true)}
+          >
+            <IoMenu />
+          </div>
+        </div>
       </div>
 
       {/* Slide-up menu */}

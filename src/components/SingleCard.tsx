@@ -193,10 +193,10 @@ const SingleCard = ({ item }: { item: CardItem }) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[590px] md:max-h-[500px]">
+    <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[590px] md:max-h-[590px]">
       {/* Image */}
       <div
-        className="relative w-full  h-[340px] md:h-[400px]"
+        className="relative w-full  h-[340px] md:h-[440px]"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -232,7 +232,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
             <Link
               to={item.categoryLink}
               className={`text-xs border border-black/90 rounded-full 
-          px-4 py-2 md:py-1 text-center  text-[#444] font-semibold no-underline 
+          px-4 py-2 m text-center  text-[#444] font-semibold no-underline 
           flex justify-center items-center -rotate-90
           ${isMobile ? "-" : "-rotate-90"}
         `}
