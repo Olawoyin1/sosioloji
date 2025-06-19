@@ -235,8 +235,8 @@ const SingleCard = ({ item }: { item: CardItem }) => {
       <Link
         to={item.categoryLink}
         className={`
-          bg-[#FAD9E6] text-xs border border-black/90 rounded-full 
-          px-3 py-[2px] text-[#444] font-semibold no-underline 
+          bg-[${item.buttonBgColor}] text-xs border border-black/90 rounded-full 
+          px-4 py-[4px] text-center  text-[#444] font-semibold no-underline 
           flex justify-center items-center -rotate-90
           ${isMobile ? "-" : "-rotate-90"}
         `}
@@ -251,8 +251,8 @@ const SingleCard = ({ item }: { item: CardItem }) => {
       {/* Text */}
       <div className="pt-6 h-[200px]">
         <div className="mb-5">
-          <h1 className="text-2xl font-extrabold mb-2 leading-tight">{item.title}</h1>
-          <p className="text-gray-700 leading-loose pf  text-xs mb-2">{item.description}</p>
+          <h1 className="text-2xl font-extrabold mb-3 leading-tight">{item.title}</h1>
+          <p className="text-gray-700 leading-loose pf  text-xs mb-3">{item.description}</p>
           <FancyLinkButton
             label={item.buttonLabel}
             to={item.buttonLink}

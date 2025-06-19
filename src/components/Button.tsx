@@ -130,7 +130,7 @@ const FancyLinkButton: React.FC<FancyLinkButtonProps> = ({
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onMouseMove={handleMouseMove}
-        className={`relative inline-flex items-center justify-center px-8 py-2 text-sm font-bold rounded-full cursor-pointer my-2 ${block ? "w-full" : ""}`}
+        className={`relative inline-flex items-center justify-center px-7 md:px-8 py-2 text-xs md:text-sm font-bold rounded-full cursor-pointer my-2 ${block ? "w-full" : ""}`}
         style={{ backgroundColor: bgColor, color: textColor }}
       >
         {/* Decorative shrinking border */}

@@ -104,7 +104,7 @@ const Navbar = () => {
                   </Link>
 
                   {item.name === "LAST GENERATION" && (
-                    <div className="h-px w-130 mx-auto bg-black/20 mt-9" />
+                    <div className="h-px w-80 md:w-130 mx-auto bg-black/20 mt-9" />
                   )}
                 </motion.li>
               ))}
