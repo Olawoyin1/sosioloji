@@ -235,8 +235,8 @@ const SingleCard = ({ item }: { item: CardItem }) => {
       <Link
         to={item.categoryLink}
         className={`
-          bg-[#FAD9E6] border border-black/90 rounded-full 
-          px-3 py-[2px] text-[#444] font-semibold text-sm no-underline 
+          bg-[#FAD9E6] text-xs border border-black/90 rounded-full 
+          px-3 py-[2px] text-[#444] font-semibold no-underline 
           flex justify-center items-center -rotate-90
           ${isMobile ? "-" : "-rotate-90"}
         `}
