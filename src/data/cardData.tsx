@@ -2,9 +2,9 @@
 export const dataCard = [
   {
     id: 1,
-    title: "Building your audience with",
+    title: "Building your audience with SOSIOLOJI",
     description:
-      "How Ghost allows you to turn anonymous readers into an audience of active subscribers, so you know what's working.",
+      "How Ghost allows you to turn anonymous readers into an audience of active subscribers, so you know what's working. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Inspiration",
     categoryLink: "/articles",
     image:
@@ -16,7 +16,7 @@ export const dataCard = [
   {
     id: 2,
     title: "Grow your newsletter with quality leads",
-    description: "Techniques for converting your traffic into subscribers using attractive articles and landing pages.",
+    description: "Techniques for converting your traffic into subscribers using attractive articles and landing pages. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Survey",
     categoryLink: "/tutorials",
     image:
@@ -29,7 +29,7 @@ export const dataCard = [
     id: 1,
     title: "Effective email capture for marketing",
     description:
-      "Capture emails with minimal friction and integrate them with your CRM or automation tools.",
+      "Capture emails with minimal friction and integrate them with your CRM or automation tools. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Society",
     categoryLink: "/articles",
     image:
@@ -40,8 +40,8 @@ export const dataCard = [
   },
   {
     id: 2,
-    title: "Audience segmentation",
-    description: "Segment your subscribers to target messaging and improve engagement rates.",
+    title: "Audience segmentation your newsletter with quality",
+    description: "Segment your subscribers to target messaging and improve engagement rates. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Solution",
     categoryLink: "/tutorials",
     image:
@@ -53,7 +53,7 @@ export const dataCard = [
   {
     id: 2,
     title: "Effective email capture for marketing",
-    description: "Capture emails with minimal friction and integrate them with your CRM or automation tools.",
+    description: "Capture emails with minimal friction and integrate them with your CRM or automation tools. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Video",
     categoryLink: "/tutorials",
     image:
@@ -65,7 +65,7 @@ export const dataCard = [
   {
     id: 2,
     title: "Grow your newsletter with quality leads",
-    description: "How Ghost allows you to turn anonymous readers into an audience of active subscribers, so you know what's working.",
+    description: "How Ghost allows you to turn anonymous readers into an audience of active subscribers, so you know what's working. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Behaviour",
     categoryLink: "/tutorials",
     image:

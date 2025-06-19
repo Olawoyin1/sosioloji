@@ -74,8 +74,6 @@
 
 // // export default SingleCard;
 
-
-
 // import { Link } from "react-router-dom";
 // import { motion } from "framer-motion";
 // import { useState, useEffect } from "react";
@@ -166,7 +164,6 @@
 
 // export default SingleCard;
 
-
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -196,34 +193,34 @@ const SingleCard = ({ item }: { item: CardItem }) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[540px] md:max-h-[470px]">
+    <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[540px] md:h-[470px]">
       {/* Image */}
       <div
-  className="relative w-full h-[400px]"
-  onMouseEnter={() => setIsHovered(true)}
-  onMouseLeave={() => setIsHovered(false)}
->
-  {/* Image Background */}
-  <div
-    className="w-full h-full bg-cover bg-center border border-gray-300 rounded-xl"
-    style={{ backgroundImage: `url(${item.image})` }}
-  />
+        className="relative w-full h-[300px]"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Image Background */}
+        <div
+          className="w-full h-full bg-cover bg-center border border-gray-300 rounded-xl"
+          style={{ backgroundImage: `url(${item.image})` }}
+        />
 
-  {/* Overlay Frame */}
-  <motion.div
-    animate={
-      isHovered
-        ? { x: 0, y: 0 }
-        : isMobile
-        ? { x: 0, y: 0 }
-        : { x: -20, y: 20 }
-    }
-    transition={{ type: "spring", stiffness: 200, damping: 20 }}
-    className="absolute top-0 left-0 w-full h-full border border-black rounded-xl cursor-pointer"
-  >
-    {/* Category Tag - aligned left center */}
-    <div
-      className={`
+        {/* Overlay Frame */}
+        <motion.div
+          animate={
+            isHovered
+              ? { x: 0, y: 0 }
+              : isMobile
+              ? { x: 0, y: 0 }
+              : { x: -20, y: 20 }
+          }
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          className="absolute top-0 left-0 w-full h-full border border-black rounded-xl cursor-pointer"
+        >
+          {/* Category Tag - aligned left center */}
+          <div
+            className={`
         absolute 
         top-20 
         left-0 
@@ -231,28 +228,32 @@ const SingleCard = ({ item }: { item: CardItem }) => {
         ${isMobile ? "-translate-x-[50%]" : "-translate-x-[50%]"}
         pointer-events-auto
       `}
-    >
-      <Link
-        to={item.categoryLink}
-        className={`
-          bg-[${item.buttonBgColor}] text-xs border border-black/90 rounded-full 
+          >
+            <Link
+              to={item.categoryLink}
+              className={`text-xs border border-black/90 rounded-full 
           px-4 py-[4px] text-center  text-[#444] font-semibold no-underline 
           flex justify-center items-center -rotate-90
           ${isMobile ? "-" : "-rotate-90"}
         `}
-      >
-        {item.category}
-      </Link>
-    </div>
-  </motion.div>
-</div>
+        style={{ backgroundColor: item.buttonBgColor }}
 
+            >
+              {item.category}
+            </Link>
+          </div>
+        </motion.div>
+      </div>
 
       {/* Text */}
-      <div className="pt-6 h-[200px]">
+      <div className="pt-6 ">
         <div className="mb-5">
-          <h1 className="text-2xl font-extrabold mb-3 leading-tight">{item.title}</h1>
-          <p className="text-gray-700 leading-loose pf  text-xs mb-3">{item.description}</p>
+          <h1 className="text-2xl font-extrabold mb-3 leading-tight">
+            {item.title}
+          </h1>
+          <p className="text-gray-700 line-clamp-3 leading-loose pf  text-xs mb-3">
+            {item.description}
+          </p>
           <FancyLinkButton
             label={item.buttonLabel}
             to={item.buttonLink}
