@@ -5,7 +5,7 @@ import { PageWrapper } from "../components/PageWrapper";
 
 const Home = () => {
     return (
-    <PageWrapper>
+    <PageWrapper disableEntryAnimation>
       {/* Fixed background image */}
       <div className="bg" />
 

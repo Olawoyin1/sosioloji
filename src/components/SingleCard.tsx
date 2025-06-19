@@ -193,10 +193,10 @@ const SingleCard = ({ item }: { item: CardItem }) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[590px] md:h-[470px]">
+    <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[590px] md:max-h-[500px]">
       {/* Image */}
       <div
-        className="relative w-full  h-[340px]"
+        className="relative w-full  h-[340px] md:h-[400px]"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
