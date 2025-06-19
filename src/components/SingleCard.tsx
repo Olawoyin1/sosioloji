@@ -228,7 +228,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
         top-20 
         left-0 
         -translate-y-1/2 
-        ${isMobile ? "translate-x-0" : "-translate-x-[50%]"}
+        ${isMobile ? "-translate-x-[50%]" : "-translate-x-[50%]"}
         pointer-events-auto
       `}
     >
