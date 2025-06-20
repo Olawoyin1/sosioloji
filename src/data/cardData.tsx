@@ -15,7 +15,7 @@ export const dataCard = [
     buttonLabel: "Read More",
     buttonLink: "/topics",
     buttonBgColor: "#E8D4C3",
-    slug: "this-is-the-detailed-page",
+    slug: "this-is-the-first",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ export const dataCard = [
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
-    slug: "this-is-the-detailed-page",
+    slug: "this-is-the-second",
     subTag: "A | C"
   },
     {
@@ -45,7 +45,7 @@ export const dataCard = [
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
-    slug: "this-is-the-detailed-page",
+    slug: "this-is-the-third",
   },
  
   {
@@ -60,7 +60,7 @@ export const dataCard = [
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
-    slug: "this-is-the-detailed-page",
+    slug: "this-is-the-fourth",
   },
    {
     id: 5,
@@ -75,7 +75,7 @@ export const dataCard = [
     buttonLabel: "Read More",
     buttonLink: "/topics",
     buttonBgColor: "#E8D4C3",
-    slug: "this-is-the-detailed-page",
+    slug: "this-is-the-fifth",
   },
 
   {
@@ -91,7 +91,7 @@ export const dataCard = [
     buttonLabel: "Read More",
     buttonLink: "/topics",
     buttonBgColor: "#E8D4C3",
-    slug: "this-is-the-detailed-page",
+    slug: "this-is-the-sixth",
   },
   {
     id: 7,
@@ -105,6 +105,8 @@ export const dataCard = [
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
+    
+    slug: "this-is-the-seventh",
   },
   {
     id: 8,
@@ -117,7 +119,7 @@ export const dataCard = [
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
-    slug: "this-is-the-detailed-page",
+    slug: "this-is-the",
   },
   {
     id: 9,
@@ -131,6 +133,6 @@ export const dataCard = [
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
-    slug: "this-is-the-detailed-page",
+    slug: "this-is-the-page",
   },
 ];
