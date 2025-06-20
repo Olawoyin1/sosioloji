@@ -162,7 +162,7 @@ const ImageGallery = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-6xl mx-auto mt-9 px-4 relative">
+    <div className="w-full max-w-6xl mx-auto mt-9 relative">
       {/* Image Grid */}
       <div className="grid grid-cols-3 gap-4">
         {images.map((src, index) => (
