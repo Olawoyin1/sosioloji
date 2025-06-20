@@ -26,7 +26,7 @@ export const dataCard = [
     buttonBgColor: "#FAD9E6",
   },
   {
-    id: 1,
+    id: 3,
     title: "Effective email capture for marketing",
     description:
       "Capture emails with minimal friction and integrate them with your CRM or automation tools. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
@@ -39,7 +39,7 @@ export const dataCard = [
     buttonBgColor: "#E8D4C3",
   },
   {
-    id: 2,
+    id: 4,
     title: "Audience segmentation your newsletter with quality",
     description: "Segment your subscribers to target messaging and improve engagement rates. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Solution",
@@ -51,7 +51,44 @@ export const dataCard = [
     buttonBgColor: "#FAD9E6",
   },
   {
-    id: 2,
+    id: 5,
+    title: "Grow your newsletter with quality leads",
+    description: "Techniques for converting your traffic into subscribers using attractive articles and landing pages. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
+    category: "Survey",
+    categoryLink: "/tutorials",
+    image:
+      "../../Images/card.webp",
+    buttonLabel: "Read More",
+    buttonLink: "/start",
+    buttonBgColor: "#FAD9E6",
+  },
+  {
+    id: 6,
+    title: "Effective email capture for marketing",
+    description:
+      "Capture emails with minimal friction and integrate them with your CRM or automation tools. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
+    category: "Society",
+    categoryLink: "/articles",
+    image:
+      "../../Images/card-image-3-CjfYGdAv.webp",
+    buttonLabel: "Read More",
+    buttonLink: "/topics",
+    buttonBgColor: "#E8D4C3",
+  },
+  {
+    id: 7,
+    title: "Audience segmentation your newsletter with quality",
+    description: "Segment your subscribers to target messaging and improve engagement rates. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
+    category: "Solution",
+    categoryLink: "/tutorials",
+    image:
+      "../../Images/card-image-4-D7xxZtUD.webp",
+    buttonLabel: "Read More",
+    buttonLink: "/start",
+    buttonBgColor: "#FAD9E6",
+  },
+  {
+    id: 8,
     title: "Effective email capture for marketing",
     description: "Capture emails with minimal friction and integrate them with your CRM or automation tools. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Video",
@@ -63,7 +100,7 @@ export const dataCard = [
     buttonBgColor: "#FAD9E6",
   },
   {
-    id: 2,
+    id: 9,
     title: "Grow your newsletter with quality leads",
     description: "How Ghost allows you to turn anonymous readers into an audience of active subscribers, so you know what's working. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Behaviour",
