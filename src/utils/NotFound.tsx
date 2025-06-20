@@ -8,7 +8,7 @@ const NotFound = () => {
     <PageWrapper>
       <Navbar />
       <div className="p-6 text-center min-h-[40vh] flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-bold">page build in progress</h1>
+        <h1 className="text-2xl font-semibold">page build in progress</h1>
         <FancyLinkButton
               label="home page"
               to='/'

@@ -12,8 +12,8 @@ const Home = () => {
 
       {/* Content section */}
       <section className="relative z-10">
-        <div className="max-w-7xl mx-auto px-8 md:px-12">
         <Navbar />
+        <div className="max-w-7xl mx-auto px-8 md:px-12">
           <div className="mb-20">
 
           <ImageSlider />

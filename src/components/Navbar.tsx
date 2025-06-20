@@ -35,7 +35,7 @@ const Navbar = () => {
 
   return (
     <nav className="w-full  z-50 relative mb-4">
-      <div className="">
+      <div className="max-w-7xl mx-auto px-8 md:px-12">
         <div className="flex items-center justify-between min-h-[100px] md:min-h-[200px]  mx-auto relative">
           {/* Title */}
           <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-800">
