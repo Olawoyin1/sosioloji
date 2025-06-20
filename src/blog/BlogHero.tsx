@@ -23,11 +23,11 @@ const BlogHero = ({ blog }: BlogHeroProps) => {
       <img
         src={blog.image}
         alt={blog.title}
-        className="relative w-full bg-[#FFF0D3] rounded-[15px] object-cover justify-center gap-0 shadow-md md:h-[440px] h-auto"
+        className="relative w-full bg-[#FFF0D3] rounded-[15px] object-cover justify-center gap-0 shadow-md sm:h-[440px] h-[250px]"
         id="tag-box"
       />
 
-      <span className="absolute border border-gray-700 rounded-[15px] opacity-50 z-[-1] bottom-[-14px] right-4 w-full h-full" />
+      <span className="absolute border border-gray-700 rounded-[15px] opacity-50 z-[-1] bottom-[-7px] right-2 sm:bottom-[-14px] sm:right-4 w-full h-full" />
     </div>
   );
 };
