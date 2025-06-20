@@ -1,55 +1,3 @@
-// import { useState } from "react";
-// import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
-// import NormalButton from "../components/NormalButton";
-
-// const Share = () => {
-//   const [copied, setCopied] = useState(false);
-//   const shareUrl = window.location.href; // or your defined article URL
-
-//   const handleCopy = () => {
-//     navigator.clipboard.writeText(shareUrl);
-//     setCopied(true);
-//     setTimeout(() => setCopied(false), 2000);
-//   };
-
-//   return (
-//     <div className="max-w-xl mx-auto mt-12 px-4">
-
-//       {/* Social Icons */}
-//       <div className="flex items-center justify-center mb-3 gap-4">
-
-//       <h2 className="text-lg font-semibold">Share Article:</h2>
-//       <div className="flex items-center gap-2 ">
-//         {[FaFacebookF, FaTwitter, FaLinkedinIn].map((Icon, idx) => (
-//             <a
-//             key={idx}
-//             href="#"
-//             className="p-3 rounded-full border border-gray-300 text-gray-800 bg-white shadow-sm hover:-translate-y-1 transition-all duration-300"
-//             >
-//             <Icon size={18} />
-//           </a>
-//         ))}
-//       </div>
-//     </div>
-
-//       {/* Copy Link Box */}
-//       <div className="bg-white rounded-full pl-7 p-2 pr-3 flex items-center justify-between shadow-sm">
-//         <span className="text-sm text-gray-700 truncate">{shareUrl}</span>
-//         <button
-//           onClick={handleCopy}
-//           className="ml-4 text-sm font-semibold rounded-md transition"
-//         >
-//             <NormalButton bgColor="#F7C6D0" label={`${copied ? "Copied!" : "Copy Link"}`} />
-          
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Share;
-
-
 
 import { useState } from "react";
 import {
@@ -115,11 +63,11 @@ const Share = () => {
       </div>
 
       {/* Copy Link Box */}
-      <div className="bg-white rounded-full pl-3 sm:pl-7  sm:p-2 pr-3 flex items-center justify-between shadow-sm">
+      {/* <div className="bg-white rounded-full pl-3 sm:pl-7  sm:p-2 pr-3 flex items-center justify-between shadow-sm">
         <span className="text-xs sm:text-sm text-gray-700 pf truncate">{shareUrl}</span>
         <button
           onClick={handleCopy}
-          className="ml-4 text-sm font-semibold rounded-md transition"
+          className="ml-4  font-semibold rounded-md transition"
         >
           <NormalButton
             bgColor="#F7C6D0"
@@ -127,7 +75,18 @@ const Share = () => {
             label={copied ? "Copied!" : "Copy Link"}
           />
         </button>
-      </div>
+      </div> */}
+
+      <div className="bg-white rounded-full px-3 sm:px-5 py-2 flex items-center gap-4 shadow-sm flex-wrap sm:flex-nowrap">
+  <span className="text-xs sm:text-sm text-gray-700 flex-1 min-w-0 truncate">{shareUrl}</span>
+  <div className="shrink-0">
+    <NormalButton
+      bgColor="#F7C6D0"
+      color="#000"
+      label={copied ? "Copied!" : "Copy Link"}
+    />
+  </div>
+</div>
     </div>
   );
 };
