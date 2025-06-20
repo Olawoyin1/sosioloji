@@ -44,7 +44,7 @@ const Card = () => {
               key={item.id}
               initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
+              exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.3 }}
             >
               <SingleCard item={item} />

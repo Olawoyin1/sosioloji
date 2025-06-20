@@ -13,9 +13,9 @@ interface CardItem {
   buttonLabel: string;
   buttonLink: string;
   buttonBgColor: string;
-  slug: string;
-  subTag: string;
-  subTagC: string;
+  slug?: string;
+  subTag?: string;
+  subTagC?: string;
 }
 
 const SingleCard = ({ item }: { item: CardItem }) => {
@@ -139,7 +139,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
     <Link
       to={item.categoryLink}
       className="text-sm sm:text-[17px] border z-20 border-black/90 rounded-full 
-        px-4 py-1 md:py-1 text-[#444] font-bold no-underline 
+        px-4 py-1 md:py-1  font-bold no-underline 
         flex justify-center items-center transform rotate-180 origin-center"
       style={{ backgroundColor: item.buttonBgColor }}
     >
@@ -165,9 +165,9 @@ const SingleCard = ({ item }: { item: CardItem }) => {
 {(item.category === "Article" || item.category === "Inspiration") && (
   <div className="relative group">
     <Link
-      to={item.categoryLink}
+      to='/'
       className="w-8 h-8 sm:h-10 sm:w-10 border border-black/90 rounded-full 
-        flex justify-center items-center rotate-270 text-xs font-bold text-[#444] md:text-sm"
+        flex justify-center items-center rotate-270 text-xs font-bold  md:text-sm"
       style={{ backgroundColor: item.buttonBgColor }}
     >
      {
