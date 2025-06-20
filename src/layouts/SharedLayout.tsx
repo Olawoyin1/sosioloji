@@ -1,7 +1,7 @@
 // src/layouts/SharedLayout.tsx
 
 // import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+// import Footer from '../components/Footer'
 import { Outlet } from 'react-router-dom'
 import ScrollToTopButton from '../components/ScrollToTop'
 import ScrollToTop from '../utils/ScrollTT'
@@ -13,7 +13,7 @@ const SharedLayout = () => {
       <ScrollToTopButton />
       <ScrollToTop />
         <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

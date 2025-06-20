@@ -13,6 +13,9 @@ interface CardItem {
   buttonLabel: string;
   buttonLink: string;
   buttonBgColor: string;
+  slug: string;
+  subTag: string;
+  subTagC: string;
 }
 
 const SingleCard = ({ item }: { item: CardItem }) => {
@@ -52,12 +55,12 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           className="absolute top-0 left-0 w-full h-full border border-black rounded-xl cursor-pointer"
         >
-          <Link to={`/card/${item.id}`} className="absolute top-0 left-0 w-full h-full">
+          <Link to={`/post/${item.slug}`} className="absolute top-0 left-0 w-full h-full">
 
           
 
           {/* Category Tag - aligned left center */}
-          <div 
+          {/* <div 
             className={`
         absolute 
         top-20 
@@ -78,7 +81,133 @@ const SingleCard = ({ item }: { item: CardItem }) => {
             >
               {item.category}
             </Link>
-          </div>
+          </div> */}
+          
+          {/* =======SECOND TAG========= */}
+          {/* <div 
+            className={`
+        absolute 
+        top-90 
+        left-0 
+        -translate-y-1/2 
+        ${isMobile ? "-translate-x-[50%]" : "-translate-x-[50%]"}
+        pointer-events-auto
+      `}
+          >
+            <Link
+              to={item.categoryLink}
+              className={`text-xs border border-black/90 rounded-full 
+          px-4  py-2 m text-center  text-[#444] font-semibold no-underline 
+          flex justify-center items-center -rotate-90
+          ${isMobile ? "-" : "-rotate-90"}
+        `}
+              style={{ backgroundColor: item.buttonBgColor }}
+            >
+              {item.category}
+            </Link>
+          </div> */}
+
+           {/* === Tag Stack using Grid with Alignment Fix === */}
+<div
+  className={`
+    absolute 
+
+    ${
+      item.category === "Inspiration"
+        ? "top-31"
+        : item.category === "Article"
+        ? "top-28"
+        : "top-20"
+    }
+    top-20 
+    left-0 
+    -translate-x-[50%] 
+    flex 
+    
+    rotate-90
+    gap-4 
+    oveflow-hidden
+    m-0
+    p-0
+    items-center 
+    justify-items-center 
+    pointer-events-auto
+  `}
+>
+  {/* First Tag - Rotated Pill */}
+  <div className="w-max">
+    <Link
+      to={item.categoryLink}
+      className="text-sm sm:text-[17px] border z-20 border-black/90 rounded-full 
+        px-4 py-1 md:py-1 text-[#444] font-bold no-underline 
+        flex justify-center items-center transform rotate-180 origin-center"
+      style={{ backgroundColor: item.buttonBgColor }}
+    >
+      {item.category}
+    </Link>
+  </div>
+
+  {/* Second Tag - Circle, only for specific categories */}
+  {/* {(item.category === "Article" || item.category === "Inspiration") && (
+    <div>
+      <Link
+        to={item.categoryLink}
+        className="w-8 h-8 sm:h-10 sm:w-10 border border-black/90 rounded-full 
+          flex justify-center items-center rotate-270 text-xs font-bold text-[#444] md:text-sm"
+        style={{ backgroundColor: item.buttonBgColor }}
+      >
+        A|C
+      </Link>
+    </div>
+  )} */}
+
+  {/* Second Tag - Circle with Hoverable Subtag */}
+{(item.category === "Article" || item.category === "Inspiration") && (
+  <div className="relative group">
+    <Link
+      to={item.categoryLink}
+      className="w-8 h-8 sm:h-10 sm:w-10 border border-black/90 rounded-full 
+        flex justify-center items-center rotate-270 text-xs font-bold text-[#444] md:text-sm"
+      style={{ backgroundColor: item.buttonBgColor }}
+    >
+     {
+  item.category === "Inspiration"
+    ? item.subTag
+    : item.subTag?.charAt(0)
+}
+      
+    </Link>
+
+    {/* Subtag (shown on hover) */}
+    <div
+    //   className="absolute -left-13 -top-14 -translate-y-0 ml-2 
+    //     bg-white border border-gray-200  text-sm font-semibold p-1 px-3 rounded-md rotate-270 
+    //     whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30"
+    // >
+
+    className={`
+    absolute 
+    ${item.category === "Inspiration" ? "-top-19 -left-10" : 
+      item.category === "Article" ? "-top-15 -left-7" : "-top-12 -left-8"} 
+    -translate-y-0 ml-2 
+    bg-white border border-gray-200 text-sm font-semibold p-1 px-3 rounded-md rotate-270 
+    whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30
+  `}>
+    {
+      item.category === "Inspiration" ? item.subTagC : item.subTag
+    }
+    </div>
+  </div>
+)}
+
+
+
+
+  
+</div>
+
+
+
           </Link>
         </motion.div>
       </div>

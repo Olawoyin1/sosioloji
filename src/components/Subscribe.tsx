@@ -129,7 +129,7 @@ const TagCloud: React.FC = () => {
     <div className="relative ml-9 md:ml-0">
       {/* Rotated Header */}
       <h3 className="absolute left-[-84px] sm:left-[-100px] top-1/2 transform rotate-270 text-sm md:text-xl font-bold text-center writing-vertical text-[#1E1B1B] font-playfair">
-        Get Insights
+        Get Insight
 
 
         <span className="text-blue-500 inline-block ml-1">
@@ -180,7 +180,7 @@ const TagCloud: React.FC = () => {
           
 
           <form className="subscribe-form mt-3" data-members-form="subscribe">
-            <h5 className="text-xl text-center mb-3 font-bold">Subscribe to our Newsletter</h5>
+            <h5 className="text-xl text-center mb-3 font-bold">Join The Movement</h5>
             <div className="form-group">
               <input
                 type="text"

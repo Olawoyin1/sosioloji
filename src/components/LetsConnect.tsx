@@ -90,14 +90,14 @@ import FancyLinkButton from './Button';
 
   const socialLinks = [
     {
-      name: "Facebook",
+      name: "Tiktok",
       link: "https://web.facebook.com/ideaiscapital?_rdc=1&_rdr#",
       // icon: <FaFacebookF />,
       color: "#3b5998",
     },
     {
-      name: "Twitter",
-      link: "https://x.com/Ideaiscapital",
+      name: "Instagram",
+      link: "https://instagram.com/Ideaiscapital",
       // icon: <FaTwitter />,
       color: "#1DA1F2",
     },
@@ -108,13 +108,13 @@ import FancyLinkButton from './Button';
     //   color: '#25D366',
     // },
     {
-      name: "Instagram",
-      link: "https://www.instagram.com/ideaiscapital/",
+      name: "X",
+      link: "https://x.com/ideaiscapital/",
       // icon: <FaInstagram />,
       color: "#E1306C",
     },
     {
-      name: 'LinkedIn',
+      name: 'Rednote',
       link: 'https://ghost.estudiopatagon.com/edger/rss',
       // icon: <FaRss />,
       color: '#FFA500',

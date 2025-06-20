@@ -1,4 +1,5 @@
 import Cards from "../components/Cards";
+import Footer from "../components/Footer";
 import ImageSlider from "../components/ImageSlider";
 import Navbar from "../components/Navbar";
 import { PageWrapper } from "../components/PageWrapper";
@@ -24,8 +25,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Bottom padding */}
-      {/* <div className="min-h-[900px]" /> */}
+
+
+      <Footer />
+
+
     </PageWrapper>
   );
 };

@@ -18,7 +18,7 @@ function App() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
-          <Route path="blog/:id" element={<Blog />} />
+          <Route path="post/:slug" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
