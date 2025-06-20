@@ -22,7 +22,6 @@ const BlogHero = ({ blog }: BlogHeroProps) => {
     <div className="relative">
       <img
         src={blog.image}
-        // src="../../Images/car.webp"
         alt={blog.title}
         className="relative w-full bg-[#FFF0D3] rounded-[15px] object-cover justify-center gap-0 shadow-md md:h-[440px] h-auto"
         id="tag-box"

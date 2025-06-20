@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { PageWrapper } from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import BlogHero from "../blog/blogHero";
+import BlogHero from "../blog/BlogHero";
 import { dataCard } from "../data/cardData";
 import { useState } from "react";
 import Qoute from "../blog/Qoute";
