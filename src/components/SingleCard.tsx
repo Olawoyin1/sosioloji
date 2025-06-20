@@ -13,7 +13,7 @@ interface CardItem {
   buttonLabel: string;
   buttonLink: string;
   buttonBgColor: string;
-  slug?: string;
+  slug: string;
   subTag?: string;
   subTagC?: string;
 }
@@ -225,7 +225,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           <div className="flex items-center justify-between">
             <FancyLinkButton
               label={item.buttonLabel}
-              to={item.buttonLink}
+              to={item.slug}
               bgColor={item.buttonBgColor}
             />
 

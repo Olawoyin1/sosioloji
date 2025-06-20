@@ -39,7 +39,7 @@ body{
 .bg {
   background-image: url('/Images/sos.webp'); /* ✅ Correct path */
   background-repeat: repeat-x;
-  /* background-size: contain; */
+  background-size: cover;
   position: absolute;
   background-repeat: no-repeat;
   left: 0;
