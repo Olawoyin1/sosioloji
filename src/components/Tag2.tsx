@@ -1,5 +1,6 @@
 import React from "react";
 import TagButton from "./TagButton";
+import SButton from "./SmallB";
 
 interface TagItem {
   label: string;
@@ -7,19 +8,30 @@ interface TagItem {
   bgColor: string;
 }
 
+
+
 const tags: TagItem[] = [
   { label: "Solution", link: "/", bgColor: "#B8F2E6" },
-  { label: "Videos", link: "/", bgColor: "#FFB7D5" },
+  { label: "Asia", link: "/", bgColor: "#FFB7D5" },
+  { label: "Arabia", link: "/", bgColor: "#A1E3FF" },
   { label: "Society", link: "/", bgColor: "#D5AAFF" },
-  { label: "Surveys", link: "/", bgColor: "#FFC1A1" },
+  { label: "Europe", link: "/", bgColor: "#FEBDD0" },
+  { label: "Action", link: "/", bgColor: "#A1E3FF" },
+  { label: "Americas", link: "/", bgColor: "#FFC1A1" },
+  { label: "Behaviour", link: "/", bgColor: "#FFD682" },
+];
+
+const mTags: TagItem[] = [
+  { label: "Article", link: "/", bgColor: "#B8F2E6" },
+  { label: "Survey", link: "/", bgColor: "#FFB7D5" },
+  { label: "Video", link: "/", bgColor: "#D5AAFF" },
+  { label: "Qoutes", link: "/", bgColor: "#FFC1A1" },
   { label: "Inspiration", link: "/", bgColor: "#FFD682" },
-  { label: "Action Task", link: "/", bgColor: "#A1E3FF" },
-  { label: "Behaviour", link: "/", bgColor: "#FEBDD0" },
 ];
 
 const TagCloud: React.FC = () => {
   return (
-    <div className="relative  ml-9 md:ml-0">
+    <div className="relative ml-9 md:ml-0">
       {/* Rotated Header */}
       <h3 className="absolute left-[-80px] sm:left-[-90px] top-1/2 transform rotate-270 text-sm md:text-xl font-bold text-center writing-vertical text-[#1E1B1B] font-playfair">
         Tag Cloud
@@ -42,8 +54,19 @@ const TagCloud: React.FC = () => {
         id="tag-box"
       >
         <div className="flex flex-wrap space-x-3 items-center w-full">
-          {tags.map((tag) => (
+          {mTags.map((tag) => (
             <TagButton
+              key={tag.label}
+              label={tag.label}
+              to={tag.link}
+              bgColor={tag.bgColor}
+            />
+          ))}
+        </div>
+        <hr className="mt-1 text-gray-500" />
+        <div className="flex flex-wrap space-x-3 items-center w-full">
+          {tags.map((tag) => (
+            <SButton
               key={tag.label}
               label={tag.label}
               to={tag.link}
