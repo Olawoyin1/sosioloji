@@ -18,7 +18,8 @@
 
 
 
-import { useState } from "react";
+
+import  { useRef, useState, useEffect } from "react";
 import { dataCard } from "../data/cardData";
 import SingleCard from "./SingleCard";
 import { AnimatePresence, motion } from "framer-motion";
@@ -28,15 +29,25 @@ const ITEMS_PER_PAGE = 6;
 
 const Card = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const topRef = useRef<HTMLDivElement | null>(null);
 
+  const totalPages = Math.ceil(dataCard.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedData = dataCard.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-  const totalPages = Math.ceil(dataCard.length / ITEMS_PER_PAGE);
+  // scroll to top of card grid on page change
+  useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [currentPage]);
 
   return (
     <>
-      {/* Animated Card Grid */}
+      {/* Scroll Anchor */}
+      <div ref={topRef} />
+
+      {/* Card Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 md:gap-20 md:space-y-0 place-items-center ">
         <AnimatePresence mode="wait">
           {paginatedData.map((item) => (
@@ -53,6 +64,7 @@ const Card = () => {
         </AnimatePresence>
       </div>
 
+      {/* Pagination Controls */}
       {/* Pagination Controls */}
       <div className="flex  justify-center items-center mt-10 space-x-3">
         {currentPage > 1 && (
