@@ -185,7 +185,7 @@ const TagCloud: React.FC = () => {
               <input
                 type="text"
                 name="name" 
-                className="w-full mb-3 px-7 py-3 pf text-gray-700 bg-white border border-gray-300 rounded-3xl text-sm outline-none focus:ring-2 focus:ring-pink-300 transition"
+                className="w-full mb-2 px-7 py-3 pf text-gray-700 bg-white border border-gray-300 rounded-3xl text-sm outline-none focus:ring-0 focus:ring-pink-300 transition"
                 required
                 placeholder="Enter your name"
                 // value={formData.name}
@@ -193,7 +193,7 @@ const TagCloud: React.FC = () => {
               />
               <input
                 type="email"
-                name="email"className="w-full mb-3 px-7 py-3 pf text-gray-700 bg-white border border-gray-300 rounded-3xl text-sm outline-none focus:ring-2 focus:ring-pink-300 transition"
+                name="email"className="w-full mb- px-7 py-3 pf text-gray-700 bg-white border border-gray-300 rounded-3xl text-sm outline-none focus:ring-0 focus:ring-pink-300 transition"
                 required
                 placeholder="Enter your email"
                 // value={formData.email}

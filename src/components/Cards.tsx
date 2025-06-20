@@ -18,8 +18,7 @@
 
 
 
-
-import  { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import { dataCard } from "../data/cardData";
 import SingleCard from "./SingleCard";
 import { AnimatePresence, motion } from "framer-motion";
@@ -29,33 +28,23 @@ const ITEMS_PER_PAGE = 6;
 
 const Card = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const topRef = useRef<HTMLDivElement | null>(null);
 
-  const totalPages = Math.ceil(dataCard.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedData = dataCard.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-  // scroll to top of card grid on page change
-  useEffect(() => {
-    if (topRef.current) {
-      topRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [currentPage]);
+  const totalPages = Math.ceil(dataCard.length / ITEMS_PER_PAGE);
 
   return (
     <>
-      {/* Scroll Anchor */}
-      <div ref={topRef} />
-
-      {/* Card Grid */}
+      {/* Animated Card Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 md:gap-20 md:space-y-0 place-items-center ">
         <AnimatePresence mode="wait">
           {paginatedData.map((item) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, x: 0 }}
+              initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, x: 20 }}
+              exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.3 }}
             >
               <SingleCard item={item} />
@@ -64,7 +53,6 @@ const Card = () => {
         </AnimatePresence>
       </div>
 
-      {/* Pagination Controls */}
       {/* Pagination Controls */}
       <div className="flex  justify-center items-center mt-10 space-x-3">
         {currentPage > 1 && (
@@ -116,3 +104,104 @@ const Card = () => {
 };
 
 export default Card;
+
+
+
+
+// import  { useRef, useState, useEffect } from "react";
+// import { dataCard } from "../data/cardData";
+// import SingleCard from "./SingleCard";
+// import { AnimatePresence, motion } from "framer-motion";
+// import FancyLinkButton from "./Button";
+
+// const ITEMS_PER_PAGE = 6;
+
+// const Card = () => {
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const topRef = useRef<HTMLDivElement | null>(null);
+
+//   const totalPages = Math.ceil(dataCard.length / ITEMS_PER_PAGE);
+//   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+//   const paginatedData = dataCard.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+//   // scroll to top of card grid on page change
+//   useEffect(() => {
+//     if (topRef.current) {
+//       topRef.current.scrollIntoView({ behavior: "smooth" });
+//     }
+//   }, [currentPage]);
+
+//   return (
+//     <>
+//       {/* Scroll Anchor */}
+//       <div ref={topRef} />
+
+//       {/* Card Grid */}
+//       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 md:gap-20 md:space-y-0 place-items-center ">
+//         <AnimatePresence mode="wait">
+//           {paginatedData.map((item) => (
+//             <motion.div
+//               key={item.id}
+//               initial={{ opacity: 0, x: 0 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, x: 20 }}
+//               transition={{ duration: 0.3 }}
+//             >
+//               <SingleCard item={item} />
+//             </motion.div>
+//           ))}
+//         </AnimatePresence>
+//       </div>
+
+//       {/* Pagination Controls */}
+//       {/* Pagination Controls */}
+//       <div className="flex  justify-center items-center mt-10 space-x-3">
+//         {currentPage > 1 && (
+//           <button
+//             onClick={() => setCurrentPage((prev) => prev - 1)}
+//             className=""
+//           ><FancyLinkButton 
+//               to="/"
+//               label="Prev"
+//               bgColor="#FFE6B4"
+//             />
+            
+//           </button>
+//         )}
+
+//         {[...Array(totalPages)].map((_, i) => {
+//           const page = i + 1;
+//           return (
+//             <button
+//               key={page}
+//               onClick={() => setCurrentPage(page)}
+//               className={`px-4 py-1 cursor-pointer rounded ${
+//                 currentPage === page
+//                   ? "bg-[#FFE6B4] text-black"
+//                   : "hover:bg-gray-300 bg-[#EEEEEE]"
+//               }`}
+//             >
+//               {page}
+//             </button>
+//           );
+//         })}
+
+//         {currentPage < totalPages && (
+//           <button
+//             onClick={() => setCurrentPage((prev) => prev + 1)}
+//             className=""
+//           >
+//             <FancyLinkButton 
+//               to="/"
+//               label="Next"
+//               bgColor="#FFE6B4"
+//             />
+            
+//           </button>
+//         )}
+//       </div>
+//     </>
+//   );
+// };
+
+// export default Card;

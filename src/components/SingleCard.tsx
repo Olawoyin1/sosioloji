@@ -52,8 +52,12 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           className="absolute top-0 left-0 w-full h-full border border-black rounded-xl cursor-pointer"
         >
+          <Link to={`/card/${item.id}`} className="absolute top-0 left-0 w-full h-full">
+
+          
+
           {/* Category Tag - aligned left center */}
-          <div
+          <div 
             className={`
         absolute 
         top-20 
@@ -70,12 +74,12 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           flex justify-center items-center -rotate-90
           ${isMobile ? "-" : "-rotate-90"}
         `}
-        style={{ backgroundColor: item.buttonBgColor }}
-
+              style={{ backgroundColor: item.buttonBgColor }}
             >
               {item.category}
             </Link>
           </div>
+          </Link>
         </motion.div>
       </div>
 
@@ -89,16 +93,20 @@ const SingleCard = ({ item }: { item: CardItem }) => {
             {item.description}
           </p>
           <div className="flex items-center justify-between">
-
-          <FancyLinkButton
-            label={item.buttonLabel}
-            to={item.buttonLink}
-            bgColor={item.buttonBgColor}
+            <FancyLinkButton
+              label={item.buttonLabel}
+              to={item.buttonLink}
+              bgColor={item.buttonBgColor}
             />
 
             <div className="flex items-center gap-2">
               <div className="img h-8 w-8 sm:h-10 sm:w-10 overflow-hidden bg-black/30 text-white flex justify-center items-center rounded-full">
-              <img src="https://th.bing.com/th/id/OIP.ItvA9eX1ZIYT8NHePqeuCgHaHa?w=210&h=210&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" className="object-cover" alt="" /></div>
+                <img
+                  src="https://th.bing.com/th/id/OIP.ItvA9eX1ZIYT8NHePqeuCgHaHa?w=210&h=210&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+                  className="object-cover"
+                  alt=""
+                />
+              </div>
               <p className="font-bold">sosioloji</p>
             </div>
           </div>
