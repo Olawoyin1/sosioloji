@@ -74,10 +74,10 @@ const Card = () => {
             <button
               key={page}
               onClick={() => setCurrentPage(page)}
-              className={`px-4 py-1 border rounded ${
+              className={`px-4 py-1 cursor-pointer rounded ${
                 currentPage === page
                   ? "bg-[#FFE6B4] text-black"
-                  : "hover:bg-gray-100"
+                  : "hover:bg-gray-300 bg-[#EEEEEE]"
               }`}
             >
               {page}
