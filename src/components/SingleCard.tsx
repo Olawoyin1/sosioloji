@@ -82,7 +82,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
       {/* Text */}
       <div className="pt-6 ">
         <div className="mb-5">
-          <h1 className="text-lg md:text-2xl font-extrabold mb-3 leading-tight">
+          <h1 className="text-xl md:text-2xl font-extrabold mb-3 leading-tight">
             {item.title}
           </h1>
           <p className="text-gray-700 line-clamp-3 leading-loose pf  text-xs mb-3">
