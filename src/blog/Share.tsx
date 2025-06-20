@@ -79,7 +79,7 @@ const Share = () => {
 
       <div className="bg-white rounded-full px-3 sm:px-5 py-2 flex items-center gap-4 shadow-sm flex-wrap sm:flex-nowrap">
   <span className="text-xs sm:text-sm text-gray-700 flex-1 min-w-0 truncate">{shareUrl}</span>
-  <div className="shrink-0">
+  <div className="shrink-0" onClick={handleCopy}>
     <NormalButton
       bgColor="#F7C6D0"
       color="#000"
