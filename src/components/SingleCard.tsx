@@ -34,8 +34,9 @@ const SingleCard = ({ item }: { item: CardItem }) => {
       {/* Image */}
       <div
         className="relative w-full  h-[340px] md:h-[440px]"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+          onMouseEnter={() => !isMobile && setIsHovered(true)}
+  onMouseLeave={() => !isMobile && setIsHovered(false)}
+  onClick={() => isMobile && setIsHovered((prev) => !prev)}
       >
         {/* Image Background */}
         <div
