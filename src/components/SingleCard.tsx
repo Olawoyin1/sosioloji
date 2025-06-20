@@ -225,7 +225,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           <div className="flex items-center justify-between">
             <FancyLinkButton
               label={item.buttonLabel}
-              to={item.slug}
+              to={`/post/${item.slug}`}
               bgColor={item.buttonBgColor}
             />
 
