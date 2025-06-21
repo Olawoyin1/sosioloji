@@ -8,6 +8,8 @@ import Blog from './pages/Blog'
 import NotFound from './utils/NotFound'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import FormSurvey from './components/SurveyForm'
+import CategoryList from './MainTag/CategoryList'
 
 
 function App() {
@@ -20,6 +22,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="post/:slug" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/tag/:categoryName" element={<CategoryList />} />
+
+          <Route path=":slug" element={<FormSurvey />} />
         </Route>
       </Routes>
     </AnimatePresence>

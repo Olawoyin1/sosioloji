@@ -8,7 +8,6 @@ interface CardItem {
   title: string;
   description: string;
   category: string;
-  categoryLink: string;
   image: string;
   buttonLabel: string;
   buttonLink: string;
@@ -56,7 +55,10 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           className="absolute top-0 left-0 w-full h-full border border-black rounded-xl cursor-pointer"
         >
-          <Link to={`/post/${item.slug}`} className="absolute top-0 left-0 w-full h-full">
+          <Link 
+          // to={`/post/${item.slug}`} 
+          to={item.category === "Survey" ? "/survey" : `/post/${item.slug}`}
+          className="absolute top-0 left-0 w-full h-full">
 
           
 
@@ -138,7 +140,8 @@ const SingleCard = ({ item }: { item: CardItem }) => {
   {/* First Tag - Rotated Pill */}
   <div className="w-max">
     <Link
-      to={item.categoryLink}
+    
+      to={`/tag/${item.category}`}
       className="text-sm sm:text-[17px] border z-20 border-black/90 rounded-full 
         px-4 py-1 md:py-1  font-bold no-underline 
         flex justify-center items-center transform rotate-180 origin-center"

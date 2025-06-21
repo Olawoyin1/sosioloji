@@ -7,7 +7,7 @@ export const dataCard = [
       "How Ghost allows you to turn anonymous readers into an audience of active subscribers, so you know what's working. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Inspiration",
     
-    categoryLink: "/articles",
+    // categoryLink: "/articles",
     subTagC: "Asia | China",
     subTag: "A | C",
     image:
@@ -22,7 +22,7 @@ export const dataCard = [
     title: "Grow your newsletter with quality leads",
     description: "Techniques for converting your traffic into subscribers using attractive articles and landing pages. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Qoute",
-    categoryLink: "/tutorials",
+    // categoryLink: "/tutorials",
     image:
       "../../Images/card.webp",
     buttonLabel: "Read More",
@@ -39,9 +39,9 @@ export const dataCard = [
     
     subTagC: "Europe | Italy",
     subTag: "E | I",
-    categoryLink: "/tutorials",
+    // categoryLink: "/tutorials",
     image:
-      "../../Images/card.webp",
+      "../../Images/three.webp",
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
@@ -54,9 +54,9 @@ export const dataCard = [
     description: "Segment your subscribers to target messaging and improve engagement rates. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Article",
     subTag: "Solution",
-    categoryLink: "/tutorials",
+    // categoryLink: "/tutorials",
     image:
-      "../../Images/card-image-4-D7xxZtUD.webp",
+      "../../Images/four.webp",
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
@@ -69,13 +69,13 @@ export const dataCard = [
       "Capture emails with minimal friction and integrate them with your CRM or automation tools. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Survey",
     subTag: "Action",
-    categoryLink: "/articles",
+    // categoryLink: "/articles",
     image:
-      "../../Images/card-image-3-CjfYGdAv.webp",
+      "../../Images/five.webp",
     buttonLabel: "Read More",
     buttonLink: "/topics",
     buttonBgColor: "#E8D4C3",
-    slug: "this-is-the-fifth",
+    slug: "survey",
   },
 
   {
@@ -85,9 +85,9 @@ export const dataCard = [
       "Capture emails with minimal friction and integrate them with your CRM or automation tools. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Article",
     subTag: "Action",
-    categoryLink: "/articles",
+    // categoryLink: "/articles",
     image:
-      "../../Images/card-image-3-CjfYGdAv.webp",
+      "../../Images/six.webp",
     buttonLabel: "Read More",
     buttonLink: "/topics",
     buttonBgColor: "#E8D4C3",
@@ -99,9 +99,9 @@ export const dataCard = [
     description: "Segment your subscribers to target messaging and improve engagement rates. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Article",
     subTag: "Solution",
-    categoryLink: "/tutorials",
+    // categoryLink: "/tutorials",
     image:
-      "../../Images/card-image-4-D7xxZtUD.webp",
+      "../../Images/seven.webp",
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
@@ -113,9 +113,9 @@ export const dataCard = [
     title: "Effective email capture for marketing",
     description: "Capture emails with minimal friction and integrate them with your CRM or automation tools. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Video",
-    categoryLink: "/tutorials",
+    // categoryLink: "/tutorials",
     image:
-      "../../Images/card-image-5-DQp_Btsy.webp",
+      "../../Images/eight.webp",
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",
@@ -127,9 +127,9 @@ export const dataCard = [
     description: "How Ghost allows you to turn anonymous readers into an audience of active subscribers, so you know what's working. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente temporibus consectetur voluptatum obcaecati ullam!",
     category: "Article",
     subTag: "Behavior",
-    categoryLink: "/tutorials",
+    // categoryLink: "tag/tutorials",
     image:
-      "../../Images/card-image-6-CQ51w8H9.webp",
+      "../../Images/nine.webp",
     buttonLabel: "Read More",
     buttonLink: "/start",
     buttonBgColor: "#FAD9E6",

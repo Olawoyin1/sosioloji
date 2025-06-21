@@ -40,7 +40,7 @@ const Blog = () => {
       <section className="relative z-10">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 md:px-12">
-          <div className="max-w-3xl mx-auto px-2 md:px-12">
+          <div className="max-w-3xl mx-auto px-4 md:px-12">
             <div className="">
               <BlogHero blog={blog} />
 

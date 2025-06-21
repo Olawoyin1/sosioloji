@@ -3,7 +3,7 @@ interface BlogPost{
   title: string;
   description: string;
   category: string;
-  categoryLink: string;
+  // categoryLink: string;
   image?: string;
   buttonLabel: string;
   buttonLink: string;
