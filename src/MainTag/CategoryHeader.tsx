@@ -8,11 +8,11 @@ interface CategoryHeaderProps {
 
 const CategoryHeader: React.FC<CategoryHeaderProps> = ({ category, count, description }) => {
   return (
-    <div className="mb-16 flex items-center flex-col sm:flex row text-center sm:text-start gap-7 sm:gap-10 ">
+    <div className="mb-16 flex items-center flex-col  sm:flex-row text-center sm:text-start gap-7 sm:gap-10 ">
         <div className="shrink-0">
 
       <h1 className="text-3xl font-bold capitalize">{category}</h1>
-      <p className="text-gray-600 mt-1 ">A collection of {count} {count === 1 ? "post" : "posts"}</p>
+      <p className="text-gray-600 mt-1 text-sm ">A collection of <strong> {count} {count === 1 ? "post" : "posts"}</strong></p>
         </div>
       <div>
 
