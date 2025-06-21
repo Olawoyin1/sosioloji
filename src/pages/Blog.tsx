@@ -42,7 +42,7 @@ const Blog = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-12">
           <div className="max-w-3xl mx-auto px-4 md:px-12">
             <div className="">
-              <BlogHero blog={blog} />
+              <BlogHero blog={blog} height="medium"/>
 
               <h1 className="text-2xl sm:text-4xl text-center font-semibold mt-6">
                 {blog.title}

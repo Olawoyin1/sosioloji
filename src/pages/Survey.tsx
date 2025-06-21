@@ -41,11 +41,14 @@ const Survey = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-12">
           <div className="max-w-3xl mx-auto px-4 md:px-12">
             <div className="">
-              <BlogHero blog={blog} />
+                <div className="flex flex-col  sm:flex-row  items-center sm:gap-10">
+                    
+                    <BlogHero blog={blog} height="small" />
 
-              <h1 className="text-2xl sm:text-4xl text-center font-semibold mt-6">
-                {blog.title}
-              </h1>
+                    <h1 className="text-2xl sm:text-3xl text-center font-semibold mt-6">
+                        {blog.title}
+                    </h1>
+                </div>
               <div className="flex w-fit mx-auto mt-8 gap-10 items-center justify-center ">
                 <p className="text-lg text-gray-600">Apr 26, 2019</p>
                 <div className="flex items-center gap-2">

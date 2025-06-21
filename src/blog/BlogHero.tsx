@@ -15,15 +15,21 @@ interface BlogPost{
 
 interface BlogHeroProps {
   blog: BlogPost;
+  height?: "small" | "medium" | "large"; 
 }
 
-const BlogHero = ({ blog }: BlogHeroProps) => {
+const BlogHero = ({ blog, height = "medium" }: BlogHeroProps) => {
+   const heightClass = {
+    small: "h-[300px]",
+    medium: "h-[440px]",
+    large: "h-[500px]",
+  }[height];
   return (
-    <div className="relative">
+    <div className="relative shrink-0">
       <img
         src={blog.image}
         alt={blog.title}
-        className="relative w-full bg-[#FFF0D3] rounded-[15px] object-cover justify-center gap-0 shadow-md sm:h-[440px] h-[250px]"
+        className={`relative w-full bg-[#FFF0D3] rounded-[15px] object-cover justify-center gap-0 shadow-md sm:${heightClass} h-[250px]`}
         id="tag-box"
       />
 
