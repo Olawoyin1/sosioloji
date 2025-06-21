@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import NormalButton from './NormalButton';
 // import { useParams } from 'react-router-dom';
 // import { dataCard } from '../data/cardData';
 
@@ -85,13 +86,13 @@ const FormSurvey: React.FC = () => {
   };
 
   return (
-    <div className="px-8 max-w-7xl mx-auto md:px-12 border-2">
-      <form onSubmit={handleSubmit} className="max-w-7xl space-y-6">
+    <div className="my-10 mx-auto md:px-12 ">
+      <form onSubmit={handleSubmit} className="space-y-6 pf">
         <div>
           <label className="block font-semibold mb-1">1. Which of these best describe you?</label>
           <div className="flex flex-col gap-3 mt-3">
             {['A', 'B', 'C', 'D'].map((opt, idx) => (
-              <label key={opt} className="inline-flex items-center">
+              <label key={opt} className="inline-flex font-light items-center">
                 <input
                   type="checkbox"
                   name={`q1-${opt}`}
@@ -120,7 +121,7 @@ const FormSurvey: React.FC = () => {
           <label className="block font-semibold mb-1">3. Would you consider relocating?</label>
           <div className="flex flex-col gap-3 mt-3">
             {['Yes', 'No'].map((opt) => (
-              <label key={opt} className="inline-flex items-center">
+              <label key={opt} className="inline-flex font-light items-center">
                 <input
                   type="checkbox"
                   name={`q3-${opt}`}
@@ -138,7 +139,7 @@ const FormSurvey: React.FC = () => {
           <label className="block font-semibold mb-1">4. What are your preferred work environments?</label>
           <div className="flex flex-col gap-3 mt-3">
             {['A', 'B', 'C', 'D'].map((opt, idx) => (
-              <label key={opt} className="inline-flex items-center">
+              <label key={opt} className="inline-flex font-light items-center">
                 <input
                   type="checkbox"
                   name={`q4-${opt}`}
@@ -167,7 +168,7 @@ const FormSurvey: React.FC = () => {
           <label className="block font-semibold mb-1">6. Are you open to internships?</label>
           <div className="flex flex-col gap-3 mt-3">
             {['Yes', 'No'].map((opt) => (
-              <label key={opt} className="inline-flex items-center">
+              <label key={opt} className="inline-flex font-light items-center">
                 <input
                   type="checkbox"
                   name={`q6-${opt}`}
@@ -185,7 +186,7 @@ const FormSurvey: React.FC = () => {
           <label className="block font-semibold mb-1">7. Preferred communication methods</label>
           <div className="flex flex-col gap-3 mt-3">
             {['A', 'B', 'C', 'D'].map((opt, idx) => (
-              <label key={opt} className="inline-flex items-center">
+              <label key={opt} className="inline-flex font-light items-center">
                 <input
                   type="checkbox"
                   name={`q7-${opt}`}
@@ -214,7 +215,7 @@ const FormSurvey: React.FC = () => {
           <label className="block font-semibold mb-1">9. Are you willing to work weekends?</label>
           <div className="flex flex-col gap-3 mt-3">
             {['Yes', 'No'].map((opt) => (
-              <label key={opt} className="inline-flex items-center">
+              <label key={opt} className="inline-flex font-light items-center">
                 <input
                   type="checkbox"
                   name={`q9-${opt}`}
@@ -232,7 +233,7 @@ const FormSurvey: React.FC = () => {
           <label className="block font-semibold mb-1">10. Which benefits are important to you?</label>
           <div className="flex flex-col gap-3 mt-3">
             {['A', 'B', 'C', 'D'].map((opt, idx) => (
-              <label key={opt} className="inline-flex items-center">
+              <label key={opt} className="inline-flex font-light items-center">
                 <input
                   type="checkbox"
                   name={`q10-${opt}`}
@@ -261,7 +262,7 @@ const FormSurvey: React.FC = () => {
           <label className="block font-semibold mb-1">12. Are you currently studying?</label>
           <div className="flex flex-col gap-3 mt-3">
             {['Yes', 'No'].map((opt) => (
-              <label key={opt} className="inline-flex items-center">
+              <label key={opt} className="inline-flex font-light items-center">
                 <input
                   type="checkbox"
                   name={`q12-${opt}`}
@@ -290,7 +291,7 @@ const FormSurvey: React.FC = () => {
           <label className="block font-semibold mb-1">14. Preferred contact method</label>
           <div className="flex flex-col gap-3 mt-3">
             {['WhatsApp', 'Telegram', 'Email'].map((option) => (
-              <label key={option} className="inline-flex items-center">
+              <label key={option} className="inline-flex font-light items-center">
                 <input
                   type="radio"
                   name="q14"
@@ -321,7 +322,7 @@ const FormSurvey: React.FC = () => {
           <label className="block font-semibold mb-1">16. Are you currently employed? (Optional)</label>
           <div className="flex flex-col gap-3 mt-3">
             {['Yes', 'No'].map((opt) => (
-              <label key={opt} className="inline-flex items-center">
+              <label key={opt} className="inline-flex font-light items-center">
                 <input
                   type="checkbox"
                   name={`q16-${opt}`}
@@ -348,9 +349,15 @@ const FormSurvey: React.FC = () => {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
-        >
-          Submit Survey
+          className="block font-light w-full"
+        ><NormalButton
+        block
+        
+      bgColor="#F7C6D0"
+      color="#000"
+      label="Submit Survey"
+    />
+          
         </button>
       </form>
     </div>
