@@ -20,16 +20,16 @@ interface BlogHeroProps {
 
 const BlogHero = ({ blog, height = "medium" }: BlogHeroProps) => {
    const heightClass = {
-    small: "h-[300px]",
-    medium: "h-[440px]",
-    large: "h-[500px]",
+    small: "sm:h-[300px] h-[250px]",
+    medium: "sm:h-[440px] h-[250px]",
+    large: "sm:h-[500px] h-[250px]",
   }[height];
   return (
     <div className="relative shrink-0">
       <img
         src={blog.image}
         alt={blog.title}
-        className={`relative w-full bg-[#FFF0D3] rounded-[15px] object-cover justify-center gap-0 shadow-md  ${`sm:${heightClass}`} h-[250px]`}
+        className={`relative w-full bg-[#FFF0D3] rounded-[15px] object-cover justify-center gap-0 shadow-md  ${`${heightClass}`} `}
         id="tag-box"
       />
 
