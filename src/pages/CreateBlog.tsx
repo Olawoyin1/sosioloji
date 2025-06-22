@@ -156,13 +156,13 @@ const CreateBlogPostForm = () => {
 
       {/* Category (full width) */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
           Category
         </label>
-        <div className=" flex items-center flex-wrap gap-8">
+        <div className="gap-8 space-y-2">
           {["Article", "Survey", "Video", "Quotes", "Inspiration"].map(
             (option) => (
-              <label key={option} className="flex items-center text-sm sm:text-[16px] gap-1">
+              <label key={option} className="flex items-center text-sm sm:text-[16px] gap-2">
                 <input
                   type="radio"
                   name="category"
@@ -208,9 +208,9 @@ const CreateBlogPostForm = () => {
       </div>
 
       {/* Image and Video Upload */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-4">
         <div>
-          <label className="block mb-1 text-sm font-medium">Image</label>
+          <label className="block mb-2 text-sm font-medium">Image</label>
           <div className="relative border-2 border-dashed border-gray-700 rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[#ee774f] transition">
             <IoCloudUploadOutline size={20} />
             {imageName ? (
@@ -233,7 +233,7 @@ const CreateBlogPostForm = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-sm font-medium">Video</label>
+          <label className="block mb-2 text-sm font-medium">Video</label>
           <div className="relative border-2 border-dashed border-gray-700 rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[#ee774f] transition">
             <IoCloudUploadOutline size={20} />
             {videoName ? (
