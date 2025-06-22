@@ -485,7 +485,7 @@ const FormSurvey: React.FC = () => {
               value={formik.values[key]}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className="w-full border-b border-gray-300 px-4 py-2"
+              className="w-full border-b outline-0 ring-0 border-gray-300 px-4 py-2"
               type="text"
             />
             {formik.touched[key] && formik.errors[key] && (
