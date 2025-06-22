@@ -1,20 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Matangi:wght@300..900&family=Noto+Sans+JP:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 
+
 *{
     /* border: 1px solid red; */
 }
 
+
+
+
 body{
     font-family: "Playfair Display", serif;
     background-color: #FFF6E6;
+  }
+  
+  .pf, form, input , label{
+    /* font-family: "Matangi", sans-serif; */
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  
+  .sf{
+    font-family: "Playfair Display", serif;
+    
 }
 
-.pf{
-  /* font-family: "Matangi", sans-serif; */
-  font-family: "Noto Sans JP", sans-serif;
-}
 
+.blog-form input{
+  outline: none;
+}
 
 .main-card{
     max-height: 520px;
@@ -59,6 +72,25 @@ body{
     background-position: 100% 0%;
   }
 }
+
+
+
+
+.ce-header[data-level="2"] {
+  font-size: 1.875rem;
+  font-weight: 600;
+}
+
+.ce-header[data-level="3"] {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.ce-header[data-level="4"] {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
 
 
 

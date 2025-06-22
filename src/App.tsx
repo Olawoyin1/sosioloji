@@ -10,6 +10,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CategoryList from './MainTag/CategoryList'
 import Survey from './pages/Survey'
+import CreateBlogPostForm from './pages/CreateBlog'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="post/:slug" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="create" element={<CreateBlogPostForm />} />
           <Route path="/tag/:categoryName" element={<CategoryList />} />
 
           <Route path=":slug" element={<Survey />} />
