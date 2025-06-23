@@ -10,7 +10,7 @@ interface FancyLinkButtonProps {
   block?: boolean;
 }
 
-const FancyLinkButton: React.FC<FancyLinkButtonProps> = ({
+const BButton: React.FC<FancyLinkButtonProps> = ({
   label,
   to,
   bgColor = "#E8D4C3",
@@ -36,7 +36,7 @@ const FancyLinkButton: React.FC<FancyLinkButtonProps> = ({
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onMouseMove={handleMouseMove}
-        className={`relative inline-flex items-center justify-center px-4 sm:px-7  py-2 text-xs md:text-sm font-bold rounded-full cursor-pointer my-2 ${block ? "w-full" : ""}`}
+        className={`relative inline-flex items-center justify-center px-4 sm:px-9  py-[11px] text-xs md:text-sm font-bold rounded-full cursor-pointer my-2 ${block ? "w-full" : ""}`}
         style={{ backgroundColor: bgColor, color: textColor }}
       >
         {/* Decorative shrinking border */}
@@ -92,4 +92,4 @@ const FancyLinkButton: React.FC<FancyLinkButtonProps> = ({
   );
 };
 
-export default FancyLinkButton;
+export default BButton;

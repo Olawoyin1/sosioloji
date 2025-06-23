@@ -1,6 +1,7 @@
 import React from "react";
 import TagButton from "./TagButton";
 import SButton from "./SmallB";
+import BButton from "./BigButton";
 
 interface TagItem {
   label: string;
@@ -54,7 +55,7 @@ const TagCloud: React.FC = () => {
       >
         <div className="flex flex-wrap space-x-3 items-center w-full">
           {mTags.map((tag) => (
-            <TagButton
+            <BButton
               key={tag.label}
               label={tag.label}
               to={tag.link}

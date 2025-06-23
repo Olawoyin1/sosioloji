@@ -60,55 +60,6 @@ const SingleCard = ({ item }: { item: CardItem }) => {
             to={item.category === "Survey" ? "/survey" : `/post/${item.slug}`}
             className="absolute top-0 left-0 w-full h-full"
           >
-            {/* Category Tag - aligned left center */}
-            {/* <div 
-            className={`
-        absolute 
-        top-20 
-        left-0 
-        -translate-y-1/2 
-        ${isMobile ? "-translate-x-[50%]" : "-translate-x-[50%]"}
-        pointer-events-auto
-      `}
-          >
-            <Link
-              to={item.categoryLink}
-              className={`text-xs border border-black/90 rounded-full 
-          px-4  py-2 m text-center  text-[#444] font-semibold no-underline 
-          flex justify-center items-center -rotate-90
-          ${isMobile ? "-" : "-rotate-90"}
-        `}
-              style={{ backgroundColor: item.buttonBgColor }}
-            >
-              {item.category}
-            </Link>
-          </div> */}
-
-            {/* =======SECOND TAG========= */}
-            {/* <div 
-            className={`
-        absolute 
-        top-90 
-        left-0 
-        -translate-y-1/2 
-        ${isMobile ? "-translate-x-[50%]" : "-translate-x-[50%]"}
-        pointer-events-auto
-      `}
-          >
-            <Link
-              to={item.categoryLink}
-              className={`text-xs border border-black/90 rounded-full 
-          px-4  py-2 m text-center  text-[#444] font-semibold no-underline 
-          flex justify-center items-center -rotate-90
-          ${isMobile ? "-" : "-rotate-90"}
-        `}
-              style={{ backgroundColor: item.buttonBgColor }}
-            >
-              {item.category}
-            </Link>
-          </div> */}
-
-            {/* === Tag Stack using Grid with Alignment Fix === */}
             <div
               className={`
     absolute 
@@ -148,19 +99,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
                 </Link>
               </div>
 
-              {/* Second Tag - Circle, only for specific categories */}
-              {/* {(item.category === "Article" || item.category === "Inspiration") && (
-    <div>
-      <Link
-        to={item.categoryLink}
-        className="w-8 h-8 sm:h-10 sm:w-10 border border-black/90 rounded-full 
-          flex justify-center items-center rotate-270 text-xs font-bold text-[#444] md:text-sm"
-        style={{ backgroundColor: item.buttonBgColor }}
-      >
-        A|C
-      </Link>
-    </div>
-  )} */}
+            
 
               {/* Second Tag - Circle with Hoverable Subtag */}
               {(item.category === "Article" ||
@@ -178,16 +117,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
                   </Link>
 
                   {/* Subtag (shown on hover) */}
-                  <div
-                    //   className="absolute -left-13 -top-14 -translate-y-0 ml-2
-                    //     bg-white border border-gray-200  text-sm font-semibold p-1 px-3 rounded-md rotate-270
-                    //     whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30"
-                    // >
-
-                    className={`
-    absolute 
-    ${
-      item.category === "Inspiration"
+                  <div         className={`   absolute   ${      item.category === "Inspiration"
         ? "-top-19 -left-10"
         : item.category === "Article"
         ? "-top-15 -left-7"
