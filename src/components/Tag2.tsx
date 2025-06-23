@@ -24,7 +24,6 @@ const tags: TagItem[] = [
 
 const mTags: TagItem[] = [
   { label: "Article", link: "/", bgColor: "#B8F2E6" },
-  // { label: "Survey", link: "/", bgColor: "#FFB7D5" },
   { label: "Video", link: "/", bgColor: "#D5AAFF" },
   { label: "Wisdom", link: "/", bgColor: "#FFC1A1" },
 ];

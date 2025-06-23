@@ -79,6 +79,7 @@ const JoditEditorComponent: React.FC<Props> = ({ value, onChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const config = {
+      height: 700, 
     readonly: false,
     uploader: {
       insertImageAsBase64URI: true,
