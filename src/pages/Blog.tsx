@@ -1,20 +1,64 @@
+// Blog.tsx
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PageWrapper } from "../components/PageWrapper";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BlogHero from "../blog/BlogHero";
-import { dataCard } from "../data/cardData";
-import { useState } from "react";
-import Qoute from "../blog/Qoute";
-import ImageGallery from "../blog/ImageGallery";
+import parse, { Element } from "html-react-parser";
+import InlineImageViewer from "../utils/InlineImageViewer";
 import Share from "../blog/Share";
+
+interface BlogPost {
+  id: number;
+  title: string;
+  slug: string;
+  author: string;
+  body: string;
+  category: string;
+  tag: string;
+  subtag?: string;
+  image: string;
+  video?: string;
+  contentImages?: string[];
+  created_at: string;
+}
 
 const Blog = () => {
   const { slug } = useParams<{ slug: string }>();
-
+  const [blog, setBlog] = useState<BlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
   const [openAccordion, setOpenAccordion] = useState(false);
 
-  const blog = dataCard.find((post) => post.slug === slug);
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const res = await fetch("https://sosoiloji.onrender.com/api/posts/");
+        const data: BlogPost[] = await res.json();
+        const found = data.find((post) => post.slug === slug);
+        setBlog(found || null);
+      } catch (err) {
+        console.error("Failed to fetch blog post:", err);
+        setBlog(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlog();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <PageWrapper>
+        <Navbar />
+        <div className="max-w-4xl mx-auto py-20 px-6 text-center">
+          <h1 className="text-3xl font-bold text-gray-600">Loading...</h1>
+        </div>
+        <Footer />
+      </PageWrapper>
+    );
+  }
 
   if (!blog) {
     return (
@@ -31,38 +75,49 @@ const Blog = () => {
     );
   }
 
+  const transformedBody = parse(blog.body, {
+    replace: (node) => {
+      if (node instanceof Element && node.name === "img") {
+        const src = node.attribs.src;
+        const alt = node.attribs.alt || "blog image";
+        return <InlineImageViewer src={src} alt={alt} />;
+      }
+    },
+  });
+
   return (
     <PageWrapper>
-      {/* Fixed background image */}
       <div className="bg" />
       <div className="fade-bottom" />
-
       <section className="relative z-10">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 md:px-12">
           <div className="max-w-3xl mx-auto px-4 md:px-12">
-            <div className="">
-              <BlogHero blog={blog} height="medium"/>
+            <BlogHero
+              blog={{ ...blog, buttonLabel: "Read More", buttonBgColor: "#FFD682" }}
+              height="medium"
+            />
 
-              <h1 className="text-2xl sm:text-4xl text-center font-semibold mt-6">
-                {blog.title}
-              </h1>
-              <div className="flex w-fit mx-auto mt-8 gap-10 items-center justify-center ">
-                <p className="text-lg text-gray-600">Apr 26, 2019</p>
-                <div className="flex items-center gap-2">
-                  <div className="img h-8 w-8 sm:h-10 sm:w-10 overflow-hidden bg-black/30 text-white flex justify-center items-center rounded-full">
-                    <img
-                      src="https://th.bing.com/th/id/OIP.ItvA9eX1ZIYT8NHePqeuCgHaHa?w=210&h=210&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
-                      className="object-cover"
-                      alt=""
-                    />
-                  </div>
-                  <p className="font-bold">sosioloji</p>
+            <h1 className="text-2xl sm:text-4xl text-center font-semibold mt-6">
+              {blog.title}
+            </h1>
+
+            <div className="flex w-fit mx-auto mt-8 gap-10 items-center justify-center">
+              <p className="text-lg text-gray-600">
+                {new Date(blog.created_at).toDateString()}
+              </p>
+              <div className="flex items-center gap-2">
+                <div className="img h-8 w-8 sm:h-10 sm:w-10 overflow-hidden bg-black/30 text-white flex justify-center items-center rounded-full">
+                  <img
+                    src="https://th.bing.com/th/id/OIP.ItvA9eX1ZIYT8NHePqeuCgHaHa?w=210&h=210&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+                    className="object-cover"
+                    alt="Author"
+                  />
                 </div>
+                <p className="font-bold">{blog.author}</p>
               </div>
             </div>
 
-            {/* Accordion: Table of Content */}
             <div className="mt-6 border-b overflow-hidden">
               <button
                 onClick={() => setOpenAccordion(!openAccordion)}
@@ -78,11 +133,7 @@ const Blog = () => {
                   strokeWidth="2"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
@@ -94,60 +145,16 @@ const Blog = () => {
               )}
             </div>
 
-            <div>
-              <p className="pf leading-10 font-light my-9">
-                Ghost comes with a beautiful default theme called Casper, which
-                is designed to be a clean, readable publication layout and can
-                be adapted for most purposes. However, Ghost can also be
-                completely themed to suit your needs. Rather than just giving
-                you a few basic settings which act as a poor proxy for code, we
-                just let you write code.
-              </p>
-
-              <p className="pf leading-10 font-light">
-                Ghost comes with a beautiful default theme called Casper, which
-                is designed to be a clean, readable publication layout and can
-                be adapted for most purposes. However, Ghost can also be
-                completely themed to suit your needs. Rather than just giving
-                you a few basic settings which act as a poor proxy for code, we
-                just let you write code.
-              </p>
-            </div>
-
-            <ImageGallery />
-
-            <Qoute />
-
-            <div>
-              <p className="pf leading-10 font-light">
-                Ghost comes with a beautiful default theme called Casper, which
-                is designed to be a clean, readable publication layout and can
-                be adapted for most purposes. However, Ghost can also be
-                completely themed to suit your needs. Rather than just giving
-                you a few basic settings which act as a poor proxy for code, we
-                just let you write code. <br />
-                <br />
-                Ghost comes with a beautiful default theme called Casper, which
-                is designed to be a clean, readable publication layout and can
-                be adapted for most purposes. However, Ghost can also be
-                completely themed to suit your needs. Rather than just giving
-                you a few basic settings which act as a poor proxy for code, we
-                just let you write code.
-              </p>
-            </div>
-
-            <div className="pf font-light leading-10 md:p-10">
-              <li>default.hbs is the main template file</li>
-              <li>default.hbs is the main template file</li>
-              <li>default.hbs is the main template file</li>
-              <li>default.hbs is the main template file</li>
+            <div className="space-y-8 mt-8 pf leading-10 fl font-light">
+              {transformedBody}
             </div>
 
             <Share />
+
+            
           </div>
         </div>
       </section>
-
       <Footer />
     </PageWrapper>
   );

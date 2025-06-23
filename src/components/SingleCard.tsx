@@ -33,9 +33,9 @@ const SingleCard = ({ item }: { item: CardItem }) => {
       {/* Image */}
       <div
         className="relative w-full  h-[340px] md:h-[440px]"
-          onMouseEnter={() => !isMobile && setIsHovered(true)}
-  onMouseLeave={() => !isMobile && setIsHovered(false)}
-  onClick={() => isMobile && setIsHovered((prev) => !prev)}
+        onMouseEnter={() => !isMobile && setIsHovered(true)}
+        onMouseLeave={() => !isMobile && setIsHovered(false)}
+        onClick={() => isMobile && setIsHovered((prev) => !prev)}
       >
         {/* Image Background */}
         <div
@@ -55,15 +55,13 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           className="absolute top-0 left-0 w-full h-full border border-black rounded-xl cursor-pointer"
         >
-          <Link 
-          // to={`/post/${item.slug}`} 
-          to={item.category === "Survey" ? "/survey" : `/post/${item.slug}`}
-          className="absolute top-0 left-0 w-full h-full">
-
-          
-
-          {/* Category Tag - aligned left center */}
-          {/* <div 
+          <Link
+            // to={`/post/${item.slug}`}
+            to={item.category === "Survey" ? "/survey" : `/post/${item.slug}`}
+            className="absolute top-0 left-0 w-full h-full"
+          >
+            {/* Category Tag - aligned left center */}
+            {/* <div 
             className={`
         absolute 
         top-20 
@@ -85,9 +83,9 @@ const SingleCard = ({ item }: { item: CardItem }) => {
               {item.category}
             </Link>
           </div> */}
-          
-          {/* =======SECOND TAG========= */}
-          {/* <div 
+
+            {/* =======SECOND TAG========= */}
+            {/* <div 
             className={`
         absolute 
         top-90 
@@ -110,9 +108,9 @@ const SingleCard = ({ item }: { item: CardItem }) => {
             </Link>
           </div> */}
 
-           {/* === Tag Stack using Grid with Alignment Fix === */}
-<div
-  className={`
+            {/* === Tag Stack using Grid with Alignment Fix === */}
+            <div
+              className={`
     absolute 
 
     ${
@@ -136,23 +134,22 @@ const SingleCard = ({ item }: { item: CardItem }) => {
     justify-items-center 
     pointer-events-auto
   `}
->
-  {/* First Tag - Rotated Pill */}
-  <div className="w-max">
-    <Link
-    
-      to={`/tag/${item.category}`}
-      className="text-sm sm:text-[17px] border z-20 border-black/90 rounded-full 
+            >
+              {/* First Tag - Rotated Pill */}
+              <div className="w-max">
+                <Link
+                  to={`/tag/${item.category}`}
+                  className="text-sm sm:text-[17px] border z-20 border-black/90 rounded-full 
         px-4 py-1 md:py-1  font-bold no-underline 
         flex justify-center items-center transform rotate-180 origin-center"
-      style={{ backgroundColor: item.buttonBgColor }}
-    >
-      {item.category}
-    </Link>
-  </div>
+                  style={{ backgroundColor: item.buttonBgColor }}
+                >
+                  {item.category}
+                </Link>
+              </div>
 
-  {/* Second Tag - Circle, only for specific categories */}
-  {/* {(item.category === "Article" || item.category === "Inspiration") && (
+              {/* Second Tag - Circle, only for specific categories */}
+              {/* {(item.category === "Article" || item.category === "Inspiration") && (
     <div>
       <Link
         to={item.categoryLink}
@@ -165,53 +162,49 @@ const SingleCard = ({ item }: { item: CardItem }) => {
     </div>
   )} */}
 
-  {/* Second Tag - Circle with Hoverable Subtag */}
-{(item.category === "Article" || item.category === "Inspiration") && (
-  <div className="relative group">
-    <Link
-      to='/'
-      className="w-8 h-8 sm:h-10 sm:w-10 border border-black/90 rounded-full 
+              {/* Second Tag - Circle with Hoverable Subtag */}
+              {(item.category === "Article" ||
+                item.category === "Inspiration") && (
+                <div className="relative group">
+                  <Link
+                    to="/"
+                    className="w-8 h-8 sm:h-10 sm:w-10 border border-black/90 rounded-full 
         flex justify-center items-center rotate-270 text-xs font-bold  md:text-sm"
-      style={{ backgroundColor: item.buttonBgColor }}
-    >
-     {
-  item.category === "Inspiration"
-    ? item.subTag
-    : item.subTag?.charAt(0)
-}
-      
-    </Link>
+                    style={{ backgroundColor: item.buttonBgColor }}
+                  >
+                    {item.category === "Inspiration"
+                      ? item.subTag
+                      : item.subTag?.charAt(0)}
+                  </Link>
 
-    {/* Subtag (shown on hover) */}
-    <div
-    //   className="absolute -left-13 -top-14 -translate-y-0 ml-2 
-    //     bg-white border border-gray-200  text-sm font-semibold p-1 px-3 rounded-md rotate-270 
-    //     whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30"
-    // >
+                  {/* Subtag (shown on hover) */}
+                  <div
+                    //   className="absolute -left-13 -top-14 -translate-y-0 ml-2
+                    //     bg-white border border-gray-200  text-sm font-semibold p-1 px-3 rounded-md rotate-270
+                    //     whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30"
+                    // >
 
-    className={`
+                    className={`
     absolute 
-    ${item.category === "Inspiration" ? "-top-19 -left-10" : 
-      item.category === "Article" ? "-top-15 -left-7" : "-top-12 -left-8"} 
+    ${
+      item.category === "Inspiration"
+        ? "-top-19 -left-10"
+        : item.category === "Article"
+        ? "-top-15 -left-7"
+        : "-top-12 -left-8"
+    } 
     -translate-y-0 ml-2 
     bg-white border border-gray-200 text-sm font-semibold p-1 px-3 rounded-md rotate-270 
     whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30
-  `}>
-    {
-      item.category === "Inspiration" ? item.subTagC : item.subTag
-    }
-    </div>
-  </div>
-)}
-
-
-
-
-  
-</div>
-
-
-
+  `}
+                  >
+                    {item.category === "Inspiration"
+                      ? item.subTagC
+                      : item.subTag}
+                  </div>
+                </div>
+              )}
+            </div>
           </Link>
         </motion.div>
       </div>

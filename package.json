@@ -47,6 +47,8 @@
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "framer-motion": "^12.18.1",
+    "html-react-parser": "^5.2.5",
+    "jodit": "^4.6.2",
     "jodit-react": "^5.2.19",
     "lexical": "^0.32.1",
     "react": "^19.0.0",
