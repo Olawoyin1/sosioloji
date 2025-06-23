@@ -15,7 +15,6 @@ body{
   }
   
   .pf, input , label{
-    /* font-family: "Matangi", sans-serif; */
     font-family: "Noto Sans JP", sans-serif;
   }
   
@@ -76,6 +75,60 @@ body{
     background-position: 100% 0%;
   }
 }
+
+
+
+.skeleton-card-container {
+  width: 100%;
+  max-width: 380px;
+  /* background-color: #fff; */
+  /* padding: 1rem; */
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skeleton-box {
+  background-color: #e0e0e0;
+  border-radius: 0.25rem;
+  border-radius: 0.7rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  height: 100%;
+  width: 150%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
 
 
 

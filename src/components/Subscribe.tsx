@@ -151,30 +151,6 @@ const TagCloud: React.FC = () => {
         id="tag-box"
       >
 
-          <svg
-          className="epcl-plane"
-          width="100"
-          height="106"
-          viewBox="0 0 112 116"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M112 3L5.75 62.375L43.25 68.625L52.625 115.5L65.125 78L90.125 96.75L112 3Z"
-            fill="#FEBDD0"
-          />
-          <path
-            d="M58.9007 75.0919L46.996 110.806L37.9903 65.7769L37.9226 65.4385L37.5822 65.3818L1.4882 59.3661L105.506 1.2386L84.0621 93.1404L59.675 74.85L59.12 74.4338L58.9007 75.0919Z"
-            fill="#FEBDD0"
-            stroke="black"
-          />
-          <path
-            d="M58.9007 75.0919L46.996 110.806L38.0442 66.0467L103.717 3.35861L58.951 74.985L58.9195 75.0354L58.9007 75.0919Z"
-            fill="#FF84A8"
-            stroke="black"
-          />
-        </svg>
-
 
         <div className="flex flex-wrap space-x-3 items-center w-full">
           

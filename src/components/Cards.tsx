@@ -4,16 +4,14 @@
 // import FancyLinkButton from "./Button";
 // import { AnimatePresence, motion } from "framer-motion";
 
-// const COLORS = [
-//   "#B8F2E6",
-//   "#FFB7D5",
-//   "#A1E3FF",
-//   "#D5AAFF",
-//   "#FEBDD0",
-//   "#A1E3FF",
-//   "#FFC1A1",
-//   "#FFD682",
-// ];
+// // Category-to-color mapping
+// const CATEGORY_COLORS: Record<string, string> = {
+//   Inspiration: "#D5AAFF",
+//   Qoute: "#FAD9E6",
+//   Survey: "#FFD682",
+//   Article: "#E8D4C3",
+//   Video: "#B8F2E6",
+// };
 
 // interface CardItem {
 //   id: number;
@@ -57,7 +55,7 @@
 //         };
 
 //         const transformed: CardItem[] = data.map((post: any) => {
-//           const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+//           const color = CATEGORY_COLORS[post.category] || "#FFE6B4"; // default fallback
 //           const plainText = cleanText(post.body).slice(0, 180) + "...";
 
 //           return {
@@ -121,6 +119,7 @@
 //             </AnimatePresence>
 //           </div>
 
+//           {/* Pagination */}
 //           <div className="flex justify-center items-center mt-10 space-x-3">
 //             {currentPage > 1 && (
 //               <button onClick={() => setCurrentPage((prev) => prev - 1)}>
@@ -158,10 +157,12 @@
 // export default Card;
 
 
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SingleCard from "./SingleCard";
 import FancyLinkButton from "./Button";
+import SkeletonCard from "./SkeletonCard"; // 👈 import
 import { AnimatePresence, motion } from "framer-motion";
 
 // Category-to-color mapping
@@ -215,7 +216,7 @@ const Card = () => {
         };
 
         const transformed: CardItem[] = data.map((post: any) => {
-          const color = CATEGORY_COLORS[post.category] || "#FFE6B4"; // default fallback
+          const color = CATEGORY_COLORS[post.category] || "#FFE6B4";
           const plainText = cleanText(post.body).slice(0, 180) + "...";
 
           return {
@@ -258,7 +259,11 @@ const Card = () => {
   return (
     <>
       {loading ? (
-        <div className="text-center py-10">Loading posts...</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 md:gap-20 place-items-center">
+          {Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
       ) : error ? (
         <div className="text-center py-10 text-red-500">{error}</div>
       ) : (
@@ -279,35 +284,37 @@ const Card = () => {
             </AnimatePresence>
           </div>
 
-          {/* Pagination */}
-          <div className="flex justify-center items-center mt-10 space-x-3">
-            {currentPage > 1 && (
-              <button onClick={() => setCurrentPage((prev) => prev - 1)}>
-                <FancyLinkButton to="/" label="Prev" bgColor="#FFE6B4" />
-              </button>
-            )}
-            {[...Array(totalPages)].map((_, i) => {
-              const page = i + 1;
-              return (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`px-4 py-1 cursor-pointer rounded ${
-                    currentPage === page
-                      ? "bg-[#FFE6B4] text-black"
-                      : "hover:bg-gray-300 bg-[#EEEEEE]"
-                  }`}
-                >
-                  {page}
+          {/* Pagination - show only if more than 1 page */}
+          {posts.length > ITEMS_PER_PAGE && (
+            <div className="flex justify-center items-center mt-10 space-x-3">
+              {currentPage > 1 && (
+                <button onClick={() => setCurrentPage((prev) => prev - 1)}>
+                  <FancyLinkButton to="/" label="Prev" bgColor="#FFE6B4" />
                 </button>
-              );
-            })}
-            {currentPage < totalPages && (
-              <button onClick={() => setCurrentPage((prev) => prev + 1)}>
-                <FancyLinkButton to="/" label="Next" bgColor="#FFE6B4" />
-              </button>
-            )}
-          </div>
+              )}
+              {[...Array(totalPages)].map((_, i) => {
+                const page = i + 1;
+                return (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`px-4 py-1 cursor-pointer rounded ${
+                      currentPage === page
+                        ? "bg-[#FFE6B4] text-black"
+                        : "hover:bg-gray-300 bg-[#EEEEEE]"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+              {currentPage < totalPages && (
+                <button onClick={() => setCurrentPage((prev) => prev + 1)}>
+                  <FancyLinkButton to="/" label="Next" bgColor="#FFE6B4" />
+                </button>
+              )}
+            </div>
+          )}
         </>
       )}
     </>

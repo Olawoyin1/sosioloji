@@ -19,14 +19,14 @@ const tags: TagItem[] = [
   { label: "Action", link: "/", bgColor: "#A1E3FF" },
   { label: "Americas", link: "/", bgColor: "#FFC1A1" },
   { label: "Behaviour", link: "/", bgColor: "#FFD682" },
+  { label: "Inspiration", link: "/", bgColor: "#FFD682" },
 ];
 
 const mTags: TagItem[] = [
   { label: "Article", link: "/", bgColor: "#B8F2E6" },
-  { label: "Survey", link: "/", bgColor: "#FFB7D5" },
+  // { label: "Survey", link: "/", bgColor: "#FFB7D5" },
   { label: "Video", link: "/", bgColor: "#D5AAFF" },
-  { label: "Qoutes", link: "/", bgColor: "#FFC1A1" },
-  { label: "Inspiration", link: "/", bgColor: "#FFD682" },
+  { label: "Wisdom", link: "/", bgColor: "#FFC1A1" },
 ];
 
 const TagCloud: React.FC = () => {
