@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import NormalButton from "../components/NormalButton";
 import JoditEditorComponent from "../pages/Test";
+import { Link } from "react-router-dom";
 
 const CLOUD_NAME = "dunid4t4g";
 const UPLOAD_PRESET = "sosioloji";
@@ -103,12 +102,14 @@ const Testingg = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="max-w-9xl mx-auto p-6">
+      {/* <Navbar /> */}
+      
+        <Link to='/' className=" mt-10 ml-19 inline-block w-fit text-xl">Go to homepage</Link>
+      <div className="px-19 py-10">
         <form onSubmit={formik.handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-10">
           
           {/* LEFT SIDE */}
-          <div className="space-y-6">
+          <div className="space-y-10 col-span-1">
 
             <input
               name="title"
@@ -128,9 +129,9 @@ const Testingg = () => {
 
             {/* Category */}
             <div>
-              <p className="font-medium mb-1">Category</p>
+              <p className="font-medium mb-3">Category</p>
               {["Article", "Survey", "Video", "Quotes", "Inspiration"].map((cat) => (
-                <label key={cat} className="block">
+                <label key={cat} className="block mb-2 space-y-2">
                   <input
                     type="radio"
                     name="category"
@@ -152,7 +153,7 @@ const Testingg = () => {
 
             {/* Tags */}
             <div>
-              <p className="font-medium mb-1">Tags</p>
+              <p className="font-medium mb-2">Tags</p>
               <div className="grid grid-cols-2 gap-2">
                 {tagOptions.map((tag) => (
                   <label key={tag} className="flex items-center gap-2">
@@ -249,7 +250,7 @@ const Testingg = () => {
           </div>
 
           {/* RIGHT SIDE */}
-          <div>
+          <div className="">
             <p className="font-medium mb-2">Post Body</p>
             <div className="border border-gray-700 rounded-md">
               <JoditEditorComponent
@@ -260,8 +261,9 @@ const Testingg = () => {
           </div>
         </form>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
+      
   );
 };
 
