@@ -32,7 +32,7 @@ const Blog = () => {
       <PageWrapper>
         <Navbar />
         <div className="max-w-4xl mx-auto py-20 px-6 text-center">
-          <h1 className="text-3xl font-bold text-gray-600">Loading...</h1>
+          {/* <h1 className="text-3xl font-bold text-gray-600">Loading...</h1> */}
         </div>
         <Footer />
       </PageWrapper>
