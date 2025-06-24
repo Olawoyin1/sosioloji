@@ -57,7 +57,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/post/:id" element={<BlogDetail />} />
+      <Route path="/post/:slug" element={<BlogDetail />} />
       <Route path="/tag/:tag" element={<TagPage />} />
       <Route path="/author/:author" element={<AuthorPage />} />
       <Route path="*" element={<NotFound />} />
@@ -71,7 +71,7 @@ const App = () => {
         <Route path="/create" element={<CreateEditPostPage />} />
 
         {/* Edit Post (by ID) */}
-        <Route path="/edit/:id" element={<CreateEditPostPage />} />
+        <Route path="/edit/:slug" element={<CreateEditPostPage />} />
 
         
 

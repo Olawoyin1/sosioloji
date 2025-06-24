@@ -4,6 +4,9 @@ import axios from "axios";
 import SingleCard from "../components/SingleCard";
 import SkeletonCard from "../components/SkeletonCard";
 import { CardItem } from "../data/Types";
+import PageHeader from "../components/PageHeader";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const fetchPosts = async (): Promise<CardItem[]> => {
   const res = await axios.get("https://sosoiloji.onrender.com/api/posts/");
@@ -65,8 +68,13 @@ const CategoryPage = () => {
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">Posts in {tag}</h2>
+    <div className="">
+      <Navbar />
+      <PageHeader
+        title={tag || "Category"}
+        count={filteredPosts.length}
+        type="category"
+      />
 
       <div className="max-w-7xl mx-auto px-4 md:px-12">
 
@@ -88,6 +96,8 @@ const CategoryPage = () => {
         ))}
       </div>
         </div>
+
+        <Footer />
     </div>
   );
 };

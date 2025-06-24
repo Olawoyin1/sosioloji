@@ -11,13 +11,17 @@ const fetchPosts = async () => {
   return res.data;
 };
 
-const deletePost = async (id: number) => {
-  await axios.delete(`https://sosoiloji.onrender.com/api/posts/${id}/`);
+
+const deletePost = async (slug: string) => {
+  await axios.delete(`https://sosoiloji.onrender.com/api/posts/${slug}/`);
 };
+
+
 
 const DashboardPostList = () => {
   const queryClient = useQueryClient();
-  const [deleting, setDeleting] = useState<number | null>(null);
+  const [deleting, setDeleting] = useState<string | null>(null);
+
 
   const { data: posts, isLoading, error } = useQuery<CardItem[]>({
     queryKey: ["all-posts"],
@@ -25,12 +29,12 @@ const DashboardPostList = () => {
     staleTime: 1000 * 60 * 90, // 1hr 30min
   });
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (slug: string) => {
   if (!confirm("Are you sure you want to delete this post?")) return;
-  setDeleting(id);
+  setDeleting(slug);
   try {
-    await deletePost(id);
-    queryClient.invalidateQueries({ queryKey: ["all-posts"] }); // ✅ fix here
+    await deletePost(slug);
+    queryClient.invalidateQueries({ queryKey: ["all-posts"] });
   } catch (err) {
     console.error(err);
     alert("Failed to delete post");
@@ -38,6 +42,7 @@ const DashboardPostList = () => {
     setDeleting(null);
   }
 };
+
 
 
   if (isLoading) return <p className="text-center py-10">Loading dashboard...</p>;
@@ -114,18 +119,18 @@ const DashboardPostList = () => {
                 <td className="p-2 hidden md:table-cell">{post.tag}</td>
                 <td className="p-2 flex gap-4 items-center text-sm">
                   <Link
-                    to={`/edit/${post.id}`}
+                    to={`/edit/${post.slug}`}
                     className="text-blue-600 hover:underline"
                   >
                     Edit
                   </Link>
                   <button
-                    onClick={() => handleDelete(post.id)}
-                    disabled={deleting === post.id}
+                    onClick={() => handleDelete(post.slug)}
+                    disabled={deleting === post.slug}
                     className="text-red-500 hover:text-red-700"
                     title="Delete"
                   >
-                    {deleting === post.id ? "..." : <IoTrashOutline size={18} />}
+                    {deleting === post.slug ? "..." : <IoTrashOutline size={18} />}
                   </button>
                 </td>
               </tr>

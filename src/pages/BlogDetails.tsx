@@ -11,7 +11,7 @@ import Share from "../blog/Share";
 import { CardItem } from "../data/Types";
 
 const Blog = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
 
   const {
     data: posts = [],
@@ -25,7 +25,7 @@ const Blog = () => {
 
   });
 
-  const blog = posts.find((post) => post.id.toString() === id);
+  const blog = posts.find((post) => post.slug.toString() === slug);
 
   if (isLoading) {
     return (
@@ -45,7 +45,7 @@ const Blog = () => {
         <Navbar />
         <div className="max-w-4xl mx-auto py-20 px-6 text-center">
           <h1 className="text-3xl font-bold text-red-500">Blog not found</h1>
-          <p className="mt-4 text-gray-600">ID: <strong>{id}</strong></p>
+          <p className="mt-4 text-gray-600">SLUG: <strong>{slug}</strong></p>
         </div>
         <Footer />
       </PageWrapper>

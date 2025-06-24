@@ -4,6 +4,9 @@ import axios from "axios";
 import SingleCard from "../components/SingleCard";
 import SkeletonCard from "../components/SkeletonCard";
 import { CardItem } from "../data/Types";
+import PageHeader from "../components/PageHeader";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const fetchPosts = async (): Promise<CardItem[]> => {
   const res = await axios.get("https://sosoiloji.onrender.com/api/posts/");
@@ -69,8 +72,16 @@ const filteredPosts = posts?.filter(
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">Posts by {author}</h2>
+    <div className="">
+      <Navbar />
+
+
+      {/* <h2 className="text-2xl m-4 font-bold mb-6">Posts by {author}</h2> */}
+       <PageHeader
+      title={author || "Author"}
+      count={filteredPosts.length}
+      type="author"
+    />
 
       <div className="max-w-7xl mx-auto px-4 md:px-12">
 
@@ -93,6 +104,8 @@ const filteredPosts = posts?.filter(
         ))}
       </div>
         </div>
+
+        <Footer />
     </div>
   );
 };

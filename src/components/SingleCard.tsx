@@ -43,7 +43,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           className="absolute top-0 left-0 w-full h-full border border-black rounded-xl cursor-pointer"
         >
           <Link
-            to={`/post/${item.id}`}
+            to={`/post/${item.slug}`}
             className="absolute top-0 left-0 w-full h-full"
           >
             <div
@@ -137,7 +137,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           <div className="flex items-center justify-between">
             <FancyLinkButton
               label={item.buttonLabel}
-              to={`/post/${item.id}`}
+              to={`/post/${item.slug}`}
               bgColor={item.buttonBgColor}
             />
 
