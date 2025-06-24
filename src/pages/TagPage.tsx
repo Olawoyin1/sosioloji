@@ -70,14 +70,14 @@ const CategoryPage = () => {
   return (
     <div className="">
       <Navbar />
+
+      <div className="max-w-7xl mx-auto px-8 md:px-12">
+
       <PageHeader
         title={tag || "Category"}
         count={filteredPosts.length}
         type="category"
       />
-
-      <div className="max-w-7xl mx-auto px-4 md:px-12">
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 md:gap-20 place-items-center">
         {filteredPosts.map((post) => (
           <SingleCard

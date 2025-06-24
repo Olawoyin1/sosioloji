@@ -21,43 +21,38 @@ const AuthorPage = () => {
   const cachedPosts = queryClient.getQueryData<CardItem[]>(["all-posts"]);
 
   // Fallback to fetch if no cache
- const {
-  data: fetchedPosts,
-  isLoading,
-  isFetching,
-} = useQuery<CardItem[]>({
-  queryKey: ["all-posts"],
-  queryFn: fetchPosts,
-  enabled: !cachedPosts,
-//   staleTime: 5 * 60 * 1000,
-staleTime: 1.5 * 60 * 60 * 1000, // 1 hour 30 minutes in milliseconds
+  const {
+    data: fetchedPosts,
+    isLoading,
+    isFetching,
+  } = useQuery<CardItem[]>({
+    queryKey: ["all-posts"],
+    queryFn: fetchPosts,
+    enabled: !cachedPosts,
+    //   staleTime: 5 * 60 * 1000,
+    staleTime: 1.5 * 60 * 60 * 1000, // 1 hour 30 minutes in milliseconds
+  });
 
-});
+  const getPlainText = (html: string): string => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    return div.textContent || div.innerText || "";
+  };
 
-const getPlainText = (html: string): string => {
-  const div = document.createElement("div");
-  div.innerHTML = html;
-  return div.textContent || div.innerText || "";
-};
+  const posts: CardItem[] | undefined = cachedPosts ?? fetchedPosts;
 
-
-
-const posts: CardItem[] | undefined = cachedPosts ?? fetchedPosts;
-
-const filteredPosts = posts?.filter(
-    (post) => post.author?.toLowerCase() === author?.toLowerCase()
-) ?? [];
-
-
+  const filteredPosts =
+    posts?.filter(
+      (post) => post.author?.toLowerCase() === author?.toLowerCase()
+    ) ?? [];
 
   if (isLoading || isFetching) {
     return (
       <div className="max-w-7xl mx-auto px-4 md:px-12">
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 md:gap-20 place-items-center">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <SkeletonCard key={i} />
-        ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 md:gap-20 place-items-center">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
         </div>
       </div>
     );
@@ -75,37 +70,36 @@ const filteredPosts = posts?.filter(
     <div className="">
       <Navbar />
 
-
       {/* <h2 className="text-2xl m-4 font-bold mb-6">Posts by {author}</h2> */}
-       <PageHeader
-      title={author || "Author"}
-      count={filteredPosts.length}
-      type="author"
-    />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-12">
+      <div className="max-w-7xl mx-auto px-8 md:px-12">
+        <PageHeader
+          title={author || "Author"}
+          count={filteredPosts.length}
+          type="author"
+        />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 md:gap-20 place-items-center">
-        {filteredPosts.map((post) => (
-          <SingleCard
-            key={post.id}
-            item={{
-              ...post,
-            //   description: post.body.slice(0, 150) + "...",
-            description: getPlainText(post.body).slice(0, 150) + "...",
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 md:gap-20 place-items-center">
+          {filteredPosts.map((post) => (
+            <SingleCard
+              key={post.id}
+              item={{
+                ...post,
+                //   description: post.body.slice(0, 150) + "...",
+                description: getPlainText(post.body).slice(0, 150) + "...",
 
-              buttonLabel: "Read More",
-              buttonLink: `/post/${post.id}`,
-              buttonBgColor: "#E8D4C3",
-              subTag: post.tag,      // ✅ make sure this matches your backend field
-                subTagC: post.subTag, 
-            }}
+                buttonLabel: "Read More",
+                buttonLink: `/post/${post.id}`,
+                buttonBgColor: "#E8D4C3",
+                subTag: post.tag, // ✅ make sure this matches your backend field
+                subTagC: post.subTag,
+              }}
             />
-        ))}
-      </div>
+          ))}
         </div>
+      </div>
 
-        <Footer />
+      <Footer />
     </div>
   );
 };
