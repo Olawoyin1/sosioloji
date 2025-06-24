@@ -1,68 +1,3 @@
-// // components/JoditEditorComponent.tsx
-// import React, { useRef, useState } from 'react';
-// import JoditEditor from 'jodit-react';
-
-// interface Props {
-//   value: string;
-//   onChange: (newContent: string) => void;
-// }
-
-// const JoditEditorComponent: React.FC<Props> = ({ value, onChange }) => {
-//   const editor = useRef(null);
-
-//   const config = {
-//     readonly: false,
-//     uploader: {
-//       insertImageAsBase64URI: true,
-//     },
-//     toolbarAdaptive: false,
-//     buttons: [
-//       'bold',
-//       'italic',
-//       'underline',
-//       'strikethrough',
-//       '|',
-//       'ul',
-//       'ol',
-//       '|',
-//       'image',
-//       'link',
-//       '|',
-//       'fontsize',
-//       'brush',
-//       'paragraph',
-//       '|',
-//       'align',
-//       'undo',
-//       'redo',
-//       '|',
-//       'hr',
-//       'eraser',
-//       'copyformat',
-//       '|',
-//       'fullsize',
-//       'preview',
-//       'source',
-//     ],
-//   };
-
-//   return (
-//     <div className="w-full">
-//       <JoditEditor
-//         ref={editor}
-//         value={value}
-//         config={config}
-//         tabIndex={1}
-//         onBlur={(newContent) => onChange(newContent)}
-//       />
-//     </div>
-//   );
-// };
-
-// export default JoditEditorComponent;
-
-
-
 import React, { useRef } from 'react';
 import JoditEditor from 'jodit-react';
 
@@ -79,7 +14,7 @@ const JoditEditorComponent: React.FC<Props> = ({ value, onChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const config = {
-      height: 700, 
+      height: 800, 
     readonly: false,
     uploader: {
       insertImageAsBase64URI: true,
