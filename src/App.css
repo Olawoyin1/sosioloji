@@ -21,14 +21,20 @@ body{
   .sf{
     font-family: "Playfair Display", serif;
     
-}
-
-.fl{
+  }
+  
+  .bf{
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 2;
   font-weight: 300 !important;
 }
 
 
 .blog-form input{
+  outline: none ;
+}
+
+input{
   outline: none;
 }
 

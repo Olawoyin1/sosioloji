@@ -50,10 +50,10 @@ const SingleCard = ({ item }: { item: CardItem }) => {
               className={`
                 absolute
                 ${
-                  item.category === "Inspiration"
-                    ? "top-31"
+                  item.subTag 
+                    ? "top-21"
                     : item.category === "Article"
-                    ? "top-28"
+                    ? "top-17"
                     : "top-20"
                 }
                 left-0 
@@ -80,8 +80,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
               </div>
 
               {/* Hover Subtag (only for Article & Inspiration) */}
-              {(item.category === "Article" ||
-                item.category === "Inspiration") && (
+              {item.subTag && (
                 <div className="relative group">
                   <Link
                     to="/"
@@ -131,7 +130,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
 
           <p
             className="text-gray-700 pf line-clamp-3 leading-loose text-xs mb-3"
-            dangerouslySetInnerHTML={{ __html: item.description }}
+            dangerouslySetInnerHTML={{ __html: item.body }}
           />
 
           <div className="flex items-center justify-between">

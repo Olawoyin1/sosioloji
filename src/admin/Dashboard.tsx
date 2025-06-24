@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { IoTrashOutline } from "react-icons/io5";
 
 const fetchPosts = async () => {
+  // const res = await axios.get("http://localhost:8000/api/posts/");
   const res = await axios.get("https://sosoiloji.onrender.com/api/posts/");
   return res.data;
 };
@@ -14,6 +15,7 @@ const fetchPosts = async () => {
 
 const deletePost = async (slug: string) => {
   await axios.delete(`https://sosoiloji.onrender.com/api/posts/${slug}/`);
+  // await axios.delete(`http://localhost:8000/api/posts/${slug}/`);
 };
 
 

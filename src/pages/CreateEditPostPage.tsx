@@ -87,9 +87,10 @@ const isEditMode = Boolean(slug);
       title: Yup.string().required("Title is required"),
       author: Yup.string().required("Author is required"),
       category: Yup.string().required("Tag is required"),
-      subtag: Yup.string().required("Subtag is required"),
+      // subtag: Yup.string().required("Subtag is required"),
     }),
     onSubmit: async (values) => {
+      console.log("Submitting form...", values); 
       try {
         const imageUrl = mainImage ? await uploadToCloudinary(mainImage, "image") : "";
         const videoUrl = videoFile ? await uploadToCloudinary(videoFile, "video") : "";
@@ -102,10 +103,13 @@ const isEditMode = Boolean(slug);
           ...values,
           image: imageUrl,
           video: videoUrl,
-          contentVideo: blogContentVideoUrl,
-          contentImages: galleryUrls,
+          blogcontentvideo: blogContentVideoUrl,
+          content_images: galleryUrls,
           body: content,
         };
+
+
+        console.log(payload)
 
         if (isEditMode) {
           await axios.put(`https://sosoiloji.onrender.com/api/posts/${slug}/`, payload);
@@ -281,12 +285,6 @@ const isEditMode = Boolean(slug);
             )}
           </div>
 
-          <button
-            type="submit"
-            className="bg-black text-white py-2 px-6 rounded hover:bg-gray-800"
-          >
-            {isEditMode ? "Update Post" : "Create Post"}
-          </button>
         </div>
 
         {/* RIGHT SIDE */}
@@ -295,6 +293,12 @@ const isEditMode = Boolean(slug);
           <div className="border border-gray-700 rounded-md">
             <JoditEditorComponent value={content} onChange={setContent} />
           </div>
+          <button
+            type="submit"
+            className="bg-black w-full mt-9 block text-white py-2 px-6 rounded hover:bg-gray-800"
+          >
+            {isEditMode ? "Update Post" : "Create Post"}
+          </button>
         </div>
       </form>
     </div>

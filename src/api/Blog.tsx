@@ -2,6 +2,7 @@
 import { CardItem } from "../data/Types";
 
 export const fetchBlogPosts = async (): Promise<CardItem[]> => {
+  // const res = await fetch("http://localhost:8000/api/posts/");
   const res = await fetch("https://sosoiloji.onrender.com/api/posts/");
   const data = await res.json();
 
@@ -36,11 +37,13 @@ export const fetchBlogPosts = async (): Promise<CardItem[]> => {
       subTagC: post.subtag,
       image: post.image || "",
       video: post.video,
-      contentImages: post.contentImages || [],
+      contentImages: post.content_images || [],
       buttonLabel: "Read More",
       buttonLink: `/post/${post.slug}`,
       buttonBgColor: color,
       created_at: post.created_at,
+      quote: post.quote,
+      // content_images : post.content_images
     };
   });
 };
