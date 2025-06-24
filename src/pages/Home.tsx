@@ -19,9 +19,9 @@ const Home = () => {
 
           <ImageSlider />
           </div>
-          <div className="">
-            <BlogList />
-          </div>
+        </div>
+        <div className="">
+          <BlogList />
         </div>
       </section>
 
