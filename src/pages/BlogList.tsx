@@ -7,7 +7,7 @@ import { fetchBlogPosts } from "../api/Blog";
 import { AnimatePresence, motion } from "framer-motion";
 import { CardItem } from "../data/Types";
 import SingleCard from "../components/SingleCard";
-import FancyLinkButton from "../components/Button";
+// import FancyLinkButton from "../components/Button";
 import SkeletonCard from "../components/SkeletonCard";
 import NormalButton from "../components/NormalButton";
 
