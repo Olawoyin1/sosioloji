@@ -1,8 +1,8 @@
-import Cards from "../components/Cards";
 import Footer from "../components/Footer";
 import ImageSlider from "../components/ImageSlider";
 import Navbar from "../components/Navbar";
 import { PageWrapper } from "../components/PageWrapper";
+import BlogList from "./BlogList";
 
 const Home = () => {
     return (
@@ -20,7 +20,7 @@ const Home = () => {
           <ImageSlider />
           </div>
           <div className="">
-            <Cards />
+            <BlogList />
           </div>
         </div>
       </section>

@@ -1,0 +1,283 @@
+// CreateEditPostPage.tsx
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import JoditEditorComponent from "./Test";
+
+const CLOUD_NAME = "dunid4t4g";
+const UPLOAD_PRESET = "sosioloji";
+
+const tagOptions = ["Solution", "Asia", "Society"];
+const subtagOptions = [
+  "Inspiration",
+  "Behaviour",
+  "Europe",
+  "Arabia",
+  "Culture",
+  "Politics",
+  "Religion",
+  "Youth",
+];
+
+const CreateEditPostPage = () => {
+  const { id } = useParams();
+  const isEditMode = Boolean(id);
+  const navigate = useNavigate();
+
+  const [content, setContent] = useState("");
+  const [mainImage, setMainImage] = useState<File | null>(null);
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [galleryFiles, setGalleryFiles] = useState<File[]>([]);
+
+  const [showQuote, setShowQuote] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [showGallery, setShowGallery] = useState(false);
+
+  const uploadToCloudinary = async (file: File, resourceType: "image" | "video") => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+    const res = await axios.post(
+      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
+      formData
+    );
+    return res.data.secure_url;
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      author: "",
+      category: "",
+      subtag: "",
+      body: "",
+      quote: "",
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required("Title is required"),
+      author: Yup.string().required("Author is required"),
+      category: Yup.string().required("Tag is required"),
+      subtag: Yup.string().required("Subtag is required"),
+    }),
+    onSubmit: async (values) => {
+      try {
+        const imageUrl = mainImage ? await uploadToCloudinary(mainImage, "image") : "";
+        const videoUrl = videoFile ? await uploadToCloudinary(videoFile, "video") : "";
+        const galleryUrls = await Promise.all(
+          galleryFiles.map((file) => uploadToCloudinary(file, "image"))
+        );
+
+        const payload = {
+          ...values,
+          image: imageUrl,
+          video: videoUrl,
+          contentImages: galleryUrls,
+          body: content,
+        };
+
+        if (isEditMode) {
+          await axios.put(`https://sosoiloji.onrender.com/api/posts/${id}/`, payload);
+        } else {
+          await axios.post("https://sosoiloji.onrender.com/api/posts/", payload);
+        }
+
+        alert("Post submitted successfully!");
+        navigate("/dashboard");
+      } catch (error) {
+        console.error(error);
+        alert("Submission failed.");
+      }
+    },
+  });
+
+  // Populate form in edit mode
+  useEffect(() => {
+    const loadPost = async () => {
+      if (!isEditMode) return;
+      try {
+        const res = await axios.get(`https://sosoiloji.onrender.com/api/posts/${id}/`);
+        const data = res.data;
+        formik.setValues({
+          title: data.title,
+          author: data.author,
+          category: data.category,
+          subtag: data.subtag,
+          body: data.body,
+          quote: data.quote || "",
+        });
+        setContent(data.body);
+      } catch (err) {
+        console.error("Failed to fetch post for editing", err);
+      }
+    };
+    loadPost();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  return (
+    <div className="max-w-6xl mx-auto p-8">
+      <h2 className="text-2xl font-bold mb-6">{isEditMode ? "Edit" : "Create"} Blog Post</h2>
+      <form onSubmit={formik.handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* LEFT SIDE */}
+        <div className="space-y-8">
+          <input
+            name="title"
+            placeholder="Title"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+            className="w-full p-3 border-b border-gray-700"
+          />
+
+          <input
+            name="author"
+            placeholder="Author"
+            value={formik.values.author}
+            onChange={formik.handleChange}
+            className="w-full p-3 border-b border-gray-700"
+          />
+
+          {/* Main Image */}
+          <div>
+            <p className="font-medium mb-2">Main Image</p>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setMainImage(e.target.files?.[0] || null)}
+            />
+            {mainImage && (
+              <img
+                src={URL.createObjectURL(mainImage)}
+                alt="preview"
+                className="h-32 w-32 object-cover rounded mt-2"
+              />
+            )}
+          </div>
+
+          <div>
+            <p className="font-medium mb-2">Tag</p>
+            {tagOptions.map((tag) => (
+              <label key={tag} className="flex gap-2 items-center mb-2">
+                <input
+                  type="radio"
+                  name="category"
+                  value={tag}
+                  checked={formik.values.category === tag}
+                  onChange={formik.handleChange}
+                />
+                {tag}
+              </label>
+            ))}
+          </div>
+
+          <div>
+            <p className="font-medium mb-2">Subtag</p>
+            {subtagOptions.map((sub) => (
+              <label key={sub} className="flex gap-2 items-center mb-2">
+                <input
+                  type="radio"
+                  name="subtag"
+                  value={sub}
+                  checked={formik.values.subtag === sub}
+                  onChange={formik.handleChange}
+                />
+                {sub}
+              </label>
+            ))}
+          </div>
+
+          {/* Quote Toggle */}
+          <div>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={showQuote}
+                onChange={() => setShowQuote(!showQuote)}
+              />
+              Add Quote
+            </label>
+            {showQuote && (
+              <textarea
+                name="quote"
+                placeholder="Write your quote here"
+                className="w-full p-3 border rounded border-gray-400 mt-2"
+                value={formik.values.quote}
+                onChange={formik.handleChange}
+              />
+            )}
+          </div>
+
+          {/* Video Toggle */}
+          <div>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={showVideo}
+                onChange={() => setShowVideo(!showVideo)}
+              />
+              Add Video
+            </label>
+            {showVideo && (
+              <input
+                type="file"
+                accept="video/*"
+                className="mt-2"
+                onChange={(e) => setVideoFile(e.target.files?.[0] || null)}
+              />
+            )}
+          </div>
+
+          {/* Gallery Toggle */}
+          <div>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={showGallery}
+                onChange={() => setShowGallery(!showGallery)}
+              />
+              Add Image Gallery
+            </label>
+            {showGallery && (
+              <div className="space-y-2 mt-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => setGalleryFiles(e.target.files ? Array.from(e.target.files) : [])}
+                />
+                <div className="flex flex-wrap gap-2">
+                  {galleryFiles.map((file, i) => (
+                    <img
+                      key={i}
+                      src={URL.createObjectURL(file)}
+                      alt="gallery"
+                      className="h-16 w-16 object-cover rounded"
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="bg-black text-white py-2 px-6 rounded hover:bg-gray-800"
+          >
+            {isEditMode ? "Update Post" : "Create Post"}
+          </button>
+        </div>
+
+        {/* RIGHT SIDE */}
+        <div className="">
+          <p className="font-medium mb-2">Post Body</p>
+          <div className="border border-gray-700 rounded-md">
+            <JoditEditorComponent value={content} onChange={setContent} />
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default CreateEditPostPage;

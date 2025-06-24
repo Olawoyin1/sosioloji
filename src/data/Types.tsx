@@ -1,7 +1,5 @@
-// src/store/useBlogStore.ts
-import { create } from 'zustand';
-
-interface CardItem {
+// src/types.ts
+export interface CardItem {
   id: number;
   title: string;
   slug: string;
@@ -9,7 +7,7 @@ interface CardItem {
   body: string;
   description: string;
   category: string;
-  tag: string;
+  tag?: string;
   subTag?: string;
   subTagC?: string;
   image: string;
@@ -20,13 +18,3 @@ interface CardItem {
   buttonBgColor: string;
   created_at: string;
 }
-
-interface BlogState {
-  posts: CardItem[];
-  setPosts: (posts: CardItem[]) => void;
-}
-
-export const useBlogStore = create<BlogState>((set) => ({
-  posts: [],
-  setPosts: (posts) => set({ posts }),
-}));
