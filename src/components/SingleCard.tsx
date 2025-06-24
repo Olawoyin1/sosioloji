@@ -130,7 +130,7 @@ const SingleCard = ({ item }: { item: CardItem }) => {
           </p> */}
 
           <p
-            className="text-gray-700 line-clamp-3 leading-loose text-xs mb-3"
+            className="text-gray-700 pf line-clamp-3 leading-loose text-xs mb-3"
             dangerouslySetInnerHTML={{ __html: item.description }}
           />
 
