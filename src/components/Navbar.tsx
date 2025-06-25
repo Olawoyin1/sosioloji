@@ -23,8 +23,8 @@ const itemVariant: Variants = {
 };
 
 const navItems = [
-  { name: "OUR PURPOSE", href: "/purpose" },
   { name: "LAST GENERATION", href: "/last-generation" },
+  { name: "OUR PURPOSE", href: "/purpose" },
   { name: "FILOSOFI", href: "/filosofi" },
   { name: "IDEA IS CAPITAL", href: "/ideaiscapital" },
   { name: "CONNECT", href: "/connect" },
@@ -81,7 +81,7 @@ const Navbar = () => {
               animate="visible"
               exit="hidden"
             >
-              {navItems.map((item) => (
+              {navItems.map((item, index) => (
                 <motion.li key={item.name} variants={itemVariant}>
                   <Link
                     to={item.href}
@@ -92,13 +92,14 @@ const Navbar = () => {
                         // navigate(item.href); // Proper route transition
                       }, 600); // Match your motion exit transition
                     }}
-                    className="hover:text-blue-400 tracking-[3px] text-xl  text-black transition"
+                    className={`hover:text-blue-400 tracking-[3px] text-black transition ${
+        index === 0 ? "text-4xl font-bold" : "text-xl" } `}
                   >
                     {item.name}
                   </Link>
 
                   {item.name === "LAST GENERATION" && (
-                    <div className="h-px w-[80%] md:w-130 mx-auto bg-black/20 mt-9" />
+                    <div className="h-px w-[80%]  md:w-130 mx-auto bg-black/20 mt-9" />
                   )}
                 </motion.li>
               ))}
