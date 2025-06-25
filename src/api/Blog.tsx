@@ -3,7 +3,7 @@ import { CardItem } from "../data/Types";
 
 export const fetchBlogPosts = async (): Promise<CardItem[]> => {
   // const res = await fetch("http://localhost:8000/api/posts/");
-  const res = await fetch("https://sosoiloji.onrender.com/api/posts/");
+  const res = await fetch("https://sosoiloji.onrender.com/api/posts/?platform=sosioloji");
   const data = await res.json();
 
   const cleanText = (html: string): string => {
