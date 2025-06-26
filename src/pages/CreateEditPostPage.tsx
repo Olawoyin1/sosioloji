@@ -317,6 +317,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import JoditEditorComponent from "./Test";
+import FileDropInputWithPreview from "../components/FileDropInputWithPreview";
 
 const CLOUD_NAME = "dunid4t4g";
 const UPLOAD_PRESET = "sosioloji";
@@ -524,18 +525,12 @@ const CreateEditPostPage = () => {
 
           <div>
             <p className="font-medium mb-2">Main Image</p>
-            <input
-              type="file"
+            <FileDropInputWithPreview
+              label="Upload Main Image"
               accept="image/*"
-              onChange={(e) => setMainImage(e.target.files?.[0] || null)}
+              multiple={false}
+              onFilesChange={(files) => setMainImage(files[0] || null)}
             />
-            {mainImage && (
-              <img
-                src={URL.createObjectURL(mainImage)}
-                alt="preview"
-                className="h-32 w-32 object-cover rounded mt-2"
-              />
-            )}
           </div>
 
           <div>
@@ -561,11 +556,13 @@ const CreateEditPostPage = () => {
           {showVideo && (
             <div>
               <p className="font-medium mb-2">Upload Video</p>
-              <input
-                type="file"
+              <FileDropInputWithPreview
+                label="Upload Video"
                 accept="video/*"
-                onChange={(e) => setVideoFile(e.target.files?.[0] || null)}
+                multiple={false}
+                onFilesChange={(files) => setVideoFile(files[0] || null)}
               />
+
             </div>
           )}
 
@@ -634,15 +631,11 @@ const CreateEditPostPage = () => {
             </label>
             {showGallery && (
               <div className="space-y-2 mt-2">
-                <input
-                  type="file"
+                <FileDropInputWithPreview
+                  label="Upload Image Gallery"
                   accept="image/*"
-                  multiple
-                  onChange={(e) =>
-                    setGalleryFiles(
-                      e.target.files ? Array.from(e.target.files) : []
-                    )
-                  }
+                  multiple={true}
+                  onFilesChange={(files) => setGalleryFiles(files)}
                 />
                 <div className="flex flex-wrap gap-2">
                   {galleryFiles.map((file, i) => (
@@ -669,12 +662,11 @@ const CreateEditPostPage = () => {
             </label>
             {showBlogContentVideo && (
               <div className="mt-2">
-                <input
-                  type="file"
+                <FileDropInputWithPreview
+                  label="Upload Video"
                   accept="video/*"
-                  onChange={(e) =>
-                    setBlogContentVideoFile(e.target.files?.[0] || null)
-                  }
+                  multiple={false}
+                  onFilesChange={(files) => setBlogContentVideoFile(files[0] || null)}
                 />
               </div>
             )}
