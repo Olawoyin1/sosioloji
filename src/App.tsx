@@ -12,10 +12,14 @@ import NotFound from "./utils/NotFound";
 // import Testingg from "./pages/CreateBlogForm";
 import Dashboard from "./admin/Dashboard";
 import CreateEditPostPage from "./pages/CreateEditPostPage";
+import { Toaster } from 'sonner';
 // import BlogDetail from "./pages/BlogDetail";
 
 const App = () => {
   return (
+    <>
+    <Toaster richColors position="top-right" />
+
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/post/:slug" element={<BlogDetail />} />
@@ -37,6 +41,7 @@ const App = () => {
         
 
     </Routes>
+    </>
   );
 };
 
