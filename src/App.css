@@ -50,25 +50,23 @@ input{
 .bg-nav{
     background-image: url('../public/Images/sos.webp');
     height: 100vh;
+    width: 100vw;
     background-color: #FFF6E6;
     object-fit: cover;
     z-index: 9000;
+    background-repeat: no-repeat;
 
 }
 
 
 
 .bg {
-  background-image: url('/Images/sos.webp'); /* ✅ Correct path */
-  background-repeat: repeat-x;
+  background-image: url('/Images/sos.webp'); 
   background-size: cover;
-  position: absolute;
   background-repeat: no-repeat;
-  left: 0;
-
-  top: 0;
+  
   width: 100%;
-  height: 400px;
+  height: 700px;
   z-index: -1; /* ✅ Put behind all other content */
   animation: bgScroll 60s linear infinite alternate;
 }

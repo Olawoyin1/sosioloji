@@ -70,8 +70,8 @@ const SingleCard = ({ item }: { item: CardItem }) => {
               <div className="w-max">
                 <Link
                   to={`/tag/${item.category}`}
-                  className="text-sm sm:text-[17px] border z-20 border-black/90 rounded-full 
-                  px-4 py-1 font-bold no-underline 
+                  className="text-sm sm:text-[16px] border z-20 border-black/90 rounded-full 
+                  px-4 py-[3px] font-bold no-underline 
                   flex justify-center items-center transform rotate-180 origin-center"
                   style={{ backgroundColor: item.buttonBgColor }}
                 >
@@ -118,15 +118,12 @@ const SingleCard = ({ item }: { item: CardItem }) => {
       </div>
 
       {/* Text */}
-      <div className="pt-6">
+      <div className="mt-10">
         <div className="mb-5">
           <h1 className="text-xl md:text-2xl font-extrabold mb-3 leading-tight">
             {item.title}
           </h1>
 
-          {/* <p className="text-gray-700 line-clamp-3 leading-loose text-xs mb-3">
-            {item.description}
-          </p> */}
 
           <p
             className="text-gray-700 pf line-clamp-3 leading-loose text-xs mb-3"

@@ -8,12 +8,9 @@ import Home from "./pages/Home";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import NotFound from "./utils/NotFound";
-// import CreateBlogPostForm from "./pages/CreateBlog";
-// import Testingg from "./pages/CreateBlogForm";
 import Dashboard from "./admin/Dashboard";
 import CreateEditPostPage from "./pages/CreateEditPostPage";
 import { Toaster } from 'sonner';
-// import BlogDetail from "./pages/BlogDetail";
 
 const App = () => {
   return (
@@ -26,7 +23,6 @@ const App = () => {
       <Route path="/tag/:tag" element={<TagPage />} />
       <Route path="/author/:author" element={<AuthorPage />} />
       <Route path="*" element={<NotFound />} />
-      {/* <Route path="create" element={<Testingg />} /> */}
 
 
       {/* Dashboard List */}

@@ -24,7 +24,11 @@ const itemVariant: Variants = {
 
 const navItems = [
   { name: "LAST GENERATION", href: "/last-generation" },
+  { name: "SOSIOLOJI", href: "/purpose" },
   { name: "OUR PURPOSE", href: "/purpose" },
+  { name: "THE EDITOR", href: "/purpose" },
+  { name: "CONTRIBUTORS", href: "/purpose" },
+  { name: "JOIN THE MOVEMENT", href: "/purpose" },
   { name: "FILOSOFI", href: "/filosofi" },
   { name: "IDEA IS CAPITAL", href: "/ideaiscapital" },
   { name: "CONNECT", href: "/connect" },
@@ -39,18 +43,23 @@ const Navbar = () => {
         <div className="flex items-center justify-between min-h-[100px] md:min-h-[200px]  mx-auto relative">
           {/* Title */}
           <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-800">
-            <Link to="/" className="block md:hidden">sosioloji</Link>
-            <Link to='/' className="hidden md:block md:-translate-y-1/2 absolute left-1/2 -translate-x-1/2">
+            <Link to="/" className="block md:hidden">
+              sosioloji
+            </Link>
+            <Link
+              to="/"
+              className="hidden md:block md:-translate-y-1/2 absolute left-1/2 -translate-x-1/2"
+            >
               sosioloji
             </Link>
           </h1>
 
           {/* Menu icon */}
           <div
-            className="text-3xl text-gray-700 cursor-pointer rotate-90 block md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2"
+            className="text-3xl md:text-6xl text-gray-700 cursor-pointer rotate-90 block md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2"
             onClick={() => setMenuOpen(true)}
           >
-            <IoMenu />
+            <IoMenu  />
           </div>
         </div>
       </div>
@@ -67,7 +76,7 @@ const Navbar = () => {
           >
             {/* Close icon */}
             <div
-              className="absolute top-5 right-5 text-3xl cursor-pointer"
+              className="absolute top-5 right-5 text-4xl cursor-pointer"
               onClick={() => setMenuOpen(false)}
             >
               <GrClose color="#000000" />
@@ -75,7 +84,7 @@ const Navbar = () => {
 
             {/* AnimatePresence for list */}
             <motion.ul
-              className="w-full text-xl sm:text-3xl space-y-6 text-center"
+              className="w-full text-xl sm:text-3xl space-y-3 font-light text-center"
               variants={containerVariant}
               initial="hidden"
               animate="visible"
@@ -86,20 +95,24 @@ const Navbar = () => {
                   <Link
                     to={item.href}
                     onClick={(e) => {
-                      e.preventDefault(); // Prevent immediate routing
-                      setMenuOpen(false); // Trigger exit animation
+                      e.preventDefault();
+                      setMenuOpen(false); 
                       setTimeout(() => {
                         // navigate(item.href); // Proper route transition
-                      }, 600); // Match your motion exit transition
+                      }, 600);  
                     }}
                     className={`hover:text-blue-400 tracking-[3px] text-black transition ${
-        index === 0 ? "text-2xl md:text-4xl font-bold" : "text-xl" } `}
+                      index === 0 ? "text-2xl md:text-4xl font-bold" : "text-xl font-light"
+                    } `}
                   >
                     {item.name}
                   </Link>
 
                   {item.name === "LAST GENERATION" && (
                     <div className="h-px w-[80%]  md:w-130 mx-auto bg-black/20 mt-9" />
+                  )}
+                  {item.name === "JOIN THE MOVEMENT" && (
+                    <div className="h-px w-[80%]  md:w-80 mx-auto bg-black/20 mt-9" />
                   )}
                 </motion.li>
               ))}

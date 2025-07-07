@@ -21,14 +21,14 @@ const ImageSlider: React.FC = () => {
 
   return (
     <div className="w-full relative  mx-auto mb-8">
-        <div className='absolute w-full md:h-[400px] h-[300px] border border-gray-700 rounded-xl -left-1 top-1 md:-left-4 md:top-3'/>
+        <div className='absolute w-full md:h-[500px] h-[300px] border border-gray-700 rounded-xl -left-1 top-1 md:-left-4 md:top-3'/>
       <Slider {...settings}>
         {images.map((src, index) => (
           <div key={index}>
             <img
               src={src}
               alt={`Slide ${index + 1}`}
-              className="w-full  h-[300px] md:h-[400px] object-cover overflow-hidden rounded-lg"
+              className="w-full  h-[300px] md:h-[500px] object-cover overflow-hidden rounded-lg"
             />
           </div>
         ))}

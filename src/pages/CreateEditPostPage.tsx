@@ -114,15 +114,15 @@ const CreateEditPostPage = () => {
         if (isEditMode) {
           await axios.put(
             `https://sosoiloji.onrender.com/api/posts/${slug}/`,
+            // `http://localhost:8000/api/posts/${slug}/`,
             payload
           );
-          // await axios.put(`http://localhost:8000/api/posts/${slug}/`, payload);
         } else {
           await axios.post(
+            // "http://localhost:8000/api/posts/",
             "https://sosoiloji.onrender.com/api/posts/",
             payload
           );
-          // await axios.post("http://localhost:8000/api/posts/", payload);
         }
 
         toast.success(`Post ${isEditMode ? "updated" : "created"} successfully!`);
@@ -155,6 +155,7 @@ const CreateEditPostPage = () => {
       try {
         const res = await axios.get(
           `https://sosoiloji.onrender.com/api/posts/${slug}/`
+          // `http://localhost:8000/api/posts/${slug}/`
         );
         const post = res.data;
         formik.setValues({
