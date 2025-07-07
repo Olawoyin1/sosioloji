@@ -63,7 +63,7 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
   };
 
   return (
-    <article className="prose prose-lg max-w-3xl mx-auto px-4 sm:px-6">
+    <article className="prose prose-lg max-w-3xl mx-auto px-8 sm:px-6">
       <BlogHero blog={blog} height="medium" />
 
       <h1 className="text-2xl sm:text-4xl text-center font-semibold mt-6">{title}</h1>
