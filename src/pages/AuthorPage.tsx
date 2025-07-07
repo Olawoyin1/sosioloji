@@ -7,6 +7,7 @@ import { CardItem } from "../data/Types";
 import PageHeader from "../components/PageHeader";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { PageWrapper } from "../components/PageWrapper";
 
 const fetchBlogPosts = async (): Promise<CardItem[]> => {
   const res = await axios.get("https://sosoiloji.onrender.com/api/posts/");
@@ -57,6 +58,8 @@ const AuthorPage = () => {
   }
 
   return (
+    <PageWrapper>
+
     <div>
       <Navbar />
 
@@ -76,16 +79,17 @@ const AuthorPage = () => {
                 description: getPlainText(post.body).slice(0, 150) + "...",
                 buttonLabel: "Read More",
                 buttonLink: `/post/${post.id}`,
-                subTag: post.tag,
-                subTagC: post.subTag,
+                category: post.category,
+                subTag: post.subTag,
               }}
-            />
+              />
           ))}
         </div>
       </div>
 
       <Footer />
     </div>
+        </PageWrapper>
   );
 };
 

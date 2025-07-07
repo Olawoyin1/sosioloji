@@ -7,6 +7,7 @@ import { CardItem } from "../data/Types";
 import PageHeader from "../components/PageHeader";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { PageWrapper } from "../components/PageWrapper";
 
 // Fetch all blog posts
 const fetchBlogPosts = async (): Promise<CardItem[]> => {
@@ -58,6 +59,8 @@ const CategoryPage = () => {
   }
 
   return (
+    <PageWrapper>
+
     <div>
       <Navbar />
 
@@ -78,8 +81,8 @@ const CategoryPage = () => {
                 buttonLabel: "Read More",
                 buttonLink: `/post/${post.id}`,
                 // buttonBgColor: "#E8D4C3",
-                subTag: post.tag,
-                subTagC: post.subTag,
+                category: post.category,
+                subTag: post.subTag,
               }}
             />
           ))}
@@ -88,6 +91,7 @@ const CategoryPage = () => {
 
       <Footer />
     </div>
+      </PageWrapper>
   );
 };
 

@@ -84,13 +84,11 @@ const SingleCard = ({ item }: { item: CardItem }) => {
                 <div className="relative group">
                   <Link
                     to="/"
-                    className="w-8 h-8 sm:h-10 sm:w-10 border border-black/90 rounded-full 
+                    className="w-8 h-8 sm:h-9 sm:w-9 border border-black/90 rounded-full 
                     flex justify-center items-center rotate-270 text-xs font-bold md:text-sm"
                     style={{ backgroundColor: item.buttonBgColor }}
                   >
-                    {item.category === "Inspiration"
-                      ? item.subTag
-                      : item.subTag?.charAt(0)}
+                    {item.subTag?.charAt(0)}
                   </Link>
 
                   <div

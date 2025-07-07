@@ -11,6 +11,7 @@ import NotFound from "./utils/NotFound";
 import Dashboard from "./admin/Dashboard";
 import CreateEditPostPage from "./pages/CreateEditPostPage";
 import { Toaster } from 'sonner';
+import Author from "./pages/Author";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/post/:slug" element={<BlogDetail />} />
+      <Route path="/main-author" element={<Author />} />
       <Route path="/tag/:tag" element={<TagPage />} />
       <Route path="/author/:author" element={<AuthorPage />} />
       <Route path="*" element={<NotFound />} />
