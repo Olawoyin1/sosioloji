@@ -84,7 +84,7 @@ const Navbar = () => {
 
             {/* AnimatePresence for list */}
             <motion.ul
-              className="w-full text-xl sm:text-3xl space-y-3 font-light text-center"
+              className="w-full text-xl sm:text-3xl space-y-5 font-light text-center"
               variants={containerVariant}
               initial="hidden"
               animate="visible"

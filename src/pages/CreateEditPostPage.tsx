@@ -87,54 +87,63 @@ const CreateEditPostPage = () => {
       category: Yup.string().required("Tag is required"),
     }),
     onSubmit: async (values) => {
-      setIsSubmitting(true);
-      try {
-        const imageUrl = mainImage
-          ? await uploadToCloudinary(mainImage, "image")
-          : "";
-        const videoUrl = videoFile
-          ? await uploadToCloudinary(videoFile, "video")
-          : "";
-        const blogContentVideoUrl = blogContentVideoFile
-          ? await uploadToCloudinary(blogContentVideoFile, "video")
-          : "";
-        const galleryUrls = await Promise.all(
-          galleryFiles.map((file) => uploadToCloudinary(file, "image"))
-        );
+  setIsSubmitting(true);
+  try {
+    // 1. Upload only new media files
+    let imageUrl = null;
+    let videoUrl = null;
+    let blogContentVideoUrl = null;
+    let galleryUrls: string[] = [];
 
-        const payload = {
-          ...values,
-          image: imageUrl,
-          video: videoUrl,
-          blogcontentvideo: blogContentVideoUrl,
-          content_images: galleryUrls,
-          body: content,
-        };
+    if (mainImage) {
+      imageUrl = await uploadToCloudinary(mainImage, "image");
+    }
+    if (videoFile) {
+      videoUrl = await uploadToCloudinary(videoFile, "video");
+    }
+    if (blogContentVideoFile) {
+      blogContentVideoUrl = await uploadToCloudinary(blogContentVideoFile, "video");
+    }
+    if (galleryFiles.length > 0) {
+      galleryUrls = await Promise.all(
+        galleryFiles.map((file) => uploadToCloudinary(file, "image"))
+      );
+    }
 
-        if (isEditMode) {
-          await axios.put(
-            `https://sosoiloji.onrender.com/api/posts/${slug}/`,
-            // `http://localhost:8000/api/posts/${slug}/`,
-            payload
-          );
-        } else {
-          await axios.post(
-            // "http://localhost:8000/api/posts/",
-            "https://sosoiloji.onrender.com/api/posts/",
-            payload
-          );
-        }
+    // 2. Construct payload
+    const payload: any = {
+      ...values,
+      body: content,
+    };
 
-        toast.success(`Post ${isEditMode ? "updated" : "created"} successfully!`);
-         setTimeout(() => navigate("/dashboard"), 2000); // short delay before redirect
-      } catch (error) {
-        console.error(error);
-        toast.error(`Submission failed. please try again!`);
-        
-      }finally {
+    if (imageUrl) payload.image = imageUrl;
+    if (videoUrl) payload.video = videoUrl;
+    if (blogContentVideoUrl) payload.blogcontentvideo = blogContentVideoUrl;
+    if (galleryUrls.length > 0) payload.content_images = galleryUrls;
+
+    // 3. Send request
+    if (isEditMode) {
+      await axios.patch(
+        `https://sosoiloji.onrender.com/api/posts/${slug}/`,
+        payload
+      );
+    } else {
+      await axios.post(
+        "https://sosoiloji.onrender.com/api/posts/",
+        payload
+      );
+    }
+
+    toast.success(`Post ${isEditMode ? "updated" : "created"} successfully!`);
+    setTimeout(() => navigate("/dashboard"), 2000);
+  } catch (error) {
+    console.error(error);
+    toast.error(`Submission failed. Please try again!`);
+  } finally {
     setIsSubmitting(false);
   }
-    },
+},
+
   });
 
   const handlePlatformToggle = (platform: string) => {
@@ -367,12 +376,7 @@ const CreateEditPostPage = () => {
     : "Create Post"}
 </button>
 
-          {/* <button
-            type="submit"
-            className="bg-black w-full mt-9 block text-white py-2 px-6 rounded hover:bg-gray-800"
-          >
-            {isEditMode ? "Update Post" : "Create Post"}
-          </button> */}
+          
         </div>
       </form>
     </div>
