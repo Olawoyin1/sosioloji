@@ -9,7 +9,7 @@ const Author = () => {
       <section className="bg">
         <Navbar />
 
-        <div className="max-w-5xl mx-auto px-8 md:px-0 py-12 flex flex-col md:flex-row items-center gap-7 md:gap-20">
+        <div className="max-w-5xl mx-auto px-8 md:px-0 py-3 md:py-12 flex flex-col md:flex-row items-center gap-7 md:gap-20">
           {/* Left: Author Image with Decorative Circle */}
           <div className="w-full md:w-2/4 flex justify-center md:justify-start">
             <div className="relative w-80 h-80 md:w-full md:h-100">
