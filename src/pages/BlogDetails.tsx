@@ -51,18 +51,12 @@ const Blog = () => {
     );
   }
 
-  // const transformedBody = parse(blog.body, {
-  //   replace: (node) => {
-  //     if (node instanceof Element && node.name === "img") {
-  //       const src = node.attribs.src;
-  //       const alt = node.attribs.alt || "blog image";
-  //       return <InlineImageViewer src={src} alt={alt} />;
-  //     }
-  //   },
-  // });
+ 
 
   return (
     <PageWrapper>
+      <section className="bg">
+
       <Navbar />
       <section className="relative z-10">
         
@@ -70,6 +64,7 @@ const Blog = () => {
         <BlogContentViewer {...blog} />
       </section>
       <Footer />
+      </section>
     </PageWrapper>
   );
 };

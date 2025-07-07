@@ -2,7 +2,7 @@ import { useState } from "react";
 // import { FiMenu } from "react-icons/fi";
 import { IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 
 const containerVariant: Variants = {
@@ -22,13 +22,14 @@ const itemVariant: Variants = {
   },
 };
 
+
 const navItems = [
   { name: "LAST GENERATION", href: "/last-generation" },
-  { name: "SOSIOLOJI", href: "/purpose" },
+  { name: "SOSIOLOJI", href: "/sosioloji" },
   { name: "OUR PURPOSE", href: "/purpose" },
-  { name: "THE EDITOR", href: "/purpose" },
-  { name: "CONTRIBUTORS", href: "/purpose" },
-  { name: "JOIN THE MOVEMENT", href: "/purpose" },
+  { name: "THE EDITOR", href: "/editor" },
+  { name: "CONTRIBUTORS", href: "/contributors" },
+  { name: "JOIN THE MOVEMENT", href: "/movement" },
   { name: "FILOSOFI", href: "/filosofi" },
   { name: "IDEA IS CAPITAL", href: "/ideaiscapital" },
   { name: "CONNECT", href: "/connect" },
@@ -36,6 +37,7 @@ const navItems = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="w-full  z-50 relative mb-4">
@@ -98,7 +100,7 @@ const Navbar = () => {
                       e.preventDefault();
                       setMenuOpen(false); 
                       setTimeout(() => {
-                        // navigate(item.href); // Proper route transition
+                        navigate(item.href); // Proper route transition
                       }, 600);  
                     }}
                     className={`hover:text-blue-400 tracking-[3px] text-black transition ${

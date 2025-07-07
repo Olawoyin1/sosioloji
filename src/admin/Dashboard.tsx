@@ -88,8 +88,11 @@ const DashboardPostList = () => {
 
   return (
     <PageWrapper>
+      <section className="bg">
 
-    <div className="p-8 max-w-6xl mx-auto">
+     
+
+    <div className="p-8  max-w-6xl mx-auto">
       <h2 className="text-3xl font-bold mb-8">Dashboard Overview</h2>
 
       {/* Summary Cards */}
@@ -225,6 +228,7 @@ const DashboardPostList = () => {
         </table>
       </div>
     </div>
+     </section>
             </PageWrapper>
   );
 };

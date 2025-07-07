@@ -188,6 +188,9 @@ const CreateEditPostPage = () => {
   }, [slug, isEditMode]);
 
   return (
+    <section className="bg">
+
+    
     <div className="max-w-6xl mx-auto p-8">
       <h2 className="text-2xl font-bold mb-6">
         {isEditMode ? "Edit" : "Create"} Blog Post
@@ -380,6 +383,7 @@ const CreateEditPostPage = () => {
         </div>
       </form>
     </div>
+    </section>
   );
 };
 

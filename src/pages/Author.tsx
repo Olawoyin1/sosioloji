@@ -1,38 +1,60 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import NormalButton from "../components/NormalButton";
 import { PageWrapper } from "../components/PageWrapper";
 
 const Author = () => {
   return (
     <PageWrapper>
-
-    <section className="bg">
-
+      <section className="bg">
         <Navbar />
 
-    <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center bg-white p-6 rounded-xl shadow-md border border-gray-200">
-      {/* Left: Author Image */}
-      <div className="flex justify-center">
-        <img
-          src="https://via.placeholder.com/150"
-          alt="Olawoyin Gbolahan"
-          className="w-32 h-32 object-cover rounded-full border-2 border-gray-300 shadow"
-          />
-      </div>
+        <div className="max-w-5xl mx-auto px-6 md:px-0 py-12 flex flex-col md:flex-row items-center gap-20">
+          {/* Left: Author Image with Decorative Circle */}
+          <div className="w-full md:w-2/4 flex justify-center md:justify-start">
+            <div className="relative w-100 h-100 md:w-full md:h-100">
+              <img
+                src="../../Images/eleven.webp"
+                alt="Author"
+                className="w-full h-full object-cover rounded-full"
+              />
+              {/* Decorative circle */}
+              <span className="absolute w-full h-full rounded-full bottom-[-7px] left-[-8px] border border-gray-400 z-[1]" />
+            </div>
+          </div>
 
-      {/* Right: Author Info */}
-      <div className="md:col-span-2 space-y-2">
-        <h2 className="text-xl font-semibold text-gray-900">Olawoyin Gbolahan</h2>
-        <p className="text-gray-700 text-sm">
-          Gbolahan is a writer and software developer exploring the intersection
-          of sociology, culture, and modern technology. He writes with purpose
-          and curiosity.
-        </p>
-      </div>
-    </div>
+          {/* Right: Author Info */}
+          <div className="w-full md:w-2/3 space-y-5 text-center md:text-left">
+            <h2 className="text-[32px] sm:text-[36px] md:text-[44px] font-bold text-gray-900">
+              Hi, I'm Jonathan Doe 👋
+            </h2>
+            <p className="text-gray-700 leading-7 text-sm sm:text-base">
+              I'm a digital nomad on the move. I'm passionate about web development and creating interactive experiences. This is my space, Edger, where I share my adventures and personal thoughts.
+            </p>
 
-    <Footer />
-    </section>
+            <p className="text-gray-700 text-sm sm:text-base">
+              Join my newsletter and don’t miss any update:
+            </p>
+
+            <div className="bg-white rounded-full px-4  sm:px-5 max-w-[400px] mx-auto md:mx-0 flex items-center gap-4  sm:flex-nowrap">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="h-full text-sm w-full focus:outline-none"
+              />
+              <div className="shrink-0">
+                <NormalButton
+                  label="Get Started"
+                  bgColor="#F7C6D0"
+                  color="#000"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <Footer />
+      </section>
     </PageWrapper>
   );
 };

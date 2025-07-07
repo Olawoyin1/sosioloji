@@ -21,7 +21,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/post/:slug" element={<BlogDetail />} />
-      <Route path="/main-author" element={<Author />} />
+      <Route path="/editor" element={<Author />} />
       <Route path="/tag/:tag" element={<TagPage />} />
       <Route path="/author/:author" element={<AuthorPage />} />
       <Route path="*" element={<NotFound />} />

@@ -60,7 +60,7 @@ const AuthorPage = () => {
   return (
     <PageWrapper>
 
-    <div>
+    <div className="bg">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-8 md:px-12">
