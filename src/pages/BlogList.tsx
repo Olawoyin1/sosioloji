@@ -1,13 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom"; 
 import { useQuery } from "@tanstack/react-query";
 import { fetchBlogPosts } from "../api/Blog";
-// import SingleCard from "./SingleCard";
-// import FancyLinkButton from "./Button";
-// import SkeletonCard from "./SkeletonCard";
 import { AnimatePresence, motion } from "framer-motion";
 import { CardItem } from "../data/Types";
 import SingleCard from "../components/SingleCard";
-// import FancyLinkButton from "../components/Button";
 import SkeletonCard from "../components/SkeletonCard";
 import NormalButton from "../components/NormalButton";
 
@@ -15,6 +12,12 @@ const ITEMS_PER_PAGE = 6;
 
 const BlogList = () => {
   const [currentPage, setCurrentPage] = useState(1);
+
+  const location = useLocation();
+
+  useEffect(() => {
+  setCurrentPage(1);
+}, [location.key]); 
 
   const {
     data: posts = [],
