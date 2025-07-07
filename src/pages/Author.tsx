@@ -9,10 +9,10 @@ const Author = () => {
       <section className="bg">
         <Navbar />
 
-        <div className="max-w-5xl mx-auto px-6 md:px-0 py-12 flex flex-col md:flex-row items-center gap-20">
+        <div className="max-w-5xl mx-auto px-8 md:px-0 py-12 flex flex-col md:flex-row items-center gap-7 md:gap-20">
           {/* Left: Author Image with Decorative Circle */}
           <div className="w-full md:w-2/4 flex justify-center md:justify-start">
-            <div className="relative max-w-100 max-h-100 md:w-full md:h-100">
+            <div className="relative w-80 h-80 md:w-full md:h-100">
               <img
                 src="../../Images/eleven.webp"
                 alt="Author"
