@@ -30,24 +30,9 @@ const Author = () => {
               I'm a digital nomad on the move. I'm passionate about web development and creating interactive experiences. This is my space, Edger, where I share my adventures and personal thoughts.
             </p>
 
-            <p className="text-gray-700 pf text-sm sm:text-base">
-              Join my newsletter and don’t miss any update:
-            </p>
+            
 
-            <div className="bg-white rounded-full px-4  sm:px-5 max-w-[400px] mx-auto md:mx-0 flex items-center gap-4  sm:flex-nowrap">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="h-full text-sm w-full focus:outline-none"
-              />
-              <div className="shrink-0">
-                <NormalButton
-                  label="Get Started"
-                  bgColor="#F7C6D0"
-                  color="#000"
-                />
-              </div>
-            </div>
+            
           </div>
         </div>
 

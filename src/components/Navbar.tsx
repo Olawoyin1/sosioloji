@@ -72,7 +72,7 @@ const Navbar = () => {
       </div>
 
       <AnimatePresence>
-        {menuOpen && !activeSection && (
+        {menuOpen && (
           <motion.div
             className="fixed inset-0 bg-nav z-40 flex items-center justify-center"
             initial={{ y: "100%" }}
