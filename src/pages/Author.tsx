@@ -23,7 +23,7 @@ const Author = () => {
           {/* Right: Author Info */}
           <div className="w-full md:w-2/3 space-y-5 text-center md:text-left">
             <h2 className="text-[30px] sm:text-[36px] md:text-[44px] font-bold text-gray-900">
-              Hi, I'm Jonathan Doe 👋
+              Hi, I'm Jonathan Doe 👋🏾
             </h2>
             <p className="text-gray-700 pf leading-7 text-sm sm:text-base">
               I'm a digital nomad on the move. I'm passionate about web development and creating interactive experiences. This is my space, Edger, where I share my adventures and personal thoughts.
