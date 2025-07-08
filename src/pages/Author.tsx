@@ -1,5 +1,4 @@
 
-import NormalButton from "../components/NormalButton";
 import { PageWrapper } from "../components/PageWrapper";
 
 const Author = () => {
