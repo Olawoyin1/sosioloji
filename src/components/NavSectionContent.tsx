@@ -36,7 +36,7 @@ interface NavSectionContentProps {
 const NavSectionContent: React.FC<NavSectionContentProps> = ({ section, onClose }) => {
   return (
     <motion.div
-      className="fixed inset-0 z-50 bg-nav overflow-y-auto"
+      className="fixed inset-0 z-50 bg-nav  overflow-y-auto"
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}

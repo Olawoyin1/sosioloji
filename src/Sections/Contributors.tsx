@@ -43,20 +43,23 @@ const Contributors = () => {
 ];
 
   return (
-    <div className=" py-10 h-screen flex items-start justify-center flex-col px-8 md:px-12">
+    <section className="b">
+
+    <div className=" py-10 h-screen  flex items-start justify-center flex-col px-8 md:px-12">
       <h1 className="text-2xl md:text-3xl font-extrabold mb-10">Contributing Authors</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-9 md:gap-20 place-items-center">
         {contributors.map((person, index) => (
           <CircularCard
-            key={index}
-            imageUrl={person.imageUrl}
-            name={person.name}
-            socials={person.socials}
+          key={index}
+          imageUrl={person.imageUrl}
+          name={person.name}
+          socials={person.socials}
           />
         ))}
       </div>
 
     </div>
+        </section>
   )
 }
 
