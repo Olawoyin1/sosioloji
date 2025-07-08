@@ -1,13 +1,11 @@
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+
 import NormalButton from "../components/NormalButton";
 import { PageWrapper } from "../components/PageWrapper";
 
 const Author = () => {
   return (
     <PageWrapper>
-      <section className="bg">
-        <Navbar />
+      <section className="">
 
         <div className="max-w-5xl mx-auto px-8 md:px-0 py-3 md:py-12 flex flex-col md:flex-row items-center gap-7 md:gap-20">
           {/* Left: Author Image with Decorative Circle */}
@@ -53,7 +51,6 @@ const Author = () => {
           </div>
         </div>
 
-        <Footer />
       </section>
     </PageWrapper>
   );

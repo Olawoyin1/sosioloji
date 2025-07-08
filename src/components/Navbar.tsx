@@ -100,7 +100,7 @@ const Navbar = () => {
                 <motion.li key={item.key} variants={itemVariant}>
                   <button
                     onClick={() => handleNavClick(item.key)}
-                    className={`hover:text-blue-400 tracking-[3px] text-black transition ${
+                    className={`hover:text-blue-400 tracking-[3px] cursor-pointer text-black transition ${
                       index === 0
                         ? "text-2xl md:text-4xl font-bold"
                         : "text-xl font-light"

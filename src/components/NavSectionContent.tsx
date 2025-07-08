@@ -36,7 +36,7 @@ interface NavSectionContentProps {
 const NavSectionContent: React.FC<NavSectionContentProps> = ({ section, onClose }) => {
   return (
     <motion.div
-      className="fixed inset-0 z-50 bg-white overflow-y-auto"
+      className="fixed inset-0 z-50 bg-nav overflow-y-auto"
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
@@ -53,7 +53,7 @@ const NavSectionContent: React.FC<NavSectionContentProps> = ({ section, onClose 
       {/* Section content */}
       <div className="max-w-6xl mx-auto pt-24 px-6">
         {sectionMap[section] || (
-          <div className="text-center py-20 text-gray-500">Content not found.</div>
+          <div className="text-center py-20 text-gray-500">page build in progress.</div>
         )}
       </div>
     </motion.div>
