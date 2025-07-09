@@ -8,6 +8,14 @@ const SingleCard = ({ item }: { item: CardItem }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+
+  const getFirstParagraph = (html: string) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const p = doc.querySelector("p");
+  return p ? p.outerHTML : "";
+};
+
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -124,9 +132,10 @@ const SingleCard = ({ item }: { item: CardItem }) => {
 
 
           <p
-            className="text-gray-700 pf line-clamp-3 leading-loose text-xs mb-3"
-            dangerouslySetInnerHTML={{ __html: item.body }}
-          />
+  className="text-gray-700 pf line-clamp-3 leading-loose text-xs mb-3"
+  dangerouslySetInnerHTML={{ __html: getFirstParagraph(item.body) }}
+/>
+
 
           <div className="flex items-center justify-between">
             <FancyLinkButton
