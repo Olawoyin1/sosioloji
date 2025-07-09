@@ -63,7 +63,7 @@ const closeSection = () => {
     <nav className="w-full z-50 relative">
       <div className="max-w-7xl mx-auto px-8 md:px-12">
         <div className="flex items-center justify-between min-h-[100px] md:min-h-[200px] relative">
-          <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-gray-800">
+          <p className="text-3xl md:text-6xl font-bold tracking-tight text-gray-800">
             <Link to="/">
               <span className="block md:hidden">sosioloji</span>
             </Link>
@@ -72,7 +72,7 @@ const closeSection = () => {
                 sosioloji
               </span>
             </Link>
-          </h1>
+          </p>
 
           <div
             className="text-3xl md:text-5xl text-gray-700 cursor-pointer rotate-90 block md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2"
