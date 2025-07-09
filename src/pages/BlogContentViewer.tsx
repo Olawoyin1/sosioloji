@@ -193,7 +193,7 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
                     : lightboxIndex - 1
                 )
               }
-              className="fixed cursor-pointer left-0 top-0 bottom-0 flex items-center justify-center w-18 font-bold text-xl md:text-4xl z-50"
+              className="fixed cursor-pointer left-0 top-0 bottom-0 flex items-center justify-center w-18 font-bold text-xl -mt-10 md:mt-0 md:text-4xl z-50"
             >
               <FaArrowLeftLong />
             </button>
@@ -220,7 +220,7 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
                     : lightboxIndex + 1
                 )
               }
-              className="fixed cursor-pointer right-0 top-0 bottom-0 flex items-center justify-center w-16  text-xl md:text-4xl z-50"
+              className="fixed cursor-pointer right-0 top-0 bottom-0 flex items-center justify-center w-16 -mt-10 md:mt-0  text-xl md:text-4xl z-50"
             >
               <FaArrowRightLong />
             </button>

@@ -3,8 +3,8 @@ import Slider from 'react-slick';
 
 const images = [
   '../../Images/slide.webp',
+  '../../Images/hero3.webp',
   '../../Images/sos.webp',
-  '../../Images/sos1.jpg',
 ];
 
 const ImageSlider: React.FC = () => {
