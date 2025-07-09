@@ -116,9 +116,9 @@ const SingleCard = ({ item }: { item: CardItem }) => {
       </div>
 
       {/* Text */}
-      <div className="mt-4 md:mt-10">
+      <div className="mt-4  md:mt-10">
         <div className="mb-5">
-          <h1 className="text-xl md:text-2xl font-extrabold mb-3 leading-tight">
+          <h1 className="text-xl sc-header line-clamp-2 font-extrabold mb-3 leading-tight">
             {item.title}
           </h1>
 
