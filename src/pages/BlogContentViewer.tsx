@@ -2,15 +2,23 @@ import React, { useState, useEffect } from "react";
 import { CardItem } from "../data/Types";
 import BlogHero from "../blog/BlogHero";
 import Share from "../blog/Share";
+import { motion } from "framer-motion";
+import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
+import { BiSolidQuoteAltRight } from "react-icons/bi";
 
 type BlogContentViewerProps = CardItem;
 
-// Extract all paragraphs (<p> and <img> too)
+// Extract paragraphs and images from body HTML and center images
 const getHTMLBlocks = (html: string): string[] => {
   const container = document.createElement("div");
   container.innerHTML = html;
   const elements: Element[] = Array.from(container.children);
-  return elements.map((el) => el.outerHTML);
+  return elements.map((el) => {
+    if (el.tagName === "IMG") {
+      el.classList.add("mx-auto"); // center body <img> tags
+    }
+    return el.outerHTML;
+  });
 };
 
 const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
@@ -34,8 +42,23 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
   buttonLink = "#",
   buttonBgColor = "#FFD682",
 }) => {
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [blocks, setBlocks] = useState<string[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+
+  useEffect(() => {
+  if (lightboxIndex !== null) {
+    document.body.style.overflow = "hidden"; // Disable scroll
+  } else {
+    document.body.style.overflow = ""; // Restore scroll
+  }
+
+  // Cleanup when component unmounts
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [lightboxIndex]);
+
 
   useEffect(() => {
     setBlocks(getHTMLBlocks(body));
@@ -66,9 +89,14 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
     <article className="prose prose-lg max-w-3xl mx-auto px-8 sm:px-6">
       <BlogHero blog={blog} height="medium" />
 
-      <h1 className="text-2xl sm:text-4xl text-center font-semibold mt-6">{title}</h1>
+      <h1 className="text-2xl sm:text-4xl text-center font-semibold mt-6">
+        {title}
+      </h1>
+
       <div className="flex w-fit mx-auto mt-6 gap-8 items-center mb-10 justify-center">
-        <p className="text-base text-gray-600">{new Date(created_at).toDateString()}</p>
+        <p className="text-base text-gray-600">
+          {new Date(created_at).toDateString()}
+        </p>
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 sm:h-10 sm:w-10 overflow-hidden bg-black/30 rounded-full">
             <img
@@ -81,21 +109,30 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
         </div>
       </div>
 
-      {/* First 2 paragraphs or blocks */}
+      {/* First 2 blocks */}
       {firstPart.map((block, i) => (
-        <div className="bf" key={i} dangerouslySetInnerHTML={{ __html: block }} />
+        <div
+          className="bf"
+          key={i}
+          dangerouslySetInnerHTML={{ __html: block }}
+        />
       ))}
 
       {/* Quote */}
       {quote?.trim() && (
-        <blockquote className="relative px-6 py-4 border-l-4 border-gray-400 bg-gray-50 rounded text-gray-700 my-8">
-          “{quote.trim()}”
+        <blockquote className="relative min-h-50 flex items-center justify-center text-sm md:text-xl leading-8 p-10  rounded text-gray-700 my-8">
+          {quote.trim()}
+          <BiSolidQuoteAltRight className="absolute text-gray-300  text-7xl bottom-4 z-[-1] right-4" />
         </blockquote>
       )}
 
-      {/* Remaining body (paragraphs, images, etc) */}
+      {/* Remaining blocks */}
       {remainingPart.map((block, i) => (
-        <div className="bf" key={i + 2} dangerouslySetInnerHTML={{ __html: block }} />
+        <div
+          className="bf"
+          key={i + 2}
+          dangerouslySetInnerHTML={{ __html: block }}
+        />
       ))}
 
       {/* Blog Main Video */}
@@ -131,23 +168,63 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
               src={img}
               alt={`Gallery ${i + 1}`}
               className="w-full h-40 object-cover rounded-lg shadow cursor-pointer"
-              onClick={() => setLightboxImage(img)}
+              onClick={() => setLightboxIndex(i)}
             />
           ))}
         </div>
       )}
 
-      {/* Lightbox View */}
-      {lightboxImage && (
+      {/* Lightbox */}
+      {lightboxIndex !== null && (
         <div
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
-          onClick={() => setLightboxImage(null)}
+          className="fixed overflow-hidden inset-0 bg-[#FFF6E6] z-50 flex p-1 items-center justify-center"
+          onClick={() => setLightboxIndex(null)}
         >
-          <img
-            src={lightboxImage}
-            alt="Full View"
-            className="max-w-[90vw] max-h-[90vh] rounded shadow-lg"
-          />
+          <div
+            className="relative flex flex-col items-end"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Fullscreen Left Arrow */}
+            <button
+              onClick={() =>
+                setLightboxIndex(
+                  lightboxIndex === 0
+                    ? contentImages.length - 1
+                    : lightboxIndex - 1
+                )
+              }
+              className="fixed cursor-pointer left-0 top-0 bottom-0 flex items-center justify-center w-18 font-bold text-xl md:text-4xl z-50"
+            >
+              <FaArrowLeftLong />
+            </button>
+
+            {/* Animated Image */}
+            <motion.img
+              key={contentImages[lightboxIndex]}
+              src={contentImages[lightboxIndex]}
+              alt={`Gallery ${lightboxIndex + 1}`}
+              className="max-h-[90vh] max-w-auto w-[600px] object-contain  shadow"
+            />
+
+            {/* Index below image */}
+            <div className="mt-3 text-lg px-3 py-1  rounded ">
+              {lightboxIndex + 1} of {contentImages.length}
+            </div>
+
+            {/* Fullscreen Right Arrow */}
+            <button
+              onClick={() =>
+                setLightboxIndex(
+                  lightboxIndex === contentImages.length - 1
+                    ? 0
+                    : lightboxIndex + 1
+                )
+              }
+              className="fixed cursor-pointer right-0 top-0 bottom-0 flex items-center justify-center w-16  text-xl md:text-4xl z-50"
+            >
+              <FaArrowRightLong />
+            </button>
+          </div>
         </div>
       )}
 

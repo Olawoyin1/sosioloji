@@ -1,5 +1,5 @@
 // Navbar.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { IoMenu } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
@@ -43,10 +43,22 @@ const Navbar = () => {
     setActiveSection(key); // opens content
   };
 
-  const closeSection = () => {
+const closeSection = () => {
     setActiveSection(null); // closes content
   };
 
+  useEffect(() => {
+  if (menuOpen) {
+    document.body.style.overflow = "hidden"; // disable scroll
+  } else {
+    document.body.style.overflow = ""; // restore scroll
+  }
+
+  // Cleanup when unmounting
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [menuOpen]);
   return (
     <nav className="w-full z-50 relative">
       <div className="max-w-7xl mx-auto px-8 md:px-12">

@@ -24,7 +24,6 @@ const Blog = () => {
 
   const blog = posts.find((post) => post.slug.toString() === slug);
 
-  console.log(blog)
 
   if (isLoading) {
     return (
