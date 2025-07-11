@@ -22,5 +22,20 @@ export interface CardItem {
   buttonBgColor: string;
   created_at: string;
   platforms? : string
+
+
+    callout?: {
+    solution?: string;
+    change?: string;
+    action?: string;
+    purpose?: string;
+  };
+
+  product_card?: {
+    image: string;
+    title: string;
+    details: string;
+    link: string;
+  };
 }
   

@@ -43,6 +43,8 @@ export const fetchBlogPosts = async (): Promise<CardItem[]> => {
       buttonBgColor: color,
       created_at: post.created_at,
       quote: post.quote,
+      callout: post.callout,
+      product_card: post.product_card,
       // content_images : post.content_images
     };
   });

@@ -24,6 +24,11 @@ const Blog = () => {
 
   const blog = posts.find((post) => post.slug.toString() === slug);
 
+  console.log("blog", blog);
+console.log("callout", blog?.callout);
+console.log("product_card", blog?.product_card);
+
+
 
   if (isLoading) {
     return (
@@ -60,7 +65,8 @@ const Blog = () => {
       <section className="relative z-10">
         
 
-        <BlogContentViewer {...blog} />
+        <BlogContentViewer {...blog} callout={blog.callout}
+  product_card={blog.product_card} />
       </section>
       <Footer />
       </section>
