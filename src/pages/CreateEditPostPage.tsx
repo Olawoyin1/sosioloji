@@ -4,9 +4,9 @@ import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import JoditEditorComponent from "./Test";
 import FileDropInputWithPreview from "../components/FileDropInputWithPreview";
 import { toast } from "sonner";
+import TiptapEditor from "../components/TiptapEditor";
 
 const CLOUD_NAME = "dunid4t4g";
 const UPLOAD_PRESET = "sosioloji";
@@ -361,7 +361,8 @@ const CreateEditPostPage = () => {
         <div className="">
           <p className="font-medium mb-2">Post Body</p>
           <div className="border border-gray-700 rounded-md">
-            <JoditEditorComponent value={content} onChange={setContent} />
+            {/* <JoditEditorComponent value={content} onChange={setContent} /> */}
+            <TiptapEditor value={content} onChange={setContent} />
           </div>
           <button
   type="submit"

@@ -1,91 +1,26 @@
-// ...imports remain unchanged
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CardItem } from "../data/Types";
 import BlogHero from "../blog/BlogHero";
 import Share from "../blog/Share";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { BiSolidQuoteAltRight } from "react-icons/bi";
+import Callout from "../blog/Callout";
+import ProductCard from "../blog/ProductCard";
 
-type BlogContentViewerProps = CardItem;
+interface BlogContentViewerProps extends CardItem {
+  callouts?: string[];
+  productCard?: React.ReactNode;
+}
 
-const slugify = (text: string) =>
-  text.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
-
-const parseSectionsFromHtml = (html: string, headingTag = "h1") => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-  const headings = Array.from(doc.querySelectorAll(headingTag));
-  if (headings.length === 0) {
-    return [{ id: "full-content", title: "Content", content: html }];
-  }
-
-  const sections = headings.map((heading, i) => {
-    const id = heading.id || slugify(heading.textContent || `section-${i + 1}`);
-    heading.id = id;
-    const sectionContentNodes = [];
-    let sibling = heading.nextSibling;
-    while (sibling && sibling.nodeName.toLowerCase() !== headingTag.toLowerCase()) {
-      sectionContentNodes.push(sibling);
-      sibling = sibling.nextSibling;
-    }
-
-    const container = document.createElement("div");
-    sectionContentNodes.forEach((node) => container.appendChild(node.cloneNode(true)));
-
-    return {
-      id,
-      title: heading.textContent || `Section ${i + 1}`,
-      content: container.innerHTML,
-    };
-  });
-
-  return sections;
-};
-
-const getFirstParagraph = (html: string) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-  const p = doc.querySelector("p");
-  return p ? p.outerHTML : "";
-};
-
-const removeFirstParagraph = (html: string) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-  const p = doc.querySelector("p");
-  if (p) p.remove();
-  return doc.body.innerHTML;
-};
-
-// ✅ NEW — process rest content: wrap images + insert blogContentVideo after 4th <p>
-const processContent = (html: string, blogContentVideo?: string) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-
-  doc.querySelectorAll("img").forEach((img) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "flex justify-center my-4";
-    img.classList.add("max-w-full", "h-auto", "shadow", "rounded");
-    img.parentNode?.insertBefore(wrapper, img);
-    wrapper.appendChild(img);
-  });
-
-  const paragraphs = doc.querySelectorAll("p");
-  if (blogContentVideo && paragraphs.length >= 4) {
-    const videoWrapper = document.createElement("div");
-    videoWrapper.innerHTML = `
-      <video controls class="w-full rounded-lg shadow mt-6 mb-6" preload="metadata">
-        <source src="${blogContentVideo}" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    `;
-    const fourthParagraph = paragraphs[3];
-    fourthParagraph?.parentNode?.insertBefore(videoWrapper, fourthParagraph.nextSibling);
-  }
-
-  return doc.body.innerHTML;
-};
+const slugify = (text: string | null | undefined): string =>
+  (text ?? "")
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
 
 const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
   id,
@@ -95,7 +30,6 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
   image,
   body,
   quote,
-  video,
   contentImages = [],
   blogContentVideo,
   slug,
@@ -107,18 +41,49 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
   buttonLabel = "Read More",
   buttonLink = "#",
   buttonBgColor = "#FFD682",
+  // callouts = [],
+  // productCard,
 }) => {
-  const [sections, setSections] = useState<{ id: string; title: string; content: string }[]>([]);
-  const [activeSectionId, setActiveSectionId] = useState<string>("");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [tocOpen, setTocOpen] = useState(false);
+  const [activeSectionId, setActiveSectionId] = useState<string>("");
   const tocRef = useRef<HTMLDivElement>(null);
 
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(body, "text/html");
+  const headings = Array.from(doc.querySelectorAll("h1"));
+
+  const sections = headings.map((heading, index) => {
+    const id = heading.id || slugify(heading.textContent || `section-${index}`);
+    heading.id = id;
+    const sectionContentNodes: ChildNode[] = [];
+    let next = heading.nextSibling;
+    while (next && next.nodeName !== "H1") {
+      sectionContentNodes.push(next);
+      next = next.nextSibling;
+    }
+    const container = document.createElement("div");
+    sectionContentNodes.forEach((node) => {
+      if (
+        node.nodeType === Node.ELEMENT_NODE ||
+        node.nodeType === Node.TEXT_NODE
+      ) {
+        container.appendChild(node.cloneNode(true));
+      }
+    });
+    return {
+      id,
+      title: heading.textContent || `Section ${index + 1}`,
+      content: container.innerHTML,
+    };
+  });
+
   useEffect(() => {
-    const parsed = parseSectionsFromHtml(body);
-    setSections(parsed);
-    setActiveSectionId(parsed[0]?.id || "");
-  }, [body]);
+    document.body.style.overflow = lightboxIndex !== null ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightboxIndex]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -132,32 +97,49 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [tocOpen]);
 
-  useEffect(() => {
-    document.body.style.overflow = lightboxIndex !== null ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [lightboxIndex]);
-
   const blog = {
-    id, title, author, created_at, image, slug, body, description, category, tag, subTag, subTagC,
-    buttonLabel, buttonLink, buttonBgColor,
+    id,
+    title,
+    author,
+    created_at,
+    image,
+    slug,
+    body,
+    description,
+    category,
+    tag,
+    subTag,
+    subTagC,
+    buttonLabel,
+    buttonLink,
+    buttonBgColor,
   };
 
-  const activeSection = sections.find((s) => s.id === activeSectionId);
-  const firstParagraph = activeSection ? getFirstParagraph(activeSection.content) : "";
-  const restContent = activeSection
-    ? processContent(removeFirstParagraph(activeSection.content), blogContentVideo)
-    : "";
+  const activeSection =
+    sections.find((s) => s.id === activeSectionId) || sections[0];
+  const sectionDoc = parser.parseFromString(activeSection.content, "text/html");
+  const paragraphs = Array.from(sectionDoc.querySelectorAll("p"));
+  const unorderedList = sectionDoc.querySelector("ul");
+
+  const restContent = Array.from(sectionDoc.body.children).filter(
+    (node) =>
+      !paragraphs.slice(0, 4).includes(node as HTMLParagraphElement) &&
+      node !== unorderedList
+  );
 
   return (
-    <article className="prose prose-lg max-w-3xl mx-auto px-8 sm:px-6">
+    <>
+    
       <BlogHero blog={blog} height="medium" />
-
-      <h1 className="text-2xl sm:text-4xl text-center font-semibold mt-6">{title}</h1>
+    <article className="prose prose-lg max-w-3xl mx-auto px-8 sm:px-6 scroll-smooth">
+      <h1 className="text-2xl sm:text-4xl max-w-xl mx-auto text-center font-semibold mt-6">
+        {title}
+      </h1>
 
       <div className="flex w-fit mx-auto mt-6 gap-8 items-center mb-10 justify-center">
-        <p className="text-base text-gray-600">{new Date(created_at).toDateString()}</p>
+        <p className="text-base text-gray-600">
+          {new Date(created_at).toDateString()}
+        </p>
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 sm:h-10 sm:w-10 overflow-hidden bg-black/30 rounded-full">
             <img
@@ -170,84 +152,156 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
         </div>
       </div>
 
-      {/* TOC Accordion */}
-      <div className="mb-6 w-full border-b border-gray-300" ref={tocRef}>
-        <button
-          onClick={() => setTocOpen(!tocOpen)}
-          className="w-full py-2 text-left flex justify-between items-center"
-        >
-          <span className="text-gray-800 font-medium">Table of Contents</span>
-          <svg
-            className={`w-5 h-5 ml-2 transition-transform duration-300 ${tocOpen ? "rotate-180" : "rotate-0"}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+      {/* TOC */}
+      {sections.length > 1 && (
+        <div className="mb-6 border-b border-gray-200 pb-4" ref={tocRef}>
+          <button
+            onClick={() => setTocOpen(!tocOpen)}
+            className="w-full py-2 text-left flex justify-between items-center"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <AnimatePresence>
-          {tocOpen && (
-            <motion.ul
-              key="toc-accordion"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
+            <span className="text-gray-800 font-medium">Table of Contents</span>
+            <svg
+              className={`w-5 h-5 ml-2 transition-transform duration-300 ${
+                tocOpen ? "rotate-180" : "rotate-0"
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              {sections.map(({ id, title }) => (
-                <li
-                  key={id}
-                  className={`px-4 py-2 text-sm cursor-pointer ${
-                    activeSectionId === id ? "font-semibold" : ""
-                  }`}
-                  onClick={() => {
-                    setActiveSectionId(id);
-                    setTocOpen(false);
-                  }}
-                >
-                  {title}
-                </li>
-              ))}
-            </motion.ul>
-          )}
-        </AnimatePresence>
-      </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <AnimatePresence>
+            {tocOpen && (
+              <motion.ul
+                key="toc-list"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden space-y-2 mt-2"
+              >
+                {sections.map((section) => (
+                  <li key={section.id}>
+                    <button
+                      onClick={() => {
+                        setActiveSectionId(section.id);
+                        setTocOpen(false);
+                      }}
+                      className={`text-left cursor-pointer hover:underline ${
+                        activeSectionId === section.id
+                          ? "text-black font-bold"
+                          : "text-gray-600"
+                      }`}
+                    >
+                      {section.title}
+                    </button>
+                  </li>
+                ))}
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
 
       {/* Section Content */}
-      <AnimatePresence>
-        {activeSection && (
-          <motion.section
-            key={activeSection.id}
-            id={activeSection.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="prose max-w-none  mb-10"
-            tabIndex={0}
-          >
-            <h2 className="mb-3 text-2xl font-bold">{activeSection.title}</h2>
-            <div dangerouslySetInnerHTML={{ __html: firstParagraph }} className="bf" />
-            {quote?.trim() && (
-        <blockquote className="relative min-h-50 flex items-center justify-center text-sm md:text-[17px] leading-8 p-10  rounded text-gray-700 my-8">
-          {quote.trim()}
-          <BiSolidQuoteAltRight className="absolute text-gray-300  text-7xl bottom-4 z-[-1] right-4" />
-        </blockquote>
-      )}
-            <div dangerouslySetInnerHTML={{ __html: restContent }} className="bf"/>
-          </motion.section>
-        )}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeSectionId}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+        >
+          {paragraphs.slice(0, 4).map((p, i) => (
+            <div
+              key={i}
+              className="mb-4 text-sm sm:text-[15px] bf"
+              dangerouslySetInnerHTML={{ __html: p.outerHTML }}
+            />
+          ))}
+
+          {unorderedList && (
+            <div
+              className="mb-6 text-sm sm:text-[15px] bf"
+              dangerouslySetInnerHTML={{
+                __html: unorderedList.outerHTML.replace(
+                  "<ul",
+                  '<ul class="list-disc pl-5"'
+                ),
+              }}
+            />
+          )}
+
+          {/* Quote appears here */}
+          {quote && (
+            <blockquote className="relative min-h-50 flex items-center justify-center text-sm md:text-[17px] leading-8 p-10 rounded text-gray-700 my-8">
+              {quote}
+              <BiSolidQuoteAltRight className="absolute text-gray-300 text-7xl bottom-4 z-[-1] right-4" />
+            </blockquote>
+          )}
+
+          {/* Rest Content */}
+          <div className="mt-8 bf text-sm sm:text-[15px] space-y-6">
+            {restContent.map((node, i) => {
+              let html = (node as HTMLElement).outerHTML;
+              html = html.replace(/<img\s/gi, '<img class="w-full" ');
+              return (
+                <div
+                  key={i}
+                  className="w-full"
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
+              );
+            })}
+          </div>
+        </motion.div>
       </AnimatePresence>
 
-      {video && (
-        <video controls className="w-full rounded-lg shadow mt-7 mb-6" preload="metadata">
-          <source src={video} type="video/mp4" />
-        </video>
-      )}
+      {/* Video */}
+      <div className="w-full mt-6 mb-6">
+        {blogContentVideo ? (
+          <video
+            controls
+            className="w-full rounded-lg shadow"
+            preload="metadata"
+          >
+            <source src={blogContentVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <div className="flex items-center justify-center border border-dashed border-gray-300 rounded-lg p-6 bg-gray-50">
+            <div className="text-center text-gray-500">
+              <p className="font-semibold">Blog content video not available</p>
+              <p className="text-sm">
+                A preview will appear here when provided.
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
 
-      {/* Image gallery with lightbox */}
+      {/* Callouts */}
+      <Callout />
+      {/* <div className="mt-10 grid bf grid-cols-1 gap-4">
+        {(callouts.length > 0
+          ? callouts
+          : ["<p>No callouts provided.</p>"]
+        ).map((html, i) => (
+          <div
+            key={i}
+            className="border border-yellow-300 bg-yellow-50 p-4 rounded shadow"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        ))}
+      </div> */}
+
+      {/* Image Gallery */}
       {contentImages.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-10">
           {contentImages.map((img, i) => (
@@ -262,6 +316,7 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
         </div>
       )}
 
+      {/* Lightbox */}
       {lightboxIndex !== null && (
         <div
           className="fixed overflow-hidden inset-0 bg-[#FFF6E6] z-50 flex p-1 items-center justify-center"
@@ -274,10 +329,12 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
             <button
               onClick={() =>
                 setLightboxIndex(
-                  lightboxIndex === 0 ? contentImages.length - 1 : lightboxIndex - 1
+                  lightboxIndex === 0
+                    ? contentImages.length - 1
+                    : lightboxIndex - 1
                 )
               }
-              className="fixed left-0 top-0 bottom-0 flex items-center justify-center w-18 font-bold text-xl md:text-4xl z-50"
+              className="fixed left-0 top-0 bottom-0 flex items-center justify-center w-18 text-xl md:text-4xl z-50"
             >
               <FaArrowLeftLong />
             </button>
@@ -289,12 +346,16 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
               className="max-h-[90vh] w-[600px] object-contain shadow"
             />
 
-            <div className="mt-3 text-lg px-3 py-1">{lightboxIndex + 1} of {contentImages.length}</div>
+            <div className="mt-3 text-lg px-3 py-1">
+              {lightboxIndex + 1} of {contentImages.length}
+            </div>
 
             <button
               onClick={() =>
                 setLightboxIndex(
-                  lightboxIndex === contentImages.length - 1 ? 0 : lightboxIndex + 1
+                  lightboxIndex === contentImages.length - 1
+                    ? 0
+                    : lightboxIndex + 1
                 )
               }
               className="fixed right-0 top-0 bottom-0 flex items-center justify-center w-16 text-xl md:text-4xl z-50"
@@ -305,8 +366,27 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = ({
         </div>
       )}
 
+      {/* Product Card */}
+      {/* <div className="mt-10">
+        {productCard || (
+          <div className="border border-dashed border-gray-400 p-6 rounded-lg text-center text-gray-500">
+            Product coming soon. Stay tuned!
+          </div>
+        )}
+      </div> */}
+      <div className="mt-10">
+      <ProductCard
+        image={image}
+        title="Maktub - Lightweight Theme"
+        description="Maktub is a super modern Blog focused on high speed and nice effects, the theme fits perfectly any kind of blog specially personal, photography, travel or biography blogs. It is sores on Google."
+        buttonLabel="Purchase this theme"
+        onClick={() => alert("Added to cart!")}
+        />
+      </div>
+
       <Share />
     </article>
+    </>
   );
 };
 
