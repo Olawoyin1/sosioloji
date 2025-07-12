@@ -190,9 +190,9 @@ const TiptapEditor: React.FC<TiptapEditorProps> = ({ value, onChange }) => {
   if (!editor) return null
 
   return (
-    <div className={`editor-wrapper ${isFullscreen ? 'fullscreen' : ''}`}>
+    <div className={`editor-wrapper  ${isFullscreen ? 'fullscreen' : ''}`}>
       {/* Toolbar */}
-      <div className="toolbar flex flex-wrap gap-2 mb-2">
+      <div className="toolbar  flex flex-wrap gap-2 mb-2">
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
