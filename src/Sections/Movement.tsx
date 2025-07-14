@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Movement: React.FC = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center flex-col py-12 px-4">
+    <section className="min-h-screen flex items-center justify-center flex-col py-12 px-10">
       {/* Fixed Brand */}
       <Link
         to="/"
@@ -14,7 +14,7 @@ const Movement: React.FC = () => {
       </Link>
 
       {/* VERTICAL LINE - Positioned */}
-      <div className="hidden md:block  absolute top-20 bottom-20 left-1/2 transform -translate-x-1/2 w-px bg-black" />
+      <div className="hidden md:block  absolute top-40 bottom-40 left-1/2 transform -translate-x-1/2 w-px bg-black" />
 
 
 

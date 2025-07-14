@@ -19,30 +19,29 @@ const BlogList = () => {
   const [currentPage, setCurrentPage] = useState(initialPage);
 
   // If no page param, force page=1 in the URL
-useEffect(() => {
-  const pageParam = searchParams.get("page");
+  useEffect(() => {
+    const pageParam = searchParams.get("page");
 
-  if (location.pathname === "/") {
-    if (!pageParam || isNaN(Number(pageParam))) {
-      setCurrentPage(1);
-      // Don't set search param for page 1
-      setSearchParams({});
-    } else {
-      setCurrentPage(Number(pageParam));
+    if (location.pathname === "/") {
+      if (!pageParam || isNaN(Number(pageParam))) {
+        setCurrentPage(1);
+        // Don't set search param for page 1
+        setSearchParams({});
+      } else {
+        setCurrentPage(Number(pageParam));
+      }
     }
-  }
-}, [location.pathname, searchParams, setSearchParams]);
+  }, [location.pathname, searchParams, setSearchParams]);
 
-const handlePageChange = (page: number) => {
-  setCurrentPage(page);
-  if (page === 1) {
-    setSearchParams({}); // ✅ remove ?page=1 from URL
-  } else {
-    setSearchParams({ page: String(page) });
-  }
-  window.scrollTo(0, 0);
-};
-
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    if (page === 1) {
+      setSearchParams({}); // ✅ remove ?page=1 from URL
+    } else {
+      setSearchParams({ page: String(page) });
+    }
+    window.scrollTo(0, 0);
+  };
 
   const {
     data: posts = [],
