@@ -129,7 +129,9 @@ const SingleCard = ({ item }: { item: CardItem }) => {
                       bg-white border border-gray-200 text-sm font-semibold p-1 px-3 rounded-md rotate-270 
                       whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30
                     `}
-                  ></div>
+                  >
+                    {item.subtag}
+                  </div>
                 </div>
               )}
             </div>

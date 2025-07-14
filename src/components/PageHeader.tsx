@@ -30,8 +30,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, count, type = "category"
   };
 
   return (
-    <div className="mb-16  max-w-3xl mx-auto flex items-center flex-col sm:flex-row text-center sm:text-start gap-7 sm:gap-10">
-        <div className="flex gap-3 items-center">
+    <div className="mb-16  max-w-3xl mx-auto  grid grid-cols-1 sm:grid-cols-3 items-center gap-7 sm:gap-10">
+        <div className="flex  gap-3 items-center">
           <div className="w-full flex justify-center md:justify-start">
               <div className="relative w-14 h-14">
                 <img
@@ -50,7 +50,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, count, type = "category"
           </p>
         </div>
       </div>
-      <div>
+      <div className="col-span-2">
         <p className="text-gray-900 leading-7 border-0 sm:border-l pf text-sm sm:pl-9 font-light ">
           {getDefaultDescription()}
         </p>
