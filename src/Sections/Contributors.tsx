@@ -68,14 +68,11 @@ const Contributors = () => {
   };
 
   return (
-    <section className="py-20 md:py-10 md:h-screen flex items-center justify-center flex-col px-10 md:px-12">
+    <section className="py-20 md:py-10 max-w-7xl mx-auto md:h-screen flex items-center justify-center flex-col px-10 md:px-12">
       <div className="w-full">
         <h1 className="text-2xl font-extrabold mb-4 text-gray-800">Meet Our Contributors</h1>
         <p className="text-gray-600 leading-relaxed mb-1">
           Our contributors are passionate individuals committed to knowledge sharing, research, and community empowerment.
-        </p>
-        <p className="text-gray-600 leading-relaxed">
-          Learn more about each contributor below or fill the form to join our growing community of writers and thought leaders.
         </p>
       </div>
 

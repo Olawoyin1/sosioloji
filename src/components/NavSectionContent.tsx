@@ -51,7 +51,7 @@ const NavSectionContent: React.FC<NavSectionContentProps> = ({ section, onClose 
       </div>
 
       {/* Section content */}
-      <div className="max-w-7xl mx-auto  flex items-center justify-center">
+      <div className=" ">
         {sectionMap[section] || (
           <div className="text-center py-20 text-gray-500">page build in progress.</div>
         )}

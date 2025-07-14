@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Movement: React.FC = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center flex-col py-12 px-10">
+    <section className="min-h-screen flex items-center justify-center flex-col py-12 px-4">
       {/* Fixed Brand */}
       <Link
         to="/"
@@ -18,17 +18,17 @@ const Movement: React.FC = () => {
 
 
 
-      <div className="max-w-7xl w-full mx-auto px-4 md:px-8">
-        <div className="relative grid  grid-cols-1 md:grid-cols-2 items-center gap-10">
+      <div className=" md:max-w-7xl w-full mx-auto md:px-8">
+        <div className="relative grid  grid-cols-1 md:grid-cols-2 items-center gap-4 md:gap-10">
           {/* FORM SECTION – 1st on desktop, 2nd on mobile */}
-          <div className="relative ml-9 md:ml-0 order-2 md:order-1  ">
+          <div className="relative ml-2 md:ml-0 order-2 md:order-1  ">
             {/* Decorative Span below bottom-right, shifted left */}
             <span
-              className="absolute border border-gray-700 rounded-[15px] opacity-50 z-[-1]     bottom-[-14px] right-4     w-full h-full"
+              className="absolute border border-gray-700 rounded-[15px] opacity-50 z-[-1] bottom-[-7px] right-2    md:bottom-[-14px] md:right-4     w-full h-full"
             />
 
             {/* Rotated Header */}
-            <h3 className="absolute left-[-84px] sm:left-[-100px] top-1/2 transform rotate-270 text-sm md:text-xl font-bold text-center writing-vertical text-[#1E1B1B] font-playfair">
+            {/* <h3 className="absolute left-[-84px] sm:left-[-100px] top-1/2 transform rotate-270 text-sm md:text-xl font-bold text-center writing-vertical text-[#1E1B1B] font-playfair">
               Get Insight
               <span className="text-blue-500 inline-block ml-1">
                 <svg
@@ -41,7 +41,7 @@ const Movement: React.FC = () => {
                   <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" />
                 </svg>
               </span>
-            </h3>
+            </h3> */}
 
             {/* Main Tag Container */}
             <div
@@ -101,11 +101,6 @@ const Movement: React.FC = () => {
               yourself — a community that values awareness, education, and
               activism. It's about using your voice to spark meaningful dialogue
               and ignite change.
-            </p>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              When you join, you're not just signing up. You're aligning with a
-              cause that’s committed to empowering others, amplifying important
-              voices, and contributing to the betterment of society.
             </p>
           </div>
         </div>
