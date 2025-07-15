@@ -312,7 +312,7 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
 
 
           <div
-  className="prose prose-sm sm:prose-base max-w-none space-y-7 bf mt-8"
+  className="prose prose-sm sm:prose-base text-sm sm:text-[15px] max-w-none space-y-7 bf mt-8"
   dangerouslySetInnerHTML={{
     __html: rest
       .map((node) => {
