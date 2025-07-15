@@ -463,7 +463,7 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
               >
                 <FaArrowLeftLong />
               </button>
-              <div className="mt-3 text-lg px-3 py-1">
+              <div className="mt-3 text-lg px-3 py-1 z-50">
                 <IoCloseOutline
                   onClick={() => setLightboxIndex(null)}
                   className="cursor-pointer"
@@ -488,7 +488,7 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
                       : lightboxIndex + 1
                   )
                 }
-                className="fixed right-0 top-0 bottom-0 flex items-center justify-center w-16 text-xl md:text-4xl z-50"
+                className="fixed right-0 top-0 bottom-0 flex items-center justify-center w-16 text-xl md:text-4xl z-20"
               >
                 <FaArrowRightLong />
               </button>
