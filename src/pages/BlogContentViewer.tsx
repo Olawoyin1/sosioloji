@@ -5,7 +5,6 @@ import Share from "../blog/Share";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { BiSolidQuoteAltRight } from "react-icons/bi";
-// import Callout from "../blog/Callout";
 import { IoCloseOutline } from "react-icons/io5";
 import ProductCard from "../blog/ProductCard";
 
@@ -47,7 +46,6 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
     body,
     quote,
     contentImages = [],
-    // blogContentVideo,
     slug,
     description,
     category,
@@ -67,53 +65,67 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
   const tocRef = useRef<HTMLDivElement>(null);
 
   const parser = new DOMParser();
+  const doc = parser.parseFromString(body, "text/html");
 
-  // Ensure there’s always at least one h1 section
-  const hasH1 = /<h1[\s>]/i.test(body);
-  const safeBody = hasH1 ? body : `<h1>Untitled</h1>${body}`;
-  const doc = parser.parseFromString(safeBody, "text/html");
+  const sections: { id: string; title: string; content: string }[] = [];
+  const childNodes = Array.from(doc.body.childNodes);
 
-  const headings = Array.from(doc.querySelectorAll("h1"));
-  let sections;
+  let currentIndex = 0;
 
-  if (headings.length > 0) {
-    sections = headings.map((heading, index) => {
-      const id =
-        heading.id || slugify(heading.textContent || `section-${index}`);
+  // Capture leading nodes before first <h1> as "Untitled"
+  const untitledNodes: ChildNode[] = [];
+  while (
+    currentIndex < childNodes.length &&
+    !(childNodes[currentIndex].nodeName === "H1")
+  ) {
+    untitledNodes.push(childNodes[currentIndex]);
+    currentIndex++;
+  }
+  if (untitledNodes.length > 0) {
+    const container = document.createElement("div");
+    untitledNodes.forEach((node) => {
+      if (
+        node.nodeType === Node.ELEMENT_NODE ||
+        node.nodeType === Node.TEXT_NODE
+      ) {
+        container.appendChild(node.cloneNode(true));
+      }
+    });
+    sections.push({
+      id: "untitled",
+      title: "Untitled",
+      content: container.innerHTML,
+    });
+  }
+
+  // Capture the rest of the <h1>-based sections
+  const remaining = childNodes.slice(currentIndex);
+  for (let i = 0; i < remaining.length; i++) {
+    const node = remaining[i];
+    if (node.nodeName === "H1") {
+      const heading = node as HTMLElement;
+      const id = heading.id || slugify(heading.textContent || `section-${i}`);
       heading.id = id;
 
-      const sectionContentNodes: ChildNode[] = [];
-      let next = heading.nextSibling;
-      while (next && !(next.nodeName === "H1")) {
-        sectionContentNodes.push(next);
-        next = next.nextSibling;
+      const title = heading.textContent || `Section ${i + 1}`;
+      const contentNodes: ChildNode[] = [];
+      i++;
+
+      while (i < remaining.length && remaining[i].nodeName !== "H1") {
+        contentNodes.push(remaining[i]);
+        i++;
       }
+      i--; // Adjust for outer loop
 
       const container = document.createElement("div");
-      sectionContentNodes.forEach((node) => {
-        if (
-          node.nodeType === Node.ELEMENT_NODE ||
-          node.nodeType === Node.TEXT_NODE
-        ) {
-          container.appendChild(node.cloneNode(true));
-        }
-      });
+      contentNodes.forEach((n) => container.appendChild(n.cloneNode(true)));
 
-      return {
+      sections.push({
         id,
-        title: heading.textContent || `Section ${index + 1}`,
+        title,
         content: container.innerHTML,
-      };
-    });
-  } else {
-    // Fallback if parsing fails entirely (extremely rare)
-    sections = [
-      {
-        id: "fallback",
-        title: "Content",
-        content: `<p>Unable to load content.</p>`,
-      },
-    ];
+      });
+    }
   }
 
   useEffect(() => {
@@ -159,32 +171,19 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
     buttonBgColor,
   };
 
-
-
-  const activeSection =    sections.find((s) => s.id === activeSectionId) || sections[0];
+  const activeSection =
+    sections.find((s) => s.id === activeSectionId) || sections[0];
   const sectionDoc = parser.parseFromString(activeSection.content, "text/html");
-  const allElements = Array.from(sectionDoc.body.childNodes).filter(
-  (node) => node.nodeType === Node.ELEMENT_NODE
-);
+  const allElements = Array.from(sectionDoc.body.children);
 
-const first4: HTMLElement[] = [];
-const rest: HTMLElement[] = [];
-
-for (let i = 0; i < allElements.length; i++) {
-  const el = allElements[i] as HTMLElement;
-  if (first4.length < 4) {
-    first4.push(el);
-  } else {
-    rest.push(el);
-  }
-}
-
+  const first4 = allElements.slice(0, 4);
+  const rest = allElements.slice(4);
 
   return (
     <>
       <BlogHero blog={blog} height="medium" />
       <article className="prose prose-lg max-w-3xl mx-auto px-8 sm:px-6 scroll-smooth">
-        <h1 className="text-2xl sm:text-4xl max-w-xl mx-auto text-center font-semibold mt-14">
+        <h1 className="text-2xl sm:text-4xl max-w-xl mx-auto text-center font-semibold mt-7 md:mt-14">
           {title}
         </h1>
 
@@ -204,16 +203,13 @@ for (let i = 0; i < allElements.length; i++) {
           </div>
         </div>
 
-        {/* TOC */}
         {sections.length > 1 && (
           <div className="mb-6 border-b border-gray-500 pb-4" ref={tocRef}>
             <button
               onClick={() => setTocOpen(!tocOpen)}
               className="w-full py-2 text-left flex justify-between items-center"
             >
-              <span className="text-gray-800 font-bold">
-                Table of Contents
-              </span>
+              <span className="text-gray-800 font-bold">Table of Contents</span>
               <svg
                 className={`w-5 h-5 ml-2 transition-transform duration-300 ${
                   tocOpen ? "rotate-180" : "rotate-0"
@@ -263,61 +259,83 @@ for (let i = 0; i < allElements.length; i++) {
           </div>
         )}
 
-        {/* Section Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSectionId}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="bf text-sm sm:text-[15px] space-y-7">
-
+        {/* Section Preview Content */}
+        <motion.div
+          key={activeSectionId}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="mt-8 bf text-sm sm:text-[15px] space-y-7">
             {first4.map((node, i) => {
-              let html = (node as HTMLElement).outerHTML;
-              html = html.replace(/<img\s/gi, '<img class="w-full" ');
+              const html = node.outerHTML
+                .replace(/<img\s/gi, '<img class="w-full" ')
+                .replace(/<ul(\s|>)/gi, '<ul class="list-disc pl-5"$1')
+                .replace(/<ol(\s|>)/gi, '<ol class="list-decimal pl-5"$1')
+                .replace(/<li(\s|>)/gi, '<li class="mb-2"$1');
+
               return (
                 <div
-                key={`rest-${i}`}
-                      className="w-full "
-                      dangerouslySetInnerHTML={{ __html: html }}
-                      />
-                    );
-                  })}
-              </div>
+                  key={`rest-${i}`}
+                  className="prose prose-sm sm:prose-base max-w-none"
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
+              );
+            })}
+          </div>
 
-            {/* Quote appears here */}
-            {activeSectionId === sections[0]?.id && (
-              <>
-                {quote && (
-                  <blockquote className="relative min-h-50 flex items-center justify-center text-sm md:text-[17px] leading-8 p-10 rounded text-gray-700 my-8">
-                    {quote}
-                    <BiSolidQuoteAltRight className="absolute text-gray-300 text-7xl bottom-4 z-[-1] right-4" />
-                  </blockquote>
-                )}
-              </>
-            )}
+          {/* Quote */}
+          {activeSectionId === sections[0]?.id && quote && (
+            <blockquote className="relative min-h-50 flex items-center justify-center text-sm md:text-[17px] leading-8 p-10 rounded text-gray-700 my-8">
+              {quote}
+              <BiSolidQuoteAltRight className="absolute text-gray-300 text-7xl bottom-4 z-[-1] right-4" />
+            </blockquote>
+          )}
 
-            {/* Remaining content */}
-            {rest.length > 0 && (
-              <div className="mt-8 bf text-sm sm:text-[15px] space-y-7">
-                {rest.map((node, i) => {
-                  let html = (node as HTMLElement).outerHTML;
-                  html = html.replace(/<img\s/gi, '<img class="w-full" ');
-                  return (
-                    <div
-                      key={`rest-${i}`}
-                      className="w-full"
-                      dangerouslySetInnerHTML={{ __html: html }}
-                    />
-                  );
-                })}
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
+          {/* Remaining content */}
+          {/* <div className="max-w-none bf space-y-7">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: rest
+                  .map((node) =>
+                    node.outerHTML
+                      .replace(/<img\s/gi, '<img class="w-full" ')
+                      .replace(/<ul(\s|>)/gi, '<ul class="list-disc pl-5"$1')
+                      .replace(/<ol(\s|>)/gi, '<ol class="list-decimal pl-5"$1')
+                      .replace(/<li(\s|>)/gi, '<li class="mb-2"$1')
+                  )
+                  .join(""),
+              }}
+            />
+          </div> */}
 
+
+          <div
+  className="prose prose-sm sm:prose-base max-w-none space-y-7 bf mt-8"
+  dangerouslySetInnerHTML={{
+    __html: rest
+      .map((node) => {
+        let html = node.outerHTML;
+
+        // Make images full width and add margin
+        html = html.replace(/<img\s/gi, '<img class="w-full my-4" ');
+
+        html = html.replace(
+          /<(ul|ol)(.*?)>/gi,
+          '<$1 class="list-disc pl-7  md:pl-16 my-4"$2>'
+        );
+
+        return html;
+      })
+      .join(""),
+  }}
+/>
+
+
+        </motion.div>
+
+        {/* ... (keep your video, gallery, callouts, lightbox logic here) ... */}
         {activeSectionId === sections[0]?.id && (
           <>
             {/* Video */}
@@ -445,8 +463,11 @@ for (let i = 0; i < allElements.length; i++) {
               >
                 <FaArrowLeftLong />
               </button>
-                <div className="mt-3 text-lg px-3 py-1">
-                <IoCloseOutline onClick={() => setLightboxIndex(null)} className="cursor-pointer"/>
+              <div className="mt-3 text-lg px-3 py-1">
+                <IoCloseOutline
+                  onClick={() => setLightboxIndex(null)}
+                  className="cursor-pointer"
+                />
               </div>
               <motion.img
                 key={contentImages[lightboxIndex]}
@@ -474,6 +495,7 @@ for (let i = 0; i < allElements.length; i++) {
             </div>
           </div>
         )}
+
         <Share />
       </article>
     </>
