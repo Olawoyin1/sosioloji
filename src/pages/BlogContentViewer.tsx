@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { BiSolidQuoteAltRight } from "react-icons/bi";
 // import Callout from "../blog/Callout";
+import { IoCloseOutline } from "react-icons/io5";
 import ProductCard from "../blog/ProductCard";
 
 interface CalloutType {
@@ -356,13 +357,13 @@ for (let i = 0; i < allElements.length; i++) {
           <>
             {/* Image Gallery */}
             {contentImages.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-10">
+              <div className="grid grid-cols-3 gap-3 md:gap-4 mt-10">
                 {contentImages.map((img, i) => (
                   <img
                     key={i}
                     src={img}
                     alt={`Gallery ${i + 1}`}
-                    className="w-full h-40 object-cover rounded-lg shadow cursor-pointer"
+                    className="w-full md:h-40 object-cover rounded-lg shadow cursor-pointer"
                     onClick={() => setLightboxIndex(i)}
                   />
                 ))}
@@ -444,7 +445,9 @@ for (let i = 0; i < allElements.length; i++) {
               >
                 <FaArrowLeftLong />
               </button>
-
+                <div className="mt-3 text-lg px-3 py-1">
+                <IoCloseOutline onClick={() => setLightboxIndex(null)} className="cursor-pointer"/>
+              </div>
               <motion.img
                 key={contentImages[lightboxIndex]}
                 src={contentImages[lightboxIndex]}
