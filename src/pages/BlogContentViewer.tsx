@@ -66,33 +66,54 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
   const tocRef = useRef<HTMLDivElement>(null);
 
   const parser = new DOMParser();
-  const doc = parser.parseFromString(body, "text/html");
-  const headings = Array.from(doc.querySelectorAll("h1"));
 
-  const sections = headings.map((heading, index) => {
-    const id = heading.id || slugify(heading.textContent || `section-${index}`);
-    heading.id = id;
-    const sectionContentNodes: ChildNode[] = [];
-    let next = heading.nextSibling;
-    while (next && next.nodeName !== "H1") {
-      sectionContentNodes.push(next);
-      next = next.nextSibling;
-    }
-    const container = document.createElement("div");
-    sectionContentNodes.forEach((node) => {
-      if (
-        node.nodeType === Node.ELEMENT_NODE ||
-        node.nodeType === Node.TEXT_NODE
-      ) {
-        container.appendChild(node.cloneNode(true));
+  // Ensure there’s always at least one h1 section
+  const hasH1 = /<h1[\s>]/i.test(body);
+  const safeBody = hasH1 ? body : `<h1>Untitled</h1>${body}`;
+  const doc = parser.parseFromString(safeBody, "text/html");
+
+  const headings = Array.from(doc.querySelectorAll("h1"));
+  let sections;
+
+  if (headings.length > 0) {
+    sections = headings.map((heading, index) => {
+      const id =
+        heading.id || slugify(heading.textContent || `section-${index}`);
+      heading.id = id;
+
+      const sectionContentNodes: ChildNode[] = [];
+      let next = heading.nextSibling;
+      while (next && !(next.nodeName === "H1")) {
+        sectionContentNodes.push(next);
+        next = next.nextSibling;
       }
+
+      const container = document.createElement("div");
+      sectionContentNodes.forEach((node) => {
+        if (
+          node.nodeType === Node.ELEMENT_NODE ||
+          node.nodeType === Node.TEXT_NODE
+        ) {
+          container.appendChild(node.cloneNode(true));
+        }
+      });
+
+      return {
+        id,
+        title: heading.textContent || `Section ${index + 1}`,
+        content: container.innerHTML,
+      };
     });
-    return {
-      id,
-      title: heading.textContent || `Section ${index + 1}`,
-      content: container.innerHTML,
-    };
-  });
+  } else {
+    // Fallback if parsing fails entirely (extremely rare)
+    sections = [
+      {
+        id: "fallback",
+        title: "Content",
+        content: `<p>Unable to load content.</p>`,
+      },
+    ];
+  }
 
   useEffect(() => {
     if (sections.length > 0 && !activeSectionId) {
@@ -137,25 +158,32 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
     buttonBgColor,
   };
 
-  console.log(callout);
 
-  const activeSection =
-    sections.find((s) => s.id === activeSectionId) || sections[0];
+
+  const activeSection =    sections.find((s) => s.id === activeSectionId) || sections[0];
   const sectionDoc = parser.parseFromString(activeSection.content, "text/html");
-  const paragraphs = Array.from(sectionDoc.querySelectorAll("p"));
-  const unorderedList = sectionDoc.querySelector("ul");
+  const allElements = Array.from(sectionDoc.body.childNodes).filter(
+  (node) => node.nodeType === Node.ELEMENT_NODE
+);
 
-  const restContent = Array.from(sectionDoc.body.children).filter(
-    (node) =>
-      !paragraphs.slice(0, 4).includes(node as HTMLParagraphElement) &&
-      node !== unorderedList
-  );
+const first4: HTMLElement[] = [];
+const rest: HTMLElement[] = [];
+
+for (let i = 0; i < allElements.length; i++) {
+  const el = allElements[i] as HTMLElement;
+  if (first4.length < 4) {
+    first4.push(el);
+  } else {
+    rest.push(el);
+  }
+}
+
 
   return (
     <>
       <BlogHero blog={blog} height="medium" />
       <article className="prose prose-lg max-w-3xl mx-auto px-8 sm:px-6 scroll-smooth">
-        <h1 className="text-2xl sm:text-4xl max-w-xl mx-auto text-center font-semibold mt-6">
+        <h1 className="text-2xl sm:text-4xl max-w-xl mx-auto text-center font-semibold mt-14">
           {title}
         </h1>
 
@@ -164,7 +192,7 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
             {new Date(created_at).toDateString()}
           </p>
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 sm:h-10 sm:w-10 overflow-hidden bg-black/30 rounded-full">
+            <div className="h-7 w-7 overflow-hidden bg-black/30 rounded-full">
               <img
                 src="https://th.bing.com/th/id/OIP.ItvA9eX1ZIYT8NHePqeuCgHaHa?w=210"
                 alt="Author"
@@ -177,12 +205,12 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
 
         {/* TOC */}
         {sections.length > 1 && (
-          <div className="mb-6 border-b border-gray-200 pb-4" ref={tocRef}>
+          <div className="mb-6 border-b border-gray-500 pb-4" ref={tocRef}>
             <button
               onClick={() => setTocOpen(!tocOpen)}
               className="w-full py-2 text-left flex justify-between items-center"
             >
-              <span className="text-gray-800 font-medium">
+              <span className="text-gray-800 font-bold">
                 Table of Contents
               </span>
               <svg
@@ -243,25 +271,20 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
           >
-            {paragraphs.slice(0, 4).map((p, i) => (
-              <div
-                key={i}
-                className="mb-4 text-sm sm:text-[15px] bf"
-                dangerouslySetInnerHTML={{ __html: p.outerHTML }}
-              />
-            ))}
+            <div className="bf text-sm sm:text-[15px] space-y-7">
 
-            {unorderedList && (
-              <div
-                className="mb-6 text-sm sm:text-[15px] bf"
-                dangerouslySetInnerHTML={{
-                  __html: unorderedList.outerHTML.replace(
-                    "<ul",
-                    '<ul class="list-disc pl-5"'
-                  ),
-                }}
-              />
-            )}
+            {first4.map((node, i) => {
+              let html = (node as HTMLElement).outerHTML;
+              html = html.replace(/<img\s/gi, '<img class="w-full" ');
+              return (
+                <div
+                key={`rest-${i}`}
+                      className="w-full "
+                      dangerouslySetInnerHTML={{ __html: html }}
+                      />
+                    );
+                  })}
+              </div>
 
             {/* Quote appears here */}
             {activeSectionId === sections[0]?.id && (
@@ -275,27 +298,29 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
               </>
             )}
 
-            {/* Rest Content */}
-            <div className="mt-8 bf text-sm sm:text-[15px] space-y-6">
-              {restContent.map((node, i) => {
-                let html = (node as HTMLElement).outerHTML;
-                html = html.replace(/<img\s/gi, '<img class="w-full" ');
-                return (
-                  <div
-                    key={i}
-                    className="w-full"
-                    dangerouslySetInnerHTML={{ __html: html }}
-                  />
-                );
-              })}
-            </div>
+            {/* Remaining content */}
+            {rest.length > 0 && (
+              <div className="mt-8 bf text-sm sm:text-[15px] space-y-7">
+                {rest.map((node, i) => {
+                  let html = (node as HTMLElement).outerHTML;
+                  html = html.replace(/<img\s/gi, '<img class="w-full" ');
+                  return (
+                    <div
+                      key={`rest-${i}`}
+                      className="w-full"
+                      dangerouslySetInnerHTML={{ __html: html }}
+                    />
+                  );
+                })}
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
 
         {activeSectionId === sections[0]?.id && (
           <>
             {/* Video */}
-            <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black group shadow-lg">
+            <div className="relative w-full mt-8 aspect-video rounded-xl overflow-hidden bg-black group shadow-lg">
               {/* Background shimmer or gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-gray-900 opacity-90" />
 

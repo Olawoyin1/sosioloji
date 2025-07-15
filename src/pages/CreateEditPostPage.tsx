@@ -101,7 +101,6 @@ const CreateEditPostPage = () => {
       category: Yup.string().required("Tag is required"),
     }),
     onSubmit: async (values) => {
-      console.log("Submitting form...", values); 
       setIsSubmitting(true);
       try {
         // 1. Upload only new media files
