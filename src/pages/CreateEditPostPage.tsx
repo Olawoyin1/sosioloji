@@ -3,9 +3,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import FileDropInputWithPreview from "../components/FileDropInputWithPreview";
 import { toast } from "sonner";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import TiptapEditor from "../components/TiptapEditor";
 
 const CLOUD_NAME = "dunid4t4g";
@@ -249,6 +250,8 @@ const CreateEditPostPage = () => {
   return (
     <section className="bg">
       <div className="max-w-6xl mx-auto p-8">
+        
+          <Link to="/dashboard" className="flex hover:underline mb-4 items-center gap-1"> <IoIosArrowRoundBack />Dashboard</Link>
         <h2 className="text-2xl font-bold mb-6">
           {isEditMode ? "Edit" : "Create"} Blog Post
         </h2>
