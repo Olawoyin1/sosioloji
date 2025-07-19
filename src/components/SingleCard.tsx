@@ -32,23 +32,25 @@
       <div className="flex flex-col justify-center items-center max-w-[500px] max-h-[590px] md:max-h-[590px]">
         {/* Image */}
         <div
-          className="relative w-full h-[340px] md:h-[440px]"
+          className="relative w-full h-[340px]  md:max-h-[440px] rounded-xl"
           onMouseEnter={() => !isMobile && setIsHovered(true)}
           onMouseLeave={() => !isMobile && setIsHovered(false)}
           onClick={() => isMobile && setIsHovered((prev) => !prev)}
+
+          style={{ backgroundImage: `url(${item.image})`, backgroundSize: "cover", backgroundPosition: "center" }}
         >
           {/* Image Background */}
           {/* <div
             className="w-full h-full bg-cover bg-center border border-gray-300 rounded-xl"
             style={{ backgroundImage: `url(${item.image})` }}
           /> */}
-          <div className="w-full h-full border border-gray-300 rounded-xl overflow-hidden">
+          {/* <div className="w-full border-3 border-gray-300 rounded-xl overflow-hidden">
             <img
               src={item.image}
               alt={item.title}
               className="w-full h-full object-cover"
             />
-          </div>
+          </div> */}
 
           {/* Overlay Frame */}
           <motion.div

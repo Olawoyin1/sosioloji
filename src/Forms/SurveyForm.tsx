@@ -3,7 +3,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import NormalButton from './NormalButton';
+import NormalButton from '../components/NormalButton';
 
 interface FormValues {
   q1: string;
