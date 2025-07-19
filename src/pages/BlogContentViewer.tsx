@@ -273,7 +273,8 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
                 .replace(/<img\s/gi, '<img class="w-full" ')
                 .replace(/<ul(\s|>)/gi, '<ul class="list-disc pl-5"$1')
                 .replace(/<ol(\s|>)/gi, '<ol class="list-decimal pl-5"$1')
-                .replace(/<li(\s|>)/gi, '<li class="mb-2"$1');
+                .replace(/<li(\s|>)/gi, '<li class="mb-2"$1')
+                .replace(/<hr\s*\/?>/gi, '<hr class="border-gray-300 my-4" />');
 
               return (
                 <div
@@ -293,46 +294,30 @@ const BlogContentViewer: React.FC<BlogContentViewerProps> = (props) => {
             </blockquote>
           )}
 
-          {/* Remaining content */}
-          {/* <div className="max-w-none bf space-y-7">
-            <div
-              dangerouslySetInnerHTML={{
-                __html: rest
-                  .map((node) =>
-                    node.outerHTML
-                      .replace(/<img\s/gi, '<img class="w-full" ')
-                      .replace(/<ul(\s|>)/gi, '<ul class="list-disc pl-5"$1')
-                      .replace(/<ol(\s|>)/gi, '<ol class="list-decimal pl-5"$1')
-                      .replace(/<li(\s|>)/gi, '<li class="mb-2"$1')
-                  )
-                  .join(""),
-              }}
-            />
-          </div> */}
-
-
           <div
-  className="prose prose-sm sm:prose-base text-sm sm:text-[15px] max-w-none space-y-7 bf mt-8"
-  dangerouslySetInnerHTML={{
-    __html: rest
-      .map((node) => {
-        let html = node.outerHTML;
+            className="prose prose-sm sm:prose-base text-sm sm:text-[15px] max-w-none space-y-7 bf mt-8"
+            dangerouslySetInnerHTML={{
+              __html: rest
+                .map((node) => {
+                  let html = node.outerHTML;
 
-        // Make images full width and add margin
-        html = html.replace(/<img\s/gi, '<img class="w-full my-4" ');
+                  // Make images full width and add margin
+                  html = html.replace(/<img\s/gi, '<img class="w-full my-4" ');
 
-        html = html.replace(
-          /<(ul|ol)(.*?)>/gi,
-          '<$1 class="list-disc pl-7  md:pl-16 my-4"$2>'
-        );
+                  html = html.replace(
+                    /<(ul|ol)(.*?)>/gi,
+                    '<$1 class="list-disc pl-7  md:pl-16 my-4"$2>'
+                  );
+                  html = html.replace(
+                    /<hr\s*\/?>/gi,
+                    '<hr class="border-gray-300 my-4" />'
+                  );
 
-        return html;
-      })
-      .join(""),
-  }}
-/>
-
-
+                  return html;
+                })
+                .join(""),
+            }}
+          />
         </motion.div>
 
         {/* ... (keep your video, gallery, callouts, lightbox logic here) ... */}
