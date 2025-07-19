@@ -6,6 +6,7 @@ import { PageWrapper } from '../components/PageWrapper';
 import Footer from '../components/Footer';
 import BlogHero from '../blog/BlogHero';
 import { CardItem } from '../data/Types';
+import Share from '../blog/Share';
 
 interface FormValues {
   q1: string; q2: string; q3: string; q4: string; q5: string;
@@ -215,6 +216,8 @@ const EducationExperienceSurvey = ({ title, author, image, created_at }: Props) 
           </button>
         </form>
       </div>
+
+      <Share />
 
       <Footer />
     </PageWrapper>
