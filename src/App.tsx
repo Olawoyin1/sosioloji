@@ -12,6 +12,8 @@ import Dashboard from "./admin/Dashboard";
 import CreateEditPostPage from "./pages/CreateEditPostPage";
 import { Toaster } from 'sonner';
 import Author from "./pages/Author";
+import Survey from "./pages/Survey";
+import SurveyFormPage from "./pages/SurveyFormPage";
 
 const App = () => {
   return (
@@ -22,6 +24,8 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/post/:slug" element={<BlogDetail />} />
       <Route path="/editor" element={<Author />} />
+      <Route path="/survey" element={<Survey />} />
+      <Route path="/survey/:slug" element={<SurveyFormPage />} />
       <Route path="/tag/:tag" element={<TagPage />} />
       <Route path="/author/:author" element={<AuthorPage />} />
       <Route path="*" element={<NotFound />} />

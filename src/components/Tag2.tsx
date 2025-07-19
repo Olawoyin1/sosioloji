@@ -27,6 +27,7 @@ const mTags: TagItem[] = [
   { label: "Article", link: "/tag/Article", bgColor: "#B8F2E6" },
   { label: "Video", link: "/tag/Video", bgColor: "#D5AAFF" },
   { label: "Wisdom", link: "/tag/Wisdom", bgColor: "#FFC1A1" },
+  { label: "Survey", link: "/survey", bgColor: "#E5E7EB" },
 ];
 
 const TagCloud: React.FC = () => {

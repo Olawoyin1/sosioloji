@@ -31,8 +31,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, count, type = "category"
 
   return (
     <div className="mb-16  max-w-3xl mx-auto  grid grid-cols-1 sm:grid-cols-3 items-center gap-7 sm:gap-10">
-        <div className="flex  gap-3 items-center">
-          <div className="w-full flex justify-center md:justify-start">
+        <div className="flex gap-4 items-center justify-center">
+          {/* <div className="w-full flex justify-center md:justify-start"> */}
               <div className="relative w-14 h-14">
                 <img
                   src="../../Images/eleven.webp"
@@ -41,7 +41,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, count, type = "category"
                 />
                 {/* Decorative circle */}
                 <span className="absolute w-full h-full rounded-full bottom-[-2px] left-[-4px] border border-gray-400 z-[1]" />
-              </div>
+              {/* </div> */}
             </div>
       <div className="shrink-0">
           <h1 className="text-3xl font-bold capitalize">{title}</h1>

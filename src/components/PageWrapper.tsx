@@ -51,6 +51,7 @@ export const PageWrapper = ({
       duration: 0.5,
       ease: [0.25, 0.8, 0.25, 1], // easeOut
     }}
+    className="bg"
   >
     {children}
   </motion.div>
